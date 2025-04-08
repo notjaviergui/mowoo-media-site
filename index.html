@@ -4,74 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mowoo Media</title>
-    <style>
-      body, html {
-        margin: 0;
-        height: 100%;
-        overflow-x: hidden;
-      }
-
-      #scroll-container {
-        height: 5000px; /* Adjust based on how long you want the scroll effect */
-      }
-
-      canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        z-index: 10;
-      }
-    </style>
-    <script type="module" crossorigin src="/assets/index-ChYyLLp3.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DG6UyQ2e.css">
+    <script type="module" crossorigin src="/assets/index-BA6WKXmB.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DBhiq1vH.css">
   </head>
   <body>
-    <div id="scroll-container">
-      <canvas id="image-sequence"></canvas>
-    </div>
     <div id="root"></div>
-    <script>
-      const canvas = document.getElementById('image-sequence');
-      const context = canvas.getContext('2d');
-
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      const frameCount = 100;
-      const currentFrame = index => `./images/sequence/${String(index).padStart(3, '0')}.jpg`;
-
-      const images = [];
-      let imageLoaded = false;
-
-      for (let i = 1; i <= frameCount; i++) {
-        const img = new Image();
-        img.src = currentFrame(i);
-        images.push(img);
-      }
-
-      images[0].onload = function () {
-        context.drawImage(images[0], 0, 0);
-        imageLoaded = true;
-      };
-
-      window.addEventListener('scroll', () => {
-        if (!imageLoaded) return;
-
-        const scrollTop = window.scrollY;
-        const maxScrollTop = document.body.scrollHeight - window.innerHeight;
-        const scrollFraction = scrollTop / maxScrollTop;
-        const frameIndex = Math.min(
-          frameCount - 1,
-          Math.floor(scrollFraction * frameCount)
-        );
-
-        requestAnimationFrame(() => {
-          context.clearRect(0, 0, canvas.width, canvas.height);
-          context.drawImage(images[frameIndex], 0, 0);
-        });
-      });
-    </script>
   </body>
 </html>
