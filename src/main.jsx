@@ -21,6 +21,8 @@ import ScrollPopup from './components/ScrollPopup';
 import Footer from './components/Footer';
 import AIChatBox from './components/AIChatBox';
 import './components/AIChatBox.css';
+import './components/ConsultingPipeline.css';
+import ConsultingPipeline from './components/ConsultingPipeline';
 
 const LandingPage = () => (
   <div className="page-load">
@@ -28,6 +30,7 @@ const LandingPage = () => (
       <div className="animate-fade-slide">
         <VideoHero />
         <Hero />
+        <ConsultingPipeline />
         <div className="flex flex-col md:flex-row items-start md:items-center justify-start gap-8 px-8 py-20 md:py-28 bg-white">
           <div className="text-left space-y-6">
             <h3 className="text-md text-gray-700 font-medium">We optimize and grow all your customer touch points.</h3>

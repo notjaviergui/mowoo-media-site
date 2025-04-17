@@ -39,17 +39,23 @@ Example Interactions:
     const userMessage = { role: 'user', content: input }
     const updatedMessages = [...messages, userMessage]
 
+    console.log("Sending message:", updatedMessages);
+
     setMessages(updatedMessages)
     setInput('')
     setLoading(true)
 
-    const response = await fetch('http://localhost:3001/chat', {
+    const response = await fetch('https://mowoo-media-site.onrender.com/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ messages: updatedMessages })
     })
 
+    console.log("Response status:", response.status);
+
     const data = await response.json()
+    console.log("ChatGPT reply:", data);
+
     setMessages([...updatedMessages, data])
     setLoading(false)
   }
