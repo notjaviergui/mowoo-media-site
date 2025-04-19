@@ -40,11 +40,11 @@ export default function Stats() {
           <Parallax speed={-5} key={index}>
             <div className="flex flex-col items-center space-y-4">
               <img src={flowerIcon} alt="Icon" className="w-6 h-6" />
-              <h3 className="text-4xl font-semibold">
+              <h3 className="text-6xl font-semibold">
                 {inView ? (
                   <CountUp
                     end={stat.value}
-                    duration={3}
+                    duration={10}
                     prefix={stat.prefix}
                     suffix={stat.suffix}
                   />

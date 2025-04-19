@@ -5,6 +5,7 @@ import { ParallaxProvider } from 'react-scroll-parallax';
 import './index.css'
 import VideoHero from './components/VideoHero';
 import Hero from './components/Hero';
+import ConsultingPipeline from './components/ConsultingPipeline';
 import Contact from './components/Contact';
 import Stats from './components/Stats';
 import Services from './pages/services';
@@ -28,14 +29,15 @@ const LandingPage = () => (
       <div className="animate-fade-slide">
         <VideoHero />
         <Hero />
+        <ConsultingPipeline />
         <div className="flex flex-col md:flex-row items-start md:items-center justify-start gap-8 px-8 py-20 md:py-28 bg-white">
           <div className="text-left space-y-6">
             <h3 className="text-md text-gray-700 font-medium">We optimize and grow all your customer touch points.</h3>
             <div className="space-y-4">
-              <Link to="/components/services/websitessection" className="block text-5xl font-light text-black hover:text-indigo-500 transition duration-300">Websites</Link>
-              <Link to="/components/services/paidmediasection" className="block text-5xl font-light text-black hover:text-indigo-500 transition duration-300">Paid Media</Link>
-              <Link to="/components/services/creativesection" className="block text-5xl font-light text-black hover:text-indigo-500 transition duration-300">Creative</Link>
-              <Link to="/components/services/retentionsection" className="block text-5xl font-light text-black hover:text-indigo-500 transition duration-300">Retention</Link>
+              <Link to="/components/services/websitessection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Websites</Link>
+              <Link to="/components/services/paidmediasection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Paid Media</Link>
+              <Link to="/components/services/creativesection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Creative</Link>
+              <Link to="/components/services/retentionsection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Retention</Link>
               <Link to="/WorkUs" className="block text-5xl font-light text-black hover:text-indigo-500 transition duration-300">Work With Us</Link>
             </div>
           </div>

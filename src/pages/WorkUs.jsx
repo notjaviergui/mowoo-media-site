@@ -29,24 +29,27 @@ export default function WorkUs() {
     }
   };
 
-  const nextStep = () => setFormStep((prev) => Math.min(prev + 1, 3));
+  const nextStep = () => setFormStep((prev) => Math.min(prev + 1, 5));
   const prevStep = () => setFormStep((prev) => Math.max(prev - 1, 1));
 
   return (
-    <section className="relative bg-black text-white font-sans pt-32 pb-16 px-6 md:px-16 min-h-screen">
+    <section className="relative bg-[#1a1a1a] text-white font-sans pt-32 pb-16 px-6 md:px-16 min-h-screen">
       <img
-        src="/assets/vector.png"
+        src="/Images/Drawing.png"
         alt="decorative background 1"
-        className="absolute top-10 left-10 w-32 h-32 opacity-20 animate-spin-slow"
+        className="absolute top-10 left-10 w-40 h-40 opacity-30 animate-spin-slow"
       />
       <img
-        src="/assets/vector.png"
+        src="/Images/Drawing.png"
         alt="decorative background 2"
-        className="absolute bottom-10 right-10 w-48 h-48 opacity-20 animate-spin-slow"
+        className="absolute bottom-10 right-10 w-60 h-60 opacity-30 animate-spin-slow"
       />
-      <h1 className="text-4xl md:text-5xl font-extrabold mb-10 text-center text-white tracking-tight" style={{ fontFamily: 'Suarte, serif' }}>
-        Ready to get to work?
-      </h1>
+      <h2 className="text-white text-3xl md:text-4xl font-bold text-center mb-4">
+        Let’s start your project
+      </h2>
+      <p className="text-[#cbd5e1] text-center text-sm md:text-base mb-10">
+        Just a few questions to understand your goals better.
+      </p>
       {submitted ? (
         <>
           <div className="text-center text-2xl font-semibold relative z-10">
@@ -60,79 +63,95 @@ export default function WorkUs() {
         </>
       ) : (
         <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-6">
-          <div className="text-center space-y-2 mb-6">
-            <h2 className="text-3xl font-bold text-white">Let’s start your project</h2>
-            <p className="text-[#cbd5e1]">Just a few questions to understand your goals better.</p>
-          </div>
           {formStep === 1 && (
             <>
+              <h2 className="text-white text-xl md:text-2xl font-semibold">
+                1 → What’s your name? <span className="text-red-500">*</span>
+              </h2>
+              <p className="text-white/50 text-sm mb-6">(please answer clearly)</p>
               <input
-                type="email"
-                value={email}
+                type="text"
+                value={name}
                 onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (e.target.value.trim()) setShowSecondInput(true);
+                  setName(e.target.value);
                 }}
-                placeholder="What's your best email?"
-                className="w-full px-4 py-3 rounded-full text-black bg-[#f5f5f5] border border-gray-400 focus:ring-2 focus:ring-blue-500"
+                placeholder="Type your answer here..."
+                className="w-full bg-transparent border-b border-white/50 placeholder-white/70 text-white text-[1.4rem] pb-3 mb-2 placeholder:text-[1.2rem] focus:outline-none focus:border-white focus:ring-0 transition-all duration-300"
                 required
               />
-              {showSecondInput && (
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                    if (e.target.value.trim()) setShowThirdInput(true);
-                  }}
-                  placeholder="Your full name?"
-                  className="w-full px-4 py-3 rounded-full text-black bg-[#f5f5f5] border border-gray-400 focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              )}
-              {showThirdInput && (
-                <input
-                  type="text"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="What’s your company called?"
-                  className="w-full px-4 py-3 rounded-full text-black bg-[#f5f5f5] border border-gray-400 focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              )}
             </>
           )}
 
           {formStep === 2 && (
             <>
+              <h2 className="text-white text-xl md:text-2xl font-semibold">
+                2 → What’s your best email? <span className="text-red-500">*</span>
+              </h2>
+              <p className="text-white/50 text-sm mb-6">(we’ll use this to get in touch)</p>
               <input
-                type="text"
-                value={budget}
+                type="email"
+                value={email}
                 onChange={(e) => {
-                  setBudget(e.target.value);
-                  if (e.target.value.trim()) setShowTextarea(true);
+                  setEmail(e.target.value);
                 }}
-                placeholder="What kind of budget are you working with?"
-                className="w-full px-4 py-3 rounded-full text-black bg-[#f5f5f5] border border-gray-400 focus:ring-2 focus:ring-blue-500"
+                placeholder="Type your answer here..."
+                className="w-full bg-transparent border-b border-white/50 placeholder-white/70 text-white text-[1.4rem] pb-3 mb-2 placeholder:text-[1.2rem] focus:outline-none focus:border-white focus:ring-0 transition-all duration-300"
                 required
               />
-              {showTextarea && (
-                <textarea
-                  value={project}
-                  onChange={(e) => setProject(e.target.value)}
-                  placeholder="Tell us about your project goals or dreams…"
-                  rows="6"
-                  className="w-full px-4 py-3 rounded-lg text-black bg-[#f5f5f5] border border-gray-400 focus:ring-2 focus:ring-blue-500"
-                  required
-                />
-              )}
             </>
           )}
 
           {formStep === 3 && (
-            <div className="bg-gray-900 bg-opacity-80 p-8 rounded-xl shadow-lg text-center text-lg font-medium">
-              Please confirm your details and hit Submit.
-            </div>
+            <>
+              <h2 className="text-white text-xl md:text-2xl font-semibold">
+                3 → Company or Brand name? <span className="text-red-500">*</span>
+              </h2>
+              <p className="text-white/50 text-sm mb-6">(can be personal or business)</p>
+              <input
+                type="text"
+                value={phone}
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                }}
+                placeholder="Type your answer here..."
+                className="w-full bg-transparent border-b border-white/50 placeholder-white/70 text-white text-[1.4rem] pb-3 mb-2 placeholder:text-[1.2rem] focus:outline-none focus:border-white focus:ring-0 transition-all duration-300"
+                required
+              />
+            </>
+          )}
+
+          {formStep === 4 && (
+            <>
+              <h2 className="text-white text-xl md:text-2xl font-semibold">
+                4 → Explain your vision <span className="text-red-500">*</span>
+              </h2>
+              <p className="text-white/50 text-sm mb-6">(project details, dreams, or goals)</p>
+              <textarea
+                value={project}
+                onChange={(e) => setProject(e.target.value)}
+                placeholder="Type your answer here..."
+                rows="6"
+                className="w-full bg-transparent border-b border-white/50 placeholder-white/70 text-white text-[1.4rem] pb-3 mb-2 placeholder:text-[1.2rem] focus:outline-none focus:border-white focus:ring-0 transition-all duration-300"
+                required
+              />
+            </>
+          )}
+
+          {formStep === 5 && (
+            <>
+              <h2 className="text-white text-xl md:text-2xl font-semibold">
+                5 → Estimate your monthly budget <span className="text-red-500">*</span>
+              </h2>
+              <p className="text-white/50 text-sm mb-6">(helps us tailor solutions to your needs)</p>
+              <input
+                type="text"
+                value={budget}
+                onChange={(e) => setBudget(e.target.value)}
+                placeholder="e.g. $1,000 – $3,000"
+                className="w-full bg-transparent border-b border-white/50 placeholder-white/70 text-white text-[1.4rem] pb-3 mb-2 placeholder:text-[1.2rem] focus:outline-none focus:border-white focus:ring-0 transition-all duration-300"
+                required
+              />
+            </>
           )}
 
           <div className="flex justify-between items-center pt-4">
@@ -145,11 +164,11 @@ export default function WorkUs() {
                 Back
               </button>
             )}
-            {formStep < 3 ? (
+            {formStep < 5 ? (
               <button
                 type="button"
                 onClick={nextStep}
-                className="bg-[#3b82f6] hover:bg-[#2563eb] text-white px-6 py-2 rounded-full hover:scale-105 transition"
+                className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full hover:scale-105 transition duration-300"
               >
                 Next
               </button>

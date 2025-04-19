@@ -39,18 +39,18 @@ export default function NavBar() {
       {/* Logo */}
       <Link
         to="/"
-        className={`text-4xl font-black tracking-wide hover:scale-105 transition-transform duration-200 ${isHomePage ? "text-white" : isWorkUsPage ? "text-blue-600" : "text-black"}`}
+        className={`text-4xl font-black tracking-wide hover:scale-110 transition-transform duration-200 ${isHomePage ? "text-white" : isWorkUsPage ? "text-blue-600" : "text-black"}`}
       >
         Moowo Media
       </Link>
 
       {/* Desktop Nav */}
-      <nav className="hidden md:flex space-x-4 text-white font-medium text-sm">
+      <nav className="hidden md:flex space-x-4 text-white font-medium text-lg">
         {navItems.map((item) => (
           <Link
             key={item.label}
             to={item.to}
-            className={`px-4 py-2 rounded-full border transition ${
+            className={`px-6 py-2 rounded-full border text-lg transition ${
               isHomePage
                 ? "border-white text-white hover:bg-white hover:text-black"
                 : isWorkUsPage
