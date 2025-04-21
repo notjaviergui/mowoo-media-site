@@ -6,6 +6,7 @@ export default function NavBar() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const isWorkUsPage = location.pathname === "/pages/WorkUs";
+  const isLightBackground = location.pathname !== "/" && location.pathname !== "/pages/clients-portal";
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -28,35 +29,30 @@ export default function NavBar() {
 
   const navItems = [
     { label: "Services", to: "/components/services/creativesection" },
-    { label: "Clients", to: "/pages/clients" },
+    { label: "Work", to: "/pages/clients" },
     { label: "Us", to: "/pages/us" },
     { label: "Newsletter", to: "/pages/newsletter" },
     { label: "Join Us", to: "/pages/join-us" },
+    { label: "Clients", to: "/pages/clients-portal"},
   ];
 
   return (
-    <div className={`fixed top-0 left-0 z-50 w-full px-8 py-6 flex items-center justify-between transition-all duration-500 ${isVisible ? "opacity-100" : "opacity-0"} ${isWorkUsPage ? "bg-white" : "bg-transparent"}`}>
+    <div className={`fixed top-0 left-0 z-50 w-full px-8 py-6 flex items-center justify-between transition-all duration-500 ${isVisible ? "opacity-100" : "opacity-0"} ${isLightBackground ? "bg-white text-black" : "bg-transparent text-white"}`}>
       {/* Logo */}
       <Link
         to="/"
-        className={`text-4xl font-black tracking-wide hover:scale-110 transition-transform duration-200 ${isHomePage ? "text-white" : isWorkUsPage ? "text-blue-600" : "text-black"}`}
+        className="text-4xl font-black tracking-wide hover:scale-110 transition-transform duration-200"
       >
         Moowo Media
       </Link>
 
       {/* Desktop Nav */}
-      <nav className="hidden md:flex space-x-4 text-white font-medium text-lg">
+      <nav className="hidden md:flex space-x-4 font-medium text-lg">
         {navItems.map((item) => (
           <Link
             key={item.label}
             to={item.to}
-            className={`px-6 py-2 rounded-full border text-lg transition ${
-              isHomePage
-                ? "border-white text-white hover:bg-white hover:text-black"
-                : isWorkUsPage
-                ? "border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
-                : "border-black text-white bg-black hover:bg-white hover:text-black"
-            }`}
+            className="px-6 py-2 rounded-full border text-lg font-medium transition-all transform hover:scale-105 hover:shadow-md backdrop-blur-md bg-white/10 hover:bg-white/20 border-current text-current hover:text-black active:scale-95 tracking-wide"
           >
             {item.label}
           </Link>
@@ -101,13 +97,7 @@ export default function NavBar() {
               key={item.label}
               to={item.to}
               onClick={() => setIsMobileMenuOpen(false)}
-              className={`px-6 py-2 rounded-full border transition ${
-                isHomePage
-                  ? "border-white text-white hover:bg-white hover:text-black"
-                  : isWorkUsPage
-                  ? "border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
-                  : "border-black text-white bg-black hover:bg-white hover:text-black"
-              }`}
+              className="px-6 py-2 rounded-full border text-lg font-medium transition-all transform hover:scale-105 hover:shadow-md backdrop-blur-md bg-white/10 hover:bg-white/20 border-current text-current hover:text-black active:scale-95 tracking-wide"
             >
               {item.label}
             </Link>

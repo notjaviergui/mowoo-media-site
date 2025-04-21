@@ -20,6 +20,7 @@ import PaidMediaSection from './components/services/PaidMediaSection';
 import RetentionSection from './components/services/RetentionSection';
 import ScrollPopup from './components/ScrollPopup';
 import Footer from './components/Footer';
+import ClientsPortal from './pages/ClientsPortal';
 import AIChatBox from './components/AIChatBox';
 import './components/AIChatBox.css';
 
@@ -64,6 +65,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/pages/join-us" element={<Layout><JoinUs /></Layout>} />
           <Route path="/pages/newsletter" element={<Layout><Newsletter /></Layout>} />
           <Route path="/pages/clients" element={<Layout><Clients /></Layout>} />
+          <Route path="/pages/clients-portal" element={<Layout><ClientsPortal /></Layout>} />
           <Route path="/pages/us" element={<Layout><Us /></Layout>} />
           <Route path="/WorkUs" element={<Layout><WorkUs /></Layout>} />
         </Routes>
