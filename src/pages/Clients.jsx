@@ -1,71 +1,107 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
-const clients = [
+const clientsData = [
   {
-    title: "INLT Exotics",
-    description: "Premier exotic car rental service offering a fleet of luxury vehicles for unforgettable driving experiences.",
-    image: "/src/assets/inlt-exotics.png",
+    title: 'Mayu',
+    image: '/Images/Clients/Mayu.jpg',
+    tags: ['Web', 'Creative'],
   },
   {
-    title: "Inopera",
-    description: "Brand identity and motion creative for Inopera’s product launch campaign.",
-    image: "/src/assets/Inopera.png",
+    title: 'Miami Mojito Company',
+    image: '/Images/Clients/MiamiMojito.jpeg',
+    tags: ['Web', 'Creative'],
   },
   {
-    title: "Client C",
-    description: "Campaign production for a health supplement line.",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Centrum_logo.svg/2560px-Centrum_logo.svg.png",
+    title: 'Headphones',
+    image: '/Images/Clients/Inopera Headphones.png',
+    tags: ['Web', 'Media'],
   },
   {
-    title: "Client D",
-    description: "Full-funnel design and video for a beverage launch.",
-    image: "https://1000logos.net/wp-content/uploads/2018/06/Gatorade-logo.png",
+    title: 'Suches Cabins',
+    image: '/Images/Clients/Suches Cabins.jpeg',
+    tags: ['Web', 'Creative'],
+  },
+  {
+    title: 'Intl',
+    image: '/Images/Clients/INLT rentals.png',
+    tags: ['Retention', 'Media'],
   },
 ];
 
-export default function Clients() {
-  return (
-    <section className="bg-white min-h-screen py-32 px-6 md:px-20">
-      <h1 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-        <span className="text-indigo-600">Client</span> Showcase
-      </h1>
-      <div className="flex flex-col gap-24 max-w-6xl mx-auto">
-        {clients.map((client, index) => {
-          const ref = useRef(null);
-          const [isVisible, setIsVisible] = useState(false);
+const allTags = ['All', 'Web', 'Creative', 'Retention', 'Logo', 'Media', 'Consulting', 'Automations'];
 
-          useEffect(() => {
-            const observer = new IntersectionObserver(
-              ([entry]) => setIsVisible(entry.isIntersecting),
-              { threshold: 0.3 }
-            );
-            if (ref.current) observer.observe(ref.current);
-            return () => observer.disconnect();
-          }, []);
+export default function Clients() {
+  const [selectedTags, setSelectedTags] = useState([]);
+
+  useEffect(() => {
+    AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
+  }, []);
+
+  const toggleTag = (tag) => {
+    if (tag === 'All') {
+      setSelectedTags([]);
+    } else {
+      setSelectedTags((prev) =>
+        prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+      );
+    }
+  };
+
+  const filteredClients = selectedTags.length
+    ? clientsData.filter((client) =>
+        selectedTags.every((tag) => client.tags.includes(tag))
+      )
+    : clientsData;
+
+  return (
+    <section className="min-h-screen pt-32 pb-20 px-8 bg-white">
+      <h1 data-aos="fade-down" className="text-4xl text-center font-bold mb-4">
+        <span className="text-blue-600">Client</span> Showcase
+      </h1>
+      <p data-aos="fade-down" data-aos-delay="100" className="text-center text-gray-500 mb-10">
+        Explore the brands we've elevated
+      </p>
+
+      <div className="flex flex-wrap justify-center gap-3 mb-10">
+        {allTags.map((tag) => {
+          const isSelected = selectedTags.includes(tag);
+          const isAllSelected = tag === 'All' && selectedTags.length === 0;
 
           return (
             <div
-              key={index}
-              ref={ref}
-              className={`border border-white p-2 shadow-lg transition-all duration-700 ease-in-out transform ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              } ${index % 2 === 0 ? "self-start ml-0 md:ml-12" : "self-end mr-0 md:mr-12"} mt-${index * 10}`}
-              style={{ willChange: 'transform' }}
+              key={tag}
+              onClick={() => toggleTag(tag)}
+              className={`flex items-center gap-2 px-4 py-1.5 rounded-full cursor-pointer text-sm font-medium transition duration-200 shadow-sm ${
+                isSelected || isAllSelected
+                  ? 'bg-black text-white'
+                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+              }`}
             >
-              <img
-                src={client.image}
-                alt={client.title}
-                className="w-full mb-2 rounded"
-                style={{
-                  transform: isVisible ? "translateY(0)" : "translateY(20px)",
-                  transition: "transform 1s ease-out",
-                }}
-              />
-              <h3 className="text-lg font-semibold text-indigo-600 mb-1">{client.title}</h3>
-              <p className="text-sm text-gray-700">{client.description}</p>
+              <span>{tag}</span>
+              {(isSelected && tag !== 'All') && (
+                <span className="text-xs">✕</span>
+              )}
             </div>
           );
         })}
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
+        {filteredClients.map((client, i) => (
+          <div key={i} data-aos="fade-up" className="flex flex-col items-center group border border-gray-300 rounded-2xl p-6 bg-white shadow-md hover:shadow-2xl transition duration-300">
+            <img src={client.image} alt={client.title} className="w-full h-80 object-cover rounded-lg mb-4 transition-transform duration-300 group-hover:scale-105" />
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">{client.title}</h3>
+            <div className="flex flex-wrap justify-center gap-2">
+              {client.tags.map((tag, index) => (
+                <span key={index} className="text-xs font-medium text-gray-600 bg-gray-200 rounded-full px-3 py-1">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

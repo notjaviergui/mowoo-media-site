@@ -1,0 +1,22 @@
+
+
+
+.client-card {
+  @apply flex flex-col items-center border border-gray-100 rounded-xl p-6 bg-white shadow-sm hover:shadow-xl transition-all duration-300 ease-in-out;
+}
+
+.client-card img {
+  @apply rounded-lg w-full object-cover mb-4 transition-transform duration-300 group-hover:scale-105;
+}
+
+.client-title {
+  @apply text-lg font-semibold text-gray-900 mb-2;
+}
+
+.client-tags {
+  @apply flex flex-wrap justify-center gap-2;
+}
+
+.client-tag {
+  @apply text-xs font-medium text-gray-600 bg-gray-200 rounded-full px-3 py-1;
+}

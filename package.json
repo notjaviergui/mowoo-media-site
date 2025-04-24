@@ -10,6 +10,7 @@
     "deploy": "git add . && git commit -m 'Auto-deploy' && git push && gh-pages -d dist"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "canvas-confetti": "^1.9.3",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
