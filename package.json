@@ -10,7 +10,6 @@
     "deploy": "git add . && git commit -m 'Auto-deploy: save changes before gh-pages push' || echo 'No changes to commit' && git push && gh-pages -d dist --dotfiles"
   },
   "dependencies": {
-    
     "aos": "^2.3.4",
     "canvas-confetti": "^1.9.3",
     "cors": "^2.8.5",
