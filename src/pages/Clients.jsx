@@ -14,7 +14,7 @@ const clientsData = [
     tags: ['Web', 'Creative'],
   },
   {
-    title: 'Headphones',
+    title: 'Inopera',
     image: '/Images/Clients/Inopera Headphones.png',
     tags: ['Web', 'Media'],
   },
@@ -90,10 +90,10 @@ export default function Clients() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
         {filteredClients.map((client, i) => (
-          <div key={i} data-aos="fade-up" className="flex flex-col items-center group border border-gray-300 rounded-2xl p-6 bg-white shadow-md hover:shadow-2xl transition duration-300">
-            <img src={client.image} alt={client.title} className="w-full h-80 object-cover rounded-lg mb-4 transition-transform duration-300 group-hover:scale-105" />
+          <div key={i} data-aos="fade-up" className="flex flex-col items-center group border border-gray-50 rounded-3xl p-6 bg-white shadow-md hover:shadow-2xl transition duration-300">
+            <img src={client.image} alt={client.title} className="w-full h-70 object-cover rounded-lg mb-4 transition-transform duration-300 group-hover:scale-105" />
             <h3 className="text-lg font-semibold text-gray-900 mb-2">{client.title}</h3>
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap justify-centered gap-2">
               {client.tags.map((tag, index) => (
                 <span key={index} className="text-xs font-medium text-gray-600 bg-gray-200 rounded-full px-3 py-1">
                   {tag}
