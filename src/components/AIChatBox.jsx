@@ -43,15 +43,41 @@ Example Interactions:
     setInput('')
     setLoading(true)
 
-    const response = await fetch('http://localhost:3001/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: updatedMessages })
-    })
+    try {
+      // Create a timeout promise that rejects after 10 seconds
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('Request timeout')), 10000);
+      });
 
-    const data = await response.json()
-    setMessages([...updatedMessages, data])
-    setLoading(false)
+      // Create the fetch promise
+      const fetchPromise = fetch('http://localhost:3001/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: updatedMessages })
+      });
+
+      // Race between fetch and timeout
+      const response = await Promise.race([fetchPromise, timeoutPromise]);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setMessages([...updatedMessages, data]);
+    } catch (error) {
+      console.error('Chat API error:', error);
+      
+      // Add error message to chat
+      const errorMessage = {
+        role: 'assistant',
+        content: "Sorry, we are not available at the moment. Please reach out to us through our phone number +1 (786) 867-8456 or email us at hello@moowomedia.com. We'll be happy to help you!"
+      };
+      
+      setMessages([...updatedMessages, errorMessage]);
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (

@@ -2,7 +2,7 @@ export default function Contact() {
   return (
     <section className="bg-white text-center py-20 px-6">
       <h2 className="text-3xl md:text-4xl font-semibold mb-12">
-        Build with the <span className="text-indigo-600 font-bold">Mowoo Media</span> team
+        Build with the <span className="text-indigo-600 font-bold">Moowo Media</span> team
       </h2>
       <div className="flex justify-center">
         <a
