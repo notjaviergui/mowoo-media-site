@@ -1,130 +1,151 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useInView } from 'react-intersection-observer';
 
 const RetentionSection = () => {
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
+
+  const channels = [
+    {
+      icon: "📧",
+      title: "Email Automations",
+      description: "Welcome emails, abandoned carts, and post-purchase flows—automated and personalized to convert."
+    },
+    {
+      icon: "💬",
+      title: "SMS & iMessage",
+      description: "Real-time messages delivered where your customers pay attention. Short, smart, and perfectly timed."
+    },
+    {
+      icon: "🔄",
+      title: "Smart Funnels",
+      description: "From first click to long-term loyalty. Our funnel systems guide customers every step of the way."
+    }
+  ];
+
+  const features = [
+    "AI-powered segmentation",
+    "Live performance optimization", 
+    "Smart send-time predictions",
+    "Unified automations across tools",
+    "Behavior-based logic flows",
+    "Built for Shopify, Klaviyo, Meta"
+  ];
+
   return (
-    <section className="bg-gradient-to-b from-indigo-500 to-indigo-700 text-white py-20 px-6 md:px-20">
-      <div className="max-w-7xl mx-auto text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-5xl font-bold mb-6"
-        >
-          Smarter Retention = More Revenue
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="text-xl mb-12 max-w-3xl mx-auto"
-        >
-          We turn one-time buyers into loyal customers with smart, automated retention systems that drive results—email, SMS, iMessage, and beyond.
-        </motion.p>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="bg-white text-black p-6 rounded-lg shadow-lg"
-          >
-            <h3 className="text-2xl font-semibold mb-4 text-indigo-700">Email Automations</h3>
-            <p className="text-base">
-              Welcome emails, abandoned carts, and post-purchase flows—automated and personalized to convert.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="bg-white text-black p-6 rounded-lg shadow-lg"
-          >
-            <h3 className="text-2xl font-semibold mb-4 text-indigo-700">SMS & iMessage</h3>
-            <p className="text-base">
-              Real-time messages delivered where your customers pay attention. Short, smart, and perfectly timed.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
-            className="bg-white text-black p-6 rounded-lg shadow-lg"
-          >
-            <h3 className="text-2xl font-semibold mb-4 text-indigo-700">Smart Funnels</h3>
-            <p className="text-base">
-              From first click to long-term loyalty. Our funnel systems guide customers every step of the way.
-            </p>
-          </motion.div>
+    <div className="max-w-6xl mx-auto" ref={ref}>
+      {/* Hero Section - Apple Style with Glass Effects */}
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="text-center mb-24 relative"
+      >
+        {/* Glass background effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/20 via-white to-purple-50/20 rounded-3xl"></div>
+        <div className="absolute inset-0 backdrop-blur-2xl rounded-3xl"></div>
+        
+        <div className="relative z-10 p-16">
+          <h2 className="text-6xl md:text-7xl font-bold text-gray-900 mb-8 tracking-tight">
+            Smarter Retention = <span className="text-blue-600">More Revenue</span>
+          </h2>
+          <p className="text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            We turn one-time buyers into loyal customers with smart, automated retention systems 
+            that drive results—email, SMS, iMessage, and beyond.
+          </p>
         </div>
+      </motion.div>
 
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      {/* Channels Grid - Apple Style with Glass Effects */}
+      <div className="grid md:grid-cols-3 gap-12 mb-24">
+        {channels.map((channel, index) => (
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="space-y-4"
+            key={channel.title}
+            initial={{ opacity: 0, y: 80, scale: 0.9 }}
+            animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 80, scale: 0.9 }}
+            transition={{ 
+              delay: index * 0.2, 
+              duration: 1, 
+              ease: "easeOut" 
+            }}
+            whileHover={{ y: -10, scale: 1.02 }}
+            className="text-center group relative"
           >
-            <h3 className="text-3xl font-bold text-white">Next-Gen Funnel Tech</h3>
-            <p className="text-lg text-white/80">
-              We use AI, real-time behavior tracking, and journey mapping to build smarter funnels that feel personal and convert better.
-            </p>
-            <ul className="text-white/70 list-disc list-inside text-base space-y-1 mt-4">
-              <li>AI-powered segmentation</li>
-              <li>Live performance optimization</li>
-              <li>Smart send-time predictions</li>
-            </ul>
+            {/* Glass card effect */}
+            <div className="absolute inset-0 bg-white/60 backdrop-blur-xl rounded-3xl border border-white/50 shadow-lg group-hover:shadow-xl transition-all duration-500"></div>
+            <div className="relative z-10 p-12">
+              <div className="text-6xl mb-8 transition-transform duration-500 group-hover:scale-110">
+                {channel.icon}
+              </div>
+              <h3 className="text-3xl font-semibold text-gray-900 mb-6">{channel.title}</h3>
+              <p className="text-lg text-gray-600 leading-relaxed">{channel.description}</p>
+            </div>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="rounded-xl overflow-hidden shadow-lg"
-          >
-            <img
-              src="/Images/funneltech.png"
-              alt="Explainer graphic of funnel dashboard"
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-        </div>
-
-        <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="rounded-xl overflow-hidden shadow-lg"
-          >
-            <img
-              src="/Images/conductor.png"
-              alt="Automation Orchestration Graphic"
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="space-y-4"
-          >
-            <h3 className="text-3xl font-bold text-white">Omnichannel Automation Orchestration</h3>
-            <p className="text-lg text-white/80">
-              We sync emails, SMS, iMessage, and ads to feel like one conversation—not four. Automated, yet personal.
-            </p>
-            <ul className="text-white/70 list-disc list-inside text-base space-y-1 mt-4">
-              <li>Unified automations across tools</li>
-              <li>Behavior-based logic flows</li>
-              <li>Built for Shopify, Klaviyo, Meta, and more</li>
-            </ul>
-          </motion.div>
-        </div>
+        ))}
       </div>
-    </section>
+
+      {/* Features Section - Apple Style with Glass Effects */}
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ delay: 0.6, duration: 1, ease: "easeOut" }}
+        className="relative mb-24"
+      >
+        {/* Glass background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50/80 to-blue-50/80 backdrop-blur-2xl rounded-3xl border border-white/50"></div>
+        <div className="relative z-10 p-16">
+          <h3 className="text-4xl font-bold text-gray-900 mb-12 text-center">Next-Gen Funnel Tech</h3>
+          <p className="text-xl text-gray-600 text-center mb-12 max-w-3xl mx-auto leading-relaxed">
+            We use AI, real-time behavior tracking, and journey mapping to build smarter funnels 
+            that feel personal and convert better.
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((feature, index) => (
+              <motion.div 
+                key={feature} 
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                transition={{ 
+                  delay: 0.8 + index * 0.1, 
+                  duration: 0.6,
+                  ease: "easeOut"
+                }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="bg-white/80 backdrop-blur-xl px-8 py-6 rounded-2xl text-center text-lg font-medium text-gray-700 hover:shadow-lg transition-all duration-300 border border-white/50"
+              >
+                {feature}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+
+      {/* CTA Section - Apple Style with Glass Effects */}
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ delay: 1, duration: 1, ease: "easeOut" }}
+        className="relative text-center"
+      >
+        {/* Glass background */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/90 to-blue-700/90 backdrop-blur-2xl rounded-3xl shadow-2xl"></div>
+        <div className="relative z-10 p-16 text-white">
+          <h3 className="text-4xl font-bold mb-8">Ready to Build Your Retention Engine?</h3>
+          <p className="text-xl text-blue-100 mb-12 leading-relaxed">
+            Let's create automated systems that turn customers into advocates.
+          </p>
+          <a
+            href="/WorkUs"
+            className="inline-block bg-white/90 backdrop-blur-xl text-blue-600 px-12 py-6 rounded-3xl text-xl font-semibold hover:bg-white transition-all duration-500 hover:scale-105 shadow-lg hover:shadow-xl border border-white/50"
+          >
+            Get Started
+          </a>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 

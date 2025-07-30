@@ -1,109 +1,188 @@
-/* Modern glassmorphism and dark theme for Clients page */
-.clients-bg {
-  position: relative;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #181824 0%, #23243a 60%, #1a1a2e 100%);
-  overflow-x: hidden;
+/* Apple-inspired glassmorphism and clean design for Clients page */
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
 }
 
-.client-glass-card {
-  background: rgba(30, 32, 48, 0.7);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
-  border-radius: 1.5rem;
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
-  transition: box-shadow 0.3s cubic-bezier(.4,0,.2,1), transform 0.3s cubic-bezier(.4,0,.2,1);
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.client-glass-card:hover {
-  box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.25), 0 2px 8px rgba(0,0,0,0.10);
-  transform: translateY(-4px) scale(1.03);
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
 }
 
-.client-glass-card img {
-  border-radius: 1rem;
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 
-.client-glass-card h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 0.5rem;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
-.client-glass-card .tag-badge {
-  display: inline-block;
-  padding: 0.25rem 1rem;
+/* Glass morphism effects */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced hover effects */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Smooth image transitions */
+.client-image {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.client-image:hover {
+  transform: scale(1.05);
+}
+
+/* Tag styling */
+.tag-pill {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  padding: 0.5rem 1rem;
   border-radius: 9999px;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.tag-pill:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Modal backdrop blur */
+.modal-backdrop {
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Button animations */
+.btn-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
   font-weight: 600;
-  color: #fff;
-  margin: 0.15rem;
-  background: linear-gradient(90deg, #6366f1 0%, #a21caf 100%);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-  border: 1px solid rgba(255,255,255,0.10);
-  transition: background 0.2s, box-shadow 0.2s;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
-.client-glass-card .tag-badge.Web {
-  background: linear-gradient(90deg, #2563eb 0%, #06b6d4 100%);
-}
-.client-glass-card .tag-badge.Creative {
-  background: linear-gradient(90deg, #ec4899 0%, #8b5cf6 100%);
-}
-.client-glass-card .tag-badge.Retention {
-  background: linear-gradient(90deg, #22c55e 0%, #059669 100%);
-}
-.client-glass-card .tag-badge.Logo {
-  background: linear-gradient(90deg, #f59e42 0%, #fbbf24 100%);
-}
-.client-glass-card .tag-badge.Media {
-  background: linear-gradient(90deg, #6366f1 0%, #1e40af 100%);
-}
-.client-glass-card .tag-badge.Consulting {
-  background: linear-gradient(90deg, #d946ef 0%, #db2777 100%);
-}
-.client-glass-card .tag-badge.Automations {
-  background: linear-gradient(90deg, #14b8a6 0%, #22d3ee 100%);
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
 }
 
-/* Tag filter bar */
-.clients-bg .tag-filter {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-bottom: 2.5rem;
-}
-.clients-bg .tag-filter .tag {
-  cursor: pointer;
-  padding: 0.5rem 1.5rem;
-  border-radius: 9999px;
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.9);
+  color: #374151;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
   font-weight: 600;
-  font-size: 1rem;
-  background: #23243a;
-  color: #e0e7ef;
-  transition: background 0.2s, color 0.2s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-}
-.clients-bg .tag-filter .tag.selected {
-  background: linear-gradient(90deg, #2563eb 0%, #a21caf 100%);
-  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 }
 
-/* Responsive grid tweaks */
-@media (max-width: 900px) {
-  .client-glass-card {
-    padding: 1.25rem;
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Card animations */
+.card-enter {
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+}
+
+.card-enter-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-exit {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.card-exit-active {
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+  .glass-effect {
+    backdrop-filter: blur(15px);
+  }
+  
+  .tag-pill {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
   }
 }
-@media (max-width: 600px) {
-  .client-glass-card {
-    padding: 1rem;
+
+@media (max-width: 640px) {
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
   }
+}
+
+/* Focus states for accessibility */
+button:focus,
+a:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #3b82f6;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }

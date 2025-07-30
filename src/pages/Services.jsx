@@ -1,114 +1,140 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import WebsitesSection from '../components/services/WebsitesSection';
 import PaidMediaSection from '../components/services/PaidMediaSection';
 import RetentionSection from '../components/services/RetentionSection';
-import VideoPackages from '../components/services/videopackages/VideoPackages';
 import CreativeSection from '../components/services/CreativeSection';
 
 export default function Services() {
-  const [activeTag, setActiveTag] = useState(null);
+  const [activeTag, setActiveTag] = useState("Websites");
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 300], [0, -100]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0.8]);
 
-    return (
-      <div className="bg-white text-black font-sans">
-        {/* Section: Title + Nav Tags */}
-        <section className="px-6 md:px-16 pt-28">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Our <span className="text-blue-600">services</span>
-          </h1>
-          <div className="flex flex-wrap gap-2 mb-8">
-            {["Websites", "Paid Media", "Creative", "Retention"].map((tag) => (
-              <button
-                key={tag}
-                onClick={() => setActiveTag(tag)}
-                className={`border rounded-full px-4 py-1 text-sm font-medium transition-all duration-200 transform hover:scale-105 ${
-                  activeTag === tag
-                    ? 'bg-blue-600 text-white border-blue-600'
-                    : 'bg-transparent text-black border-black'
+  const services = [
+    {
+      id: "Websites",
+      title: "Websites",
+      description: "Fast, scalable websites that convert",
+      icon: "🌐"
+    },
+    {
+      id: "Paid Media", 
+      title: "Paid Media",
+      description: "Performance-driven advertising",
+      icon: "📈"
+    },
+    {
+      id: "Creative",
+      title: "Creative",
+      description: "Thumb-stopping content & design",
+      icon: "🎨"
+    },
+    {
+      id: "Retention",
+      title: "Retention", 
+      description: "Turn buyers into loyal customers",
+      icon: "🔄"
+    }
+  ];
+
+  return (
+    <div className="bg-white">
+      {/* Hero Section - Apple Style with Glass Effects */}
+      <motion.section 
+        style={{ y, opacity }}
+        className="pt-32 pb-20 px-6 md:px-16 relative overflow-hidden"
+      >
+        {/* Glass background effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white to-purple-50/30"></div>
+        <div className="absolute inset-0 backdrop-blur-3xl"></div>
+        
+        <div className="relative max-w-4xl mx-auto text-center">
+          <motion.h1 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-6xl md:text-7xl font-bold text-gray-900 mb-8 tracking-tight"
+          >
+            Our <span className="text-blue-600">Services</span>
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+            className="text-2xl text-gray-600 mb-16 leading-relaxed"
+          >
+            Choose a service to learn more about how we can help your business grow.
+          </motion.p>
+          
+          {/* Service Navigation - Glass Style Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {services.map((service, index) => (
+              <motion.button
+                key={service.id}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 0.4 + index * 0.1,
+                  ease: "easeOut"
+                }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setActiveTag(service.id)}
+                className={`group relative p-8 rounded-3xl transition-all duration-500 ease-out backdrop-blur-xl ${
+                  activeTag === service.id
+                    ? 'bg-blue-600/90 text-white shadow-2xl shadow-blue-600/25 border border-blue-400/20'
+                    : 'bg-white/70 text-gray-900 hover:bg-white/90 border border-white/50 shadow-lg hover:shadow-xl'
                 }`}
               >
-                {tag}
-              </button>
+                {/* Glass effect overlay */}
+                <div className={`absolute inset-0 rounded-3xl ${
+                  activeTag === service.id 
+                    ? 'bg-gradient-to-br from-blue-600/20 to-blue-800/20' 
+                    : 'bg-gradient-to-br from-white/20 to-gray-100/20'
+                }`}></div>
+                
+                <div className="relative z-10">
+                  <div className={`text-4xl mb-4 transition-all duration-300 ${
+                    activeTag === service.id ? 'scale-110' : 'group-hover:scale-110'
+                  }`}>
+                    {service.icon}
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                  <p className={`text-sm leading-relaxed ${
+                    activeTag === service.id ? 'text-blue-100' : 'text-gray-500'
+                  }`}>
+                    {service.description}
+                  </p>
+                  
+                  {/* Glass-style active indicator */}
+                  {activeTag === service.id && (
+                    <motion.div 
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-8 h-1 bg-white/80 rounded-full backdrop-blur-sm"
+                    ></motion.div>
+                  )}
+                </div>
+              </motion.button>
             ))}
           </div>
-        </section>
-  
-        {/* Section: Creative Summary */}
+        </div>
+      </motion.section>
+
+      {/* Dynamic Content Section */}
+      <section className="px-6 md:px-16 pb-20">
         {activeTag === "Websites" && <WebsitesSection />}
         {activeTag === "Paid Media" && <PaidMediaSection />}
         {activeTag === "Creative" && <CreativeSection />}
         {activeTag === "Retention" && <RetentionSection />}
-  
-        {/* Section: Service Cards */}
-        <section className="grid md:grid-cols-2 gap-6 px-6 md:px-16 py-12 bg-white">
-          <div className="border border-black p-6 hover:shadow-lg transition-shadow">
-            <h3 className="text-xl font-bold mb-2">Ad Production</h3>
-            <p className="text-base mb-3">
-              The average person scrolls a quarter-mile on their phone daily—
-              except when they stop on creative. We specialize in thumb-stopping
-              content that communicates the offer, the brand, and the value.
-            </p>
-            <ul className="list-disc list-inside text-base font-medium space-y-1">
-              <li>Strategy</li>
-              <li>Scriptwriting</li>
-              <li>On-set Direction</li>
-              <li>Filming</li>
-              <li>Editing</li>
-            </ul>
-          </div>
-  
-          <div className="border border-black p-6 hover:shadow-lg transition-shadow">
-            <h3 className="text-xl font-bold mb-2">Copywriting</h3>
-            <p className="text-base mb-3">
-              Good copy feels like you're listening to your favorite song at a
-              concert. You get enough familiarity to know what you'll hear,
-              but also newness to keep it fresh. We aim for that perfect note.
-            </p>
-            <ul className="list-disc list-inside text-base font-medium space-y-1">
-              <li>Audience Research</li>
-              <li>Brand Positioning</li>
-              <li>Retention Emails</li>
-              <li>Full Funnel Audit</li>
-              <li>Market Research</li>
-            </ul>
-          </div>
-  
-          <div className="border border-black p-6 hover:shadow-lg transition-shadow">
-            <h3 className="text-xl font-bold mb-2">UGC</h3>
-            <p className="text-base mb-3">
-              We work with creators to produce branded content that feels native,
-              yet sells. From briefing and scripting to vetting and managing—
-              we own the process.
-            </p>
-            <ul className="list-disc list-inside text-base font-medium space-y-1">
-              <li>Brand Research</li>
-              <li>Talent Outreach</li>
-              <li>Content Guidelines</li>
-              <li>Filming</li>
-              <li>Editing</li>
-            </ul>
-          </div>
-  
-          <div className="border border-black p-6 hover:shadow-lg transition-shadow">
-            <h3 className="text-xl font-bold mb-2">Brand Identity</h3>
-            <p className="text-base mb-3">
-              A brand’s identity should be at the intersection of real consumer
-              data and aesthetics. We craft branding that is consistent, memorable,
-              and persuasive.
-            </p>
-            <ul className="list-disc list-inside text-base font-medium space-y-1">
-              <li>Logo Design</li>
-              <li>Color Palette</li>
-              <li>Type Scale</li>
-              <li>Voice & Tone</li>
-              <li>Packaging Design</li>
-            </ul>
-          </div>
-        </section>
-        <VideoPackages />
-      </div>
-    );
-  }
+      </section>
+    </div>
+  );
+}
 
 
 

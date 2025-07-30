@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import './Clients.css';
 
 const clientsData = [
@@ -7,63 +8,61 @@ const clientsData = [
     title: 'Mayu',
     image: '/Images/Clients/Mayu.jpg',
     tags: ['Web', 'Creative'],
+    description: 'E-commerce platform redesign with improved conversion rates'
   },
   {
     title: 'Miami Mojito Company',
     image: '/Images/Clients/MiamiMojito.jpeg',
     tags: ['Web', 'Creative'],
+    description: 'Brand identity and website development for premium beverage company'
   },
   {
     title: 'Inopera',
     image: '/Images/Clients/Inopera Headphones.png',
     tags: ['Web', 'Media'],
+    description: 'Audio equipment brand with integrated e-commerce solution'
   },
   {
     title: 'Suches Cabins',
     image: '/Images/Clients/Suches Cabins.jpeg',
     tags: ['Web', 'Creative'],
+    description: 'Luxury cabin rental platform with booking system'
   },
   {
     title: 'Intl',
     image: '/Images/Clients/INLT rentals.png',
     tags: ['Retention', 'Media'],
+    description: 'Rental service platform with customer retention automation'
   },
   {
     title: 'ESmooth',
     image: 'https://instagram.fclo1-1.fna.fbcdn.net/v/t51.2885-15/245203799_122357176842916_5354720512083912117_n.jpg',
     tags: ['Creative'],
+    description: 'Creative content and brand development'
   },
   {
     title: 'Coming Soon',
     image: '/Images/placeholder.jpg',
     tags: ['Creative'],
+    description: 'New project launching soon'
   },
   {
     title: 'Coming Soon',
     image: '/Images/placeholder.jpg',
     tags: ['Creative'],
-  },
-  {
-    title: 'Coming Soon',
-    image: '/Images/placeholder.jpg',
-    tags: ['Creative'],
+    description: 'New project launching soon'
   },
 ];
 
-const allTags = ['All', 'Web', 'Creative', 'Retention', 'Logo', 'Media', 'Consulting', 'Automations'];
-
-const tagColors = {
-  Web: 'from-blue-500 to-cyan-500',
-  Creative: 'from-pink-500 to-purple-500',
-  Retention: 'from-green-500 to-emerald-500',
-  Logo: 'from-yellow-500 to-orange-500',
-  Media: 'from-indigo-500 to-blue-700',
-  Consulting: 'from-fuchsia-500 to-pink-600',
-  Automations: 'from-teal-500 to-green-400',
-};
+const allTags = ['All', 'Web', 'Creative', 'Retention', 'Media'];
 
 export default function Clients() {
   const [selectedTags, setSelectedTags] = useState([]);
+  const [modalClient, setModalClient] = useState(null);
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
 
   const toggleTag = (tag) => {
     if (tag === 'All') {
@@ -82,112 +81,183 @@ export default function Clients() {
     : clientsData;
 
   return (
-    <section className="clients-bg min-h-screen pt-32 pb-20 px-4 md:px-12 flex flex-col items-center relative overflow-x-hidden">
-      {/* Background gradient overlay */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#181824] via-[#23243a] to-[#1a1a2e] opacity-95" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[40vw] bg-gradient-to-tr from-blue-900/30 via-fuchsia-700/20 to-transparent rounded-full blur-3xl opacity-60 -z-10" />
-
-      {/* Hero header section */}
-      <motion.h1
-        initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, type: 'spring' }}
-        className="text-5xl md:text-7xl text-center font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-fuchsia-400 to-purple-500 drop-shadow-lg"
-      >
-        Client Showcase
-      </motion.h1>
-      <motion.p
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.7 }}
-        className="text-lg md:text-2xl text-center text-gray-300 mb-12"
-      >
-        Explore the brands we've elevated
-      </motion.p>
-
-      {/* Tag filter bar */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.6 }}
-        className="flex flex-wrap justify-center gap-3 mb-12"
-      >
-        {allTags.map((tag) => {
-          const isSelected = selectedTags.includes(tag);
-          const isAllSelected = tag === 'All' && selectedTags.length === 0;
-          return (
-            <motion.div
-              whileTap={{ scale: 0.95 }}
-              key={tag}
-              onClick={() => toggleTag(tag)}
-              className={`cursor-pointer px-6 py-2 rounded-full font-semibold text-base shadow-md transition-all duration-200 flex items-center gap-2 
-                ${isSelected || isAllSelected
-                  ? 'bg-gradient-to-r from-blue-600 to-fuchsia-600 text-white shadow-lg'
-                  : 'bg-zinc-800 text-gray-200 hover:bg-zinc-700'}
-              `}
-            >
-              <span>{tag}</span>
-              {(isSelected && tag !== 'All') && (
-                <span className="text-xs">✕</span>
-              )}
-            </motion.div>
-          );
-        })}
-      </motion.div>
-
-      {/* Client cards grid */}
-      <div className="w-full max-w-7xl">
-        <AnimatePresence>
-          <motion.div
-            layout
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10"
+    <div className="min-h-screen bg-white">
+      {/* Hero Section - Apple Style */}
+      <section className="pt-32 pb-20 px-6 md:px-16 relative overflow-hidden">
+        {/* Glass background effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white to-purple-50/30"></div>
+        <div className="absolute inset-0 backdrop-blur-3xl"></div>
+        
+        <div className="relative max-w-4xl mx-auto text-center">
+          <motion.h1 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="text-6xl md:text-7xl font-bold text-gray-900 mb-8 tracking-tight"
           >
-            {filteredClients.map((client, i) => (
-              <motion.div
-                key={client.title + i}
-                layout
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 40 }}
-                transition={{ duration: 0.5, delay: i * 0.08, type: 'spring', bounce: 0.2 }}
-                whileHover={{ scale: 1.04, boxShadow: '0 8px 32px rgba(0,0,0,0.18)' }}
-                className="client-glass-card group relative flex flex-col items-center p-6 rounded-2xl shadow-xl border border-zinc-700/40 bg-white/5 backdrop-blur-md transition-all duration-300"
+            Our <span className="text-blue-600">Clients</span>
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+            className="text-2xl text-gray-600 mb-16 leading-relaxed"
+          >
+            We help brands grow with design, technology, and strategy.
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Filter Section - Apple Style */}
+      <section className="px-6 md:px-16 pb-16">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-wrap justify-center gap-4"
+          >
+            {allTags.map((tag) => {
+              const isSelected = selectedTags.includes(tag);
+              const isAllSelected = tag === 'All' && selectedTags.length === 0;
+              return (
+                <motion.button
+                  key={tag}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => toggleTag(tag)}
+                  className={`px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 backdrop-blur-xl ${
+                    isSelected || isAllSelected
+                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/25'
+                      : 'bg-white/70 text-gray-700 hover:bg-white/90 border border-white/50 shadow-lg hover:shadow-xl'
+                  }`}
+                >
+                  {tag}
+                </motion.button>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Clients Grid - Apple Style */}
+      <section className="px-6 md:px-16 pb-20" ref={ref}>
+        <div className="max-w-7xl mx-auto">
+          <AnimatePresence>
+            <motion.div
+              layout
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+            >
+              {filteredClients.map((client, index) => (
+                <motion.div
+                  key={client.title + index}
+                  layout
+                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                  animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
+                  exit={{ opacity: 0, y: 50, scale: 0.9 }}
+                  transition={{ 
+                    duration: 0.8, 
+                    delay: index * 0.1, 
+                    ease: "easeOut" 
+                  }}
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  className="group relative"
+                >
+                  {/* Glass card effect */}
+                  <div className="absolute inset-0 bg-white/60 backdrop-blur-xl rounded-3xl border border-white/50 shadow-lg group-hover:shadow-xl transition-all duration-500"></div>
+                  
+                  <div className="relative z-10 p-6 rounded-3xl overflow-hidden">
+                    {/* Image container */}
+                    <div className="relative h-48 mb-6 rounded-2xl overflow-hidden">
+                      <img
+                        src={client.image}
+                        alt={client.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="text-center">
+                      <h3 className="text-2xl font-bold text-gray-900 mb-3">{client.title}</h3>
+                      <p className="text-gray-600 text-sm mb-4 leading-relaxed">{client.description}</p>
+                      
+                      {/* Tags */}
+                      <div className="flex flex-wrap justify-center gap-2">
+                        {client.tags.map((tag, tagIndex) => (
+                          <motion.span
+                            key={tagIndex}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                            transition={{ 
+                              delay: 0.3 + index * 0.1 + tagIndex * 0.05, 
+                              duration: 0.5 
+                            }}
+                            className="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700 border border-blue-200"
+                          >
+                            {tag}
+                          </motion.span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </section>
+
+      {/* Modal - Apple Style */}
+      <AnimatePresence>
+        {modalClient && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setModalClient(null)}
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+            
+            {/* Modal content */}
+            <motion.div
+              className="relative bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl max-w-lg w-full p-8 border border-white/50"
+              initial={{ scale: 0.9, opacity: 0, y: 50 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 50 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              onClick={e => e.stopPropagation()}
+            >
+              <button
+                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl transition-colors"
+                onClick={() => setModalClient(null)}
               >
-                <div className="relative w-full h-48 mb-4 overflow-hidden rounded-xl">
-                  <img
-                    src={client.image}
-                    alt={client.title}
-                    className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60 rounded-xl pointer-events-none" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3 drop-shadow-lg">{client.title}</h3>
-                <div className="flex flex-wrap justify-center gap-2 mt-2">
-                  {client.tags.map((tag, index) => (
-                    <motion.span
-                      key={index}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 + index * 0.08 }}
-                      className={`px-4 py-1 rounded-full text-xs font-semibold shadow-md bg-gradient-to-r ${tagColors[tag] || 'from-gray-700 to-gray-900'} text-white border border-white/10`}
-                    >
+                ×
+              </button>
+              
+              <div className="mb-6">
+                <img 
+                  src={modalClient.image} 
+                  alt={modalClient.title} 
+                  className="w-full h-48 object-cover rounded-2xl mb-4" 
+                />
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">{modalClient.title}</h2>
+                <p className="text-gray-600 mb-4">{modalClient.description}</p>
+                
+                <div className="flex flex-wrap gap-2">
+                  {modalClient.tags.map((tag, idx) => (
+                    <span key={idx} className="px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-700 border border-blue-200">
                       {tag}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
-                {/* Optional: Add a floating overlay or button on hover */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileHover={{ opacity: 1, y: 0 }}
-                  className="absolute bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300"
-                >
-                  <button className="px-5 py-2 rounded-full bg-gradient-to-r from-blue-600 to-fuchsia-600 text-white font-semibold shadow-lg text-sm hover:scale-105 transition-transform">View Details</button>
-                </motion.div>
-              </motion.div>
-            ))}
+              </div>
+            </motion.div>
           </motion.div>
-        </AnimatePresence>
-      </div>
-    </section>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }

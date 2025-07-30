@@ -30,7 +30,7 @@ app.post('/api/subscribe', async (req, res) => {
       },
       body: JSON.stringify({
         email,
-        publication_id: 'a0080e05-7f0d-452d-a9b0-98f3d5b8adc3',
+        publication_id: 'e2ff2a53-2b43-44fc-8f62-147223a21911',
         reactivate_existing: true,
         send_welcome_email: true,
         utm_source: 'moowo_site',
