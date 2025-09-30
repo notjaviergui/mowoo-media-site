@@ -6,9 +6,10 @@ import WebsitesSection from '../components/services/WebsitesSection';
 import PaidMediaSection from '../components/services/PaidMediaSection';
 import RetentionSection from '../components/services/RetentionSection';
 import CreativeSection from '../components/services/CreativeSection';
+import AIAdCreationSection from '../components/services/AIAdCreationSection';
 
 export default function Services() {
-  const [activeTag, setActiveTag] = useState("Websites");
+  const [activeTag, setActiveTag] = useState("AI Ad Creation");
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 300], [0, -100]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0.8]);
@@ -31,6 +32,12 @@ export default function Services() {
       title: "Creative",
       description: "Thumb-stopping content & design",
       icon: "🎨"
+    },
+    {
+      id: "AI Ad Creation",
+      title: "AI Ad Creation",
+      description: "AI-powered ads with lightning-fast iterations",
+      icon: "🤖"
     },
     {
       id: "Retention",
@@ -70,7 +77,7 @@ export default function Services() {
           </motion.p>
           
           {/* Service Navigation - Glass Style Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {services.map((service, index) => (
               <motion.button
                 key={service.id}
@@ -130,6 +137,7 @@ export default function Services() {
         {activeTag === "Websites" && <WebsitesSection />}
         {activeTag === "Paid Media" && <PaidMediaSection />}
         {activeTag === "Creative" && <CreativeSection />}
+        {activeTag === "AI Ad Creation" && <AIAdCreationSection />}
         {activeTag === "Retention" && <RetentionSection />}
       </section>
     </div>

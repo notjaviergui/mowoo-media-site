@@ -47,7 +47,21 @@ export default function NavBar() {
       </Link>
 
       {/* Desktop Nav */}
-      <nav className="hidden md:flex space-x-4 font-medium text-lg">
+      <nav className="hidden md:flex space-x-4 font-medium text-lg items-center">
+        {/* Floating AI Video Button - Left Side */}
+        <Link
+          to="/pages/services"
+          className="relative mr-4 px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white text-lg font-bold transition-all transform hover:scale-110 hover:shadow-xl hover:shadow-purple-500/25 hover:from-purple-500 hover:to-blue-500 active:scale-95 tracking-wide animate-bounce group"
+          style={{
+            animation: 'float 3s ease-in-out infinite, glow 2s ease-in-out infinite'
+          }}
+        >
+          <span className="flex items-center gap-2">
+            🤖 AI Video
+            <span className="text-xs bg-white/20 px-2 py-1 rounded-full font-semibold animate-pulse group-hover:bg-white/30 transition-all duration-300">NEW</span>
+          </span>
+        </Link>
+        
         {navItems.map((item) => (
           <Link
             key={item.label}
@@ -92,6 +106,21 @@ export default function NavBar() {
           >
             &times;
           </button>
+          {/* Mobile AI Video Button - First */}
+          <Link
+            to="/pages/services"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white text-lg font-bold transition-all transform hover:scale-110 hover:shadow-xl hover:shadow-purple-500/25 hover:from-purple-500 hover:to-blue-500 active:scale-95 tracking-wide animate-bounce group"
+            style={{
+              animation: 'float 3s ease-in-out infinite, glow 2s ease-in-out infinite'
+            }}
+          >
+            <span className="flex items-center gap-2">
+              🤖 AI Video
+              <span className="text-xs bg-white/20 px-2 py-1 rounded-full font-semibold animate-pulse group-hover:bg-white/30 transition-all duration-300">NEW</span>
+            </span>
+          </Link>
+          
           {navItems.map((item) => (
             <Link
               key={item.label}

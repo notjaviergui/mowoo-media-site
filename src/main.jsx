@@ -8,7 +8,7 @@ import Hero from './components/Hero';
 import ConsultingPipeline from './components/ConsultingPipeline';
 import Contact from './components/Contact';
 import Stats from './components/Stats';
-import Services from './pages/services';
+import Services from './pages/Services';
 import JoinUs from './pages/JoinUs';
 import Newsletter from './pages/Newsletter';
 import Clients from './pages/Clients';
@@ -38,6 +38,10 @@ const LandingPage = () => (
               <Link to="/components/services/websitessection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Websites</Link>
               <Link to="/components/services/paidmediasection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Paid Media</Link>
               <Link to="/components/services/creativesection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Creative</Link>
+              <div className="relative inline-block">
+                <Link to="/pages/services" className="block text-7xl font-bold text-black hover:text-purple-500 transition duration-300">AI Ad Creation</Link>
+                <span className="absolute -top-2 -right-8 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse">NEW</span>
+              </div>
               <Link to="/components/services/retentionsection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Retention</Link>
               <Link to="/WorkUs" className="block text-5xl font-light text-black hover:text-indigo-500 transition duration-300">Work With Us</Link>
             </div>
@@ -62,12 +66,14 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/components/services/paidmediasection" element={<Layout><PaidMediaSection /></Layout>} />
           <Route path="/components/services/creativesection" element={<Layout><Services /></Layout>} />
           <Route path="/components/services/retentionsection" element={<Layout><RetentionSection /></Layout>} />
+          <Route path="/pages/services" element={<Layout><Services /></Layout>} />
           <Route path="/pages/join-us" element={<Layout><JoinUs /></Layout>} />
           <Route path="/pages/newsletter" element={<Layout><Newsletter /></Layout>} />
           <Route path="/pages/clients" element={<Layout><Clients /></Layout>} />
           <Route path="/pages/clients-portal" element={<Layout><ClientsPortal /></Layout>} />
           <Route path="/pages/us" element={<Layout><Us /></Layout>} />
           <Route path="/WorkUs" element={<Layout><WorkUs /></Layout>} />
+          <Route path="/contact" element={<Layout><WorkUs /></Layout>} />
         </Routes>
       </Router>
       <AIChatBox /> {/* <-- globally included */}
