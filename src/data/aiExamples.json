@@ -1,0 +1,29 @@
+[
+  {
+    "id": "ex-001",
+    "title": "Product Launch Teaser",
+    "client": "Demo Brand",
+    "tags": ["teaser", "launch"],
+    "videoUrl": "/reel-video.mp4",
+    "posterUrl": "/public/paidmedia.png"
+  },
+  {
+    "id": "ex-002",
+    "title": "Lifestyle Montage",
+    "client": "Sample Co.",
+    "tags": ["lifestyle", "montage"],
+    "videoUrl": "/Videos/Backgroundvideo.mp4",
+    "posterUrl": "/public/retention.png"
+  },
+  {
+    "id": "ex-003",
+    "title": "UGC Variant Test",
+    "client": "Acme",
+    "tags": ["ugc", "variants"],
+    "videoUrl": "/Videos/Backgroundvideo.mp4",
+    "posterUrl": "/public/web.png"
+  }
+]
+
+
+

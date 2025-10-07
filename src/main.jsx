@@ -9,6 +9,7 @@ import ConsultingPipeline from './components/ConsultingPipeline';
 import Contact from './components/Contact';
 import Stats from './components/Stats';
 import Services from './pages/Services';
+import AIExamples from './pages/AIExamples';
 import JoinUs from './pages/JoinUs';
 import Newsletter from './pages/Newsletter';
 import Clients from './pages/Clients';
@@ -67,6 +68,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/components/services/creativesection" element={<Layout><Services /></Layout>} />
           <Route path="/components/services/retentionsection" element={<Layout><RetentionSection /></Layout>} />
           <Route path="/pages/services" element={<Layout><Services /></Layout>} />
+          <Route path="/pages/ai-examples" element={<Layout><AIExamples /></Layout>} />
           <Route path="/pages/join-us" element={<Layout><JoinUs /></Layout>} />
           <Route path="/pages/newsletter" element={<Layout><Newsletter /></Layout>} />
           <Route path="/pages/clients" element={<Layout><Clients /></Layout>} />

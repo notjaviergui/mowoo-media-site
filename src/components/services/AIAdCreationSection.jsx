@@ -264,7 +264,7 @@ export default function AIAdCreationSection() {
               Start with AI
             </Link>
             <Link
-              to="/contact"
+              to="/pages/ai-examples"
               className="bg-transparent border-2 border-white/80 text-white px-12 py-6 rounded-3xl text-xl font-semibold hover:bg-white/10 transition-all duration-500 hover:scale-105 backdrop-blur-xl"
             >
               See AI Examples
