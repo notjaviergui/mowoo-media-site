@@ -1,14 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "../contexts/ThemeContext";
+
+const AI_SERVICES = [
+  {
+    id: 'agents',
+    icon: '🤖',
+    label: 'AI Agents',
+    link: '/ai-agents'
+  },
+  {
+    id: 'video',
+    icon: '🎬',
+    label: 'AI Video',
+    link: '/pages/services'
+  }
+];
 
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeAIService, setActiveAIService] = useState(0);
+  const { isDark } = useTheme();
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const isWorkUsPage = location.pathname === "/pages/WorkUs";
-  const isLightBackground = location.pathname !== "/" && location.pathname !== "/pages/clients-portal";
+  const isLightBackground = (location.pathname !== "/" && location.pathname !== "/pages/clients-portal") || isDark;
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Auto-rotate AI service button every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveAIService((prev) => (prev + 1) % AI_SERVICES.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -48,19 +75,45 @@ export default function NavBar() {
 
       {/* Desktop Nav */}
       <nav className="hidden md:flex space-x-4 font-medium text-lg items-center">
-        {/* Floating AI Video Button - Left Side */}
-        <Link
-          to="/pages/services"
-          className="relative mr-4 px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white text-lg font-bold transition-all transform hover:scale-110 hover:shadow-xl hover:shadow-purple-500/25 hover:from-purple-500 hover:to-blue-500 active:scale-95 tracking-wide animate-bounce group"
-          style={{
-            animation: 'float 3s ease-in-out infinite, glow 2s ease-in-out infinite'
-          }}
-        >
-          <span className="flex items-center gap-2">
-            🤖 AI Video
-            <span className="text-xs bg-white/20 px-2 py-1 rounded-full font-semibold animate-pulse group-hover:bg-white/30 transition-all duration-300">NEW</span>
-          </span>
-        </Link>
+        {/* Combined Rotating AI Services Button */}
+        <div className="relative mr-4 overflow-hidden rounded-full">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeAIService}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+              className="inline-block relative"
+            >
+              <Link
+                to={AI_SERVICES[activeAIService].link}
+                className="relative px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white text-lg font-bold transition-all transform hover:scale-110 hover:shadow-xl hover:shadow-purple-500/25 hover:from-purple-500 hover:to-blue-500 active:scale-95 tracking-wide group inline-flex items-center gap-2 overflow-hidden"
+              >
+                {/* Gleam Effect */}
+                <motion.div
+                  className="absolute inset-0 opacity-40"
+                  initial={{ x: '-100%' }}
+                  animate={{ x: '200%' }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    repeatDelay: 1.5,
+                    ease: "linear"
+                  }}
+                  style={{
+                    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)',
+                    width: '50%',
+                    transform: 'skewX(-20deg)'
+                  }}
+                />
+                <span className="relative z-10">{AI_SERVICES[activeAIService].icon}</span>
+                <span className="relative z-10">{AI_SERVICES[activeAIService].label}</span>
+                <span className="relative z-10 text-xs bg-white/20 px-2 py-1 rounded-full font-semibold animate-pulse group-hover:bg-white/30 transition-all duration-300">NEW</span>
+              </Link>
+            </motion.div>
+          </AnimatePresence>
+        </div>
         
         {navItems.map((item) => (
           <Link
@@ -106,20 +159,46 @@ export default function NavBar() {
           >
             &times;
           </button>
-          {/* Mobile AI Video Button - First */}
-          <Link
-            to="/pages/services"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white text-lg font-bold transition-all transform hover:scale-110 hover:shadow-xl hover:shadow-purple-500/25 hover:from-purple-500 hover:to-blue-500 active:scale-95 tracking-wide animate-bounce group"
-            style={{
-              animation: 'float 3s ease-in-out infinite, glow 2s ease-in-out infinite'
-            }}
-          >
-            <span className="flex items-center gap-2">
-              🤖 AI Video
-              <span className="text-xs bg-white/20 px-2 py-1 rounded-full font-semibold animate-pulse group-hover:bg-white/30 transition-all duration-300">NEW</span>
-            </span>
-          </Link>
+          {/* Mobile Combined AI Services Button */}
+          <div className="relative overflow-hidden rounded-full">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeAIService}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+                className="inline-block relative"
+              >
+                <Link
+                  to={AI_SERVICES[activeAIService].link}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="relative px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 text-white text-lg font-bold transition-all transform hover:scale-110 hover:shadow-xl hover:shadow-purple-500/25 hover:from-purple-500 hover:to-blue-500 active:scale-95 tracking-wide group inline-flex items-center gap-2 overflow-hidden"
+                >
+                  {/* Gleam Effect */}
+                  <motion.div
+                    className="absolute inset-0 opacity-40"
+                    initial={{ x: '-100%' }}
+                    animate={{ x: '200%' }}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      repeatDelay: 1.5,
+                      ease: "linear"
+                    }}
+                    style={{
+                      background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)',
+                      width: '50%',
+                      transform: 'skewX(-20deg)'
+                    }}
+                  />
+                  <span className="relative z-10">{AI_SERVICES[activeAIService].icon}</span>
+                  <span className="relative z-10">{AI_SERVICES[activeAIService].label}</span>
+                  <span className="relative z-10 text-xs bg-white/20 px-2 py-1 rounded-full font-semibold animate-pulse group-hover:bg-white/30 transition-all duration-300">NEW</span>
+                </Link>
+              </motion.div>
+            </AnimatePresence>
+          </div>
           
           {navItems.map((item) => (
             <Link

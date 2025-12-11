@@ -2,14 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ParallaxProvider } from 'react-scroll-parallax';
+import { ThemeProvider } from './contexts/ThemeContext';
 import './index.css'
 import VideoHero from './components/VideoHero';
 import Hero from './components/Hero';
+import AIServicesBanner from './components/AIServicesBanner';
 import ConsultingPipeline from './components/ConsultingPipeline';
 import Contact from './components/Contact';
 import Stats from './components/Stats';
 import Services from './pages/Services';
 import AIExamples from './pages/AIExamples';
+import AIAgents from './pages/AIAgents';
 import JoinUs from './pages/JoinUs';
 import Newsletter from './pages/Newsletter';
 import Clients from './pages/Clients';
@@ -31,6 +34,7 @@ const LandingPage = () => (
       <div className="animate-fade-slide">
         <VideoHero />
         <Hero />
+        <AIServicesBanner />
         <ConsultingPipeline />
         <div className="flex flex-col md:flex-row items-start md:items-center justify-start gap-8 px-8 py-20 md:py-28 bg-white">
           <div className="text-left space-y-6">
@@ -39,8 +43,13 @@ const LandingPage = () => (
               <Link to="/components/services/websitessection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Websites</Link>
               <Link to="/components/services/paidmediasection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Paid Media</Link>
               <Link to="/components/services/creativesection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Creative</Link>
-              <div className="relative inline-block">
+              {/* AI Services Group */}
+              <div className="relative block">
                 <Link to="/pages/services" className="block text-7xl font-bold text-black hover:text-purple-500 transition duration-300">AI Ad Creation</Link>
+                <span className="absolute -top-2 -right-8 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse">NEW</span>
+              </div>
+              <div className="relative block">
+                <Link to="/ai-agents" className="block text-7xl font-bold text-black hover:text-purple-500 transition duration-300">AI Agents</Link>
                 <span className="absolute -top-2 -right-8 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse">NEW</span>
               </div>
               <Link to="/components/services/retentionsection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Retention</Link>
@@ -59,8 +68,9 @@ const LandingPage = () => (
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ParallaxProvider>
-      <Router>
+    <ThemeProvider>
+      <ParallaxProvider>
+        <Router>
         <Routes>
           <Route path="/" element={<Layout><LandingPage /></Layout>} />
           <Route path="/components/services/websitessection" element={<Layout><WebsitesSection /></Layout>} />
@@ -69,6 +79,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/components/services/retentionsection" element={<Layout><RetentionSection /></Layout>} />
           <Route path="/pages/services" element={<Layout><Services /></Layout>} />
           <Route path="/pages/ai-examples" element={<Layout><AIExamples /></Layout>} />
+          <Route path="/ai-agents" element={<Layout><AIAgents /></Layout>} />
           <Route path="/pages/join-us" element={<Layout><JoinUs /></Layout>} />
           <Route path="/pages/newsletter" element={<Layout><Newsletter /></Layout>} />
           <Route path="/pages/clients" element={<Layout><Clients /></Layout>} />
@@ -77,8 +88,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="/WorkUs" element={<Layout><WorkUs /></Layout>} />
           <Route path="/contact" element={<Layout><WorkUs /></Layout>} />
         </Routes>
-      </Router>
-      <AIChatBox /> {/* <-- globally included */}
-    </ParallaxProvider>
+        </Router>
+        <AIChatBox /> {/* <-- globally included */}
+      </ParallaxProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );
