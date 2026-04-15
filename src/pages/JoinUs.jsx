@@ -27,31 +27,28 @@ export default function JoinUs() {
   ];
 
   return (
-    <div className="bg-white text-black font-sans px-6 md:px-16 py-24">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-5xl font-bold mb-6 leading-tight">Join the team</h1>
-        <p className="text-lg text-gray-800 leading-relaxed mb-12">
-          We’re a team of creative minds, brand builders, and performance marketers driven by data and storytelling. If you’re excited by great ideas and great results, let’s talk.
+    <div className="bg-background text-foreground font-sans px-6 md:px-16 py-32 min-h-screen border-t border-white/10">
+      <div className="max-w-5xl mx-auto">
+        <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tight mb-8">Join the engine</h1>
+        <p className="text-xl text-soft-gray font-medium max-w-2xl leading-relaxed mb-16">
+          We build systems that produce high-performing ads. We're looking for builders who prioritize performance over decoration. If you want to scale what works, let's talk.
         </p>
 
-        <div className="space-y-12">
+        <div className="space-y-6">
           {jobs.map((job, idx) => (
-            <motion.div
+            <div
               key={idx}
-              layout
-              drag
-              dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
-              dragTransition={{ bounceStiffness: 100, bounceDamping: 10 }}
-              whileTap={{ scale: 1.05 }}
-              className="border border-gray-300 p-6 rounded-lg shadow-sm cursor-grab active:cursor-grabbing"
+              className="border border-white/10 p-8 hover:border-electric-green transition-colors bg-neutral-900 group"
             >
-              <h2 className="text-2xl font-semibold mb-1">{job.title}</h2>
-              <div className="text-sm text-gray-600 mb-4">{job.location} • {job.type}</div>
-              <p className="text-base text-gray-700 mb-4">{job.description}</p>
-              <button className="bg-black text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-gray-900 transition">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                <h2 className="text-3xl font-bold uppercase group-hover:text-electric-green transition-colors">{job.title}</h2>
+                <div className="text-sm font-bold uppercase tracking-widest text-soft-gray mt-2 md:mt-0 bg-white/5 px-4 py-1">{job.location} • {job.type}</div>
+              </div>
+              <p className="text-lg text-soft-gray mb-8 max-w-3xl">{job.description}</p>
+              <button className="bg-white text-black font-bold uppercase tracking-wider px-8 py-3 rounded-none hover:bg-electric-green transition-colors duration-300">
                 Apply Now
               </button>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

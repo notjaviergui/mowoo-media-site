@@ -33,22 +33,12 @@ export default function WorkUs() {
   const prevStep = () => setFormStep((prev) => Math.max(prev - 1, 1));
 
   return (
-    <section className="relative bg-[#1a1a1a] text-white font-sans pt-32 pb-16 px-6 md:px-16 min-h-screen">
-      <img
-        src="/Images/Drawing.png"
-        alt="decorative background 1"
-        className="absolute top-10 left-10 w-40 h-40 opacity-30 animate-spin-slow"
-      />
-      <img
-        src="/Images/Drawing.png"
-        alt="decorative background 2"
-        className="absolute bottom-10 right-10 w-60 h-60 opacity-30 animate-spin-slow"
-      />
-      <h2 className="text-white text-3xl md:text-4xl font-bold text-center mb-4">
+    <section className="relative bg-background text-foreground font-sans pt-32 pb-16 px-6 md:px-16 min-h-screen border-t border-white/10">
+      <h2 className="text-white text-4xl md:text-6xl font-black text-center mb-4 uppercase tracking-tight">
         Let’s start your project
       </h2>
-      <p className="text-[#cbd5e1] text-center text-sm md:text-base mb-10">
-        Just a few questions to understand your goals better.
+      <p className="text-soft-gray text-center text-lg md:text-xl mb-16 max-w-2xl mx-auto font-medium">
+        Just a few questions to understand your goals better. We'll follow up with data-driven strategy.
       </p>
       {submitted ? (
         <>
@@ -154,12 +144,12 @@ export default function WorkUs() {
             </>
           )}
 
-          <div className="flex justify-between items-center pt-4">
+          <div className="flex justify-between items-center pt-8">
             {formStep > 1 && (
               <button
                 type="button"
                 onClick={prevStep}
-                className="bg-gray-700 text-white px-6 py-2 rounded-full hover:scale-105 transition"
+                className="bg-transparent border border-white/50 text-white font-bold uppercase tracking-wider px-8 py-3 rounded-none hover:bg-white/10 transition-colors duration-300"
               >
                 Back
               </button>
@@ -168,23 +158,22 @@ export default function WorkUs() {
               <button
                 type="button"
                 onClick={nextStep}
-                className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full hover:scale-105 transition duration-300"
+                className="bg-electric-green text-black font-bold uppercase tracking-wider px-8 py-3 rounded-none hover:bg-white transition-colors duration-300 transform hover:scale-105"
               >
                 Next
               </button>
             ) : (
               <button
                 type="submit"
-                className="bg-gradient-to-r from-[#6366f1] via-[#3b82f6] to-[#06b6d4] text-white px-6 py-2 rounded-full hover:scale-105 transition relative overflow-hidden group"
+                className="bg-high-voltage-blue text-white font-bold uppercase tracking-wider px-8 py-3 rounded-none hover:bg-white hover:text-black transition-colors duration-300 transform hover:scale-105"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
-                <span className="relative z-10">Submit</span>
+                Submit
               </button>
             )}
           </div>
         </form>
       )}
-      <div className="text-center text-xl font-medium mt-12 text-white">hello@moowomedia.com</div>
+      <div className="text-center text-xl font-bold mt-24 text-soft-gray uppercase tracking-widest">hello@moowomedia.com</div>
       
     </section>
   );

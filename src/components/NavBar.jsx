@@ -6,7 +6,7 @@ export default function NavBar() {
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const isWorkUsPage = location.pathname === "/pages/WorkUs";
-  const isLightBackground = location.pathname !== "/" && location.pathname !== "/pages/clients-portal";
+  const isLightBackground = false; // globally dark theme
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -37,22 +37,22 @@ export default function NavBar() {
   ];
 
   return (
-    <div className={`fixed top-0 left-0 z-50 w-full px-8 py-6 flex items-center justify-between transition-all duration-500 ${isVisible ? "opacity-100" : "opacity-0"} ${isLightBackground ? "bg-white text-black" : "bg-transparent text-white"}`}>
+    <div className={`fixed top-0 left-0 z-50 w-full px-8 py-6 flex items-center justify-between transition-all duration-500 ${isVisible ? "opacity-100" : "opacity-0"} bg-transparent text-foreground`}>
       {/* Logo */}
       <Link
         to="/"
-        className="text-4xl font-black tracking-wide hover:scale-110 transition-transform duration-200"
+        className="text-2xl md:text-3xl font-black uppercase tracking-tight hover:text-electric-green transition-colors duration-300"
       >
         Moowo Media
       </Link>
 
       {/* Desktop Nav */}
-      <nav className="hidden md:flex space-x-4 font-medium text-lg">
+      <nav className="hidden md:flex space-x-8 font-bold text-sm uppercase tracking-widest">
         {navItems.map((item) => (
           <Link
             key={item.label}
             to={item.to}
-            className="px-6 py-2 rounded-full border text-lg font-medium transition-all transform hover:scale-105 hover:shadow-md backdrop-blur-md bg-white/10 hover:bg-white/20 border-current text-current hover:text-black active:scale-95 tracking-wide"
+            className="hover:text-electric-green transition-colors duration-300"
           >
             {item.label}
           </Link>
@@ -61,43 +61,36 @@ export default function NavBar() {
 
       {/* Hamburger (Mobile Only) */}
       <button
-        className="md:hidden z-20 flex flex-col justify-between w-6 h-5 focus:outline-none transform transition duration-200 hover:scale-110"
+        className="md:hidden z-20 flex flex-col justify-between w-6 h-5 focus:outline-none"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         aria-label="Toggle mobile menu"
       >
         <span
-          className={`h-[3px] w-full ${isWorkUsPage ? "bg-blue-600" : "bg-white"} transform transition duration-300 ease-in-out ${
-            isMobileMenuOpen ? "rotate-45 translate-y-2" : ""
+          className={`h-[2px] w-full bg-white transform transition duration-300 ease-in-out ${
+            isMobileMenuOpen ? "rotate-45 translate-y-2 bg-electric-green" : ""
           }`}
         />
         <span
-          className={`h-[3px] w-full ${isWorkUsPage ? "bg-blue-600" : "bg-white"} transition-all duration-300 ease-in-out ${
+          className={`h-[2px] w-full bg-white transition-all duration-300 ease-in-out ${
             isMobileMenuOpen ? "opacity-0" : ""
           }`}
         />
         <span
-          className={`h-[3px] w-full ${isWorkUsPage ? "bg-blue-600" : "bg-white"} transform transition duration-300 ease-in-out ${
-            isMobileMenuOpen ? "-rotate-45 -translate-y-2" : ""
+          className={`h-[2px] w-full bg-white transform transition duration-300 ease-in-out ${
+            isMobileMenuOpen ? "-rotate-45 -translate-y-2.5 bg-electric-green" : ""
           }`}
         />
       </button>
 
       {/* Fullscreen Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className={`fixed inset-0 z-10 ${isWorkUsPage ? "bg-white" : "bg-black bg-opacity-90"} flex flex-col items-center justify-center space-y-6 ${isWorkUsPage ? "text-blue-600" : "text-white"} text-xl font-semibold md:hidden transition duration-300`}>
-          <button
-            className={`absolute top-6 right-8 ${isWorkUsPage ? "text-blue-600" : "text-white"} text-3xl font-bold transform transition duration-200 hover:scale-110`}
-            onClick={() => setIsMobileMenuOpen(false)}
-            aria-label="Close mobile menu"
-          >
-            &times;
-          </button>
+        <div className="fixed inset-0 z-10 bg-background flex flex-col items-center justify-center space-y-8 text-white text-3xl font-black uppercase tracking-tight md:hidden transition duration-300">
           {navItems.map((item) => (
             <Link
               key={item.label}
               to={item.to}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-6 py-2 rounded-full border text-lg font-medium transition-all transform hover:scale-105 hover:shadow-md backdrop-blur-md bg-white/10 hover:bg-white/20 border-current text-current hover:text-black active:scale-95 tracking-wide"
+              className="hover:text-electric-green transition-colors duration-300"
             >
               {item.label}
             </Link>
