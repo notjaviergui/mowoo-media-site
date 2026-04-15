@@ -2,13 +2,20 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ParallaxProvider } from 'react-scroll-parallax';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/syne/700.css';
+import '@fontsource/syne/800.css';
 import './index.css'
 import VideoHero from './components/VideoHero';
-import Hero from './components/Hero';
-import ConsultingPipeline from './components/ConsultingPipeline';
-import Contact from './components/Contact';
-import Stats from './components/Stats';
-import Services from './pages/services';
+import AdFeed from './components/AdFeed';
+import MetricsProof from './components/MetricsProof';
+import BeforeAfter from './components/BeforeAfter';
+import CampaignTimeline from './components/CampaignTimeline';
+import ProcessSteps from './components/ProcessSteps';
+import CTA from './components/CTA';
+import Services from './pages/Services';
 import JoinUs from './pages/JoinUs';
 import Newsletter from './pages/Newsletter';
 import Clients from './pages/Clients';
@@ -18,7 +25,6 @@ import WorkUs from './pages/WorkUs';
 import WebsitesSection from './components/services/WebsitesSection';
 import PaidMediaSection from './components/services/PaidMediaSection';
 import RetentionSection from './components/services/RetentionSection';
-import ScrollPopup from './components/ScrollPopup';
 import Footer from './components/Footer';
 import ClientsPortal from './pages/ClientsPortal';
 import AIChatBox from './components/AIChatBox';
@@ -26,26 +32,15 @@ import './components/AIChatBox.css';
 
 const LandingPage = () => (
   <div className="page-load">
-    <div className="font-sans text-gray-900 bg-white page-load">
+    <div className="font-sans text-foreground bg-background page-load">
       <div className="animate-fade-slide">
         <VideoHero />
-        <Hero />
-        <ConsultingPipeline />
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-start gap-8 px-8 py-20 md:py-28 bg-white">
-          <div className="text-left space-y-6">
-            <h3 className="text-md text-gray-700 font-medium">We optimize and grow all your customer touch points.</h3>
-            <div className="space-y-4">
-              <Link to="/components/services/websitessection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Websites</Link>
-              <Link to="/components/services/paidmediasection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Paid Media</Link>
-              <Link to="/components/services/creativesection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Creative</Link>
-              <Link to="/components/services/retentionsection" className="block text-7xl font-bold text-black hover:text-indigo-500 transition duration-300">Retention</Link>
-              <Link to="/WorkUs" className="block text-5xl font-light text-black hover:text-indigo-500 transition duration-300">Work With Us</Link>
-            </div>
-          </div>
-        </div>
-        <ScrollPopup />
-        <Stats />
-        <Contact />
+        <AdFeed />
+        <MetricsProof />
+        <BeforeAfter />
+        <CampaignTimeline />
+        <ProcessSteps />
+        <CTA />
         <Footer />
       </div> {/* Close animate-fade-slide wrapper */}
     </div>

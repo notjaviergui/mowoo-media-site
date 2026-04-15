@@ -56,52 +56,60 @@ export default function Clients() {
     : clientsData;
 
   return (
-    <section className="min-h-screen pt-32 pb-20 px-8 bg-white">
-      <h1 data-aos="fade-down" className="text-4xl text-center font-bold mb-4">
-        <span className="text-blue-600">Client</span> Showcase
-      </h1>
-      <p data-aos="fade-down" data-aos-delay="100" className="text-center text-gray-500 mb-10">
-        Explore the brands we've elevated
-      </p>
+    <section className="min-h-screen pt-32 pb-24 px-6 md:px-16 bg-background text-foreground border-t border-white/10">
+      <div className="max-w-7xl mx-auto">
+        <h1 data-aos="fade-down" className="text-5xl md:text-7xl font-black uppercase tracking-tight text-center mb-6">
+          <span className="text-electric-green">Client</span> Logs
+        </h1>
+        <p data-aos="fade-down" data-aos-delay="100" className="text-center text-soft-gray text-xl mb-16 font-medium">
+          The brands we've scaled. Performance data available upon request.
+        </p>
 
-      <div className="flex flex-wrap justify-center gap-3 mb-10">
-        {allTags.map((tag) => {
-          const isSelected = selectedTags.includes(tag);
-          const isAllSelected = tag === 'All' && selectedTags.length === 0;
+        <div className="flex flex-wrap justify-center gap-4 mb-16">
+          {allTags.map((tag) => {
+            const isSelected = selectedTags.includes(tag);
+            const isAllSelected = tag === 'All' && selectedTags.length === 0;
 
-          return (
-            <div
-              key={tag}
-              onClick={() => toggleTag(tag)}
-              className={`flex items-center gap-2 px-4 py-1.5 rounded-full cursor-pointer text-sm font-medium transition duration-200 shadow-sm ${
-                isSelected || isAllSelected
-                  ? 'bg-black text-white'
-                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-              }`}
-            >
-              <span>{tag}</span>
-              {(isSelected && tag !== 'All') && (
-                <span className="text-xs">✕</span>
-              )}
+            return (
+              <div
+                key={tag}
+                onClick={() => toggleTag(tag)}
+                className={`flex items-center gap-2 px-6 py-2 cursor-pointer text-sm font-bold uppercase tracking-widest transition-all duration-300 border-2 rounded-none ${
+                  isSelected || isAllSelected
+                    ? 'bg-electric-green text-black border-electric-green'
+                    : 'bg-transparent text-white border-white/20 hover:border-white'
+                }`}
+              >
+                <span>{tag}</span>
+                {(isSelected && tag !== 'All') && (
+                  <span className="text-xs ml-2 font-black">✕</span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+          {filteredClients.map((client, i) => (
+            <div key={i} data-aos="fade-up" className="group border border-white/10 p-6 bg-neutral-900 hover:border-electric-green transition-colors duration-300">
+              <div className="overflow-hidden aspect-video relative mb-6">
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors z-10 duration-500" />
+                <img src={client.image} alt={client.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              </div>
+
+              <div className="flex justify-between items-end">
+                <h3 className="text-2xl font-bold uppercase tracking-tight group-hover:text-electric-green transition-colors">{client.title}</h3>
+                <div className="flex gap-2">
+                  {client.tags.map((tag, index) => (
+                    <span key={index} className="text-xs font-bold uppercase tracking-widest text-black bg-white px-3 py-1">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
-          );
-        })}
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10 max-w-6xl mx-auto">
-        {filteredClients.map((client, i) => (
-          <div key={i} data-aos="fade-up" className="flex flex-col items-center group border border-gray-300 rounded-2xl p-6 bg-white shadow-md hover:shadow-2xl transition duration-300">
-            <img src={client.image} alt={client.title} className="w-full h-80 object-cover rounded-lg mb-4 transition-transform duration-300 group-hover:scale-105" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">{client.title}</h3>
-            <div className="flex flex-wrap justify-center gap-2">
-              {client.tags.map((tag, index) => (
-                <span key={index} className="text-xs font-medium text-gray-600 bg-gray-200 rounded-full px-3 py-1">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
