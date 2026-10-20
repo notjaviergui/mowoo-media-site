@@ -1,14 +1,46 @@
-import React from 'react';
-
+import React from "react";
+import ProcessSteps from "../components/ProcessSteps";
+import CTA from "../components/CTA";
 export default function Us() {
   return (
-    <div className="bg-background min-h-screen pt-32 pb-24 text-foreground">
-      <section className="text-center px-6">
-        <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tight">
-          <span className="text-high-voltage-blue">Us</span> <br/>
-          <span className="text-2xl mt-4 block text-soft-gray font-medium">Page is currently under construction 🛠️</span>
+    <>
+      <section className="page-intro section-shell">
+        <p className="eyebrow">The Moowo approach</p>
+        <h1>
+          A creative partner.
+          <br />
+          <span>A clear way forward.</span>
         </h1>
+        <p>
+          We connect content strategy, hands-on creation, and consistent
+          management, with automation where it makes the work easier.
+        </p>
       </section>
-    </div>
+      <section className="approach-note section-shell">
+        <span className="large-asterisk" aria-hidden="true">
+          ✳
+        </span>
+        <div>
+          <h2>
+            Good work starts
+            <br />
+            with understanding.
+          </h2>
+          <p>
+            Your audience, your expertise, and your business goals shape the
+            plan. We research relevant trends, build tailored scripts, and work
+            with you to create content that feels like your brand.
+          </p>
+          <p>
+            We set priorities together, review content before publishing, and
+            use performance signals to guide the next round. No promises of
+            overnight growth. Just purposeful creative and a process you can
+            follow.
+          </p>
+        </div>
+      </section>
+      <ProcessSteps />
+      <CTA />
+    </>
   );
 }

@@ -1,45 +1,92 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 export default function VideoHero() {
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-background">
-      {/* Background Video */}
-      <video
-        className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-60"
-        src="/reel-video.mp4"
-        autoPlay
-        muted
-        defaultMuted
-        loop
-        playsInline
-        preload="auto"
-      />
-
-      {/* Overlay gradient for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black z-10" />
-
-      {/* Content */}
-      <div className="absolute inset-0 z-20 flex flex-col justify-center px-6 md:px-16 mt-16">
-        <div className="max-w-4xl">
-          <div className="flex items-center space-x-2 mb-6">
-            <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-            <span className="text-red-500 text-xs font-bold tracking-widest uppercase">REC</span>
+    <section className="hero section-shell">
+      <div className="hero-copy">
+        <p className="eyebrow">
+          <span className="status-dot" /> Your next chapter starts here
+        </p>
+        <h1>
+          Make content.
+          <br />
+          Build momentum.
+          <br />
+          <span className="accent-underline">Grow with purpose.</span>
+        </h1>
+        <p className="hero-description">
+          A performance agency for brands ready to move forward. We create the
+          content, manage the presence, and build the automations that support
+          your growth.
+        </p>
+        <div className="button-row">
+          <Link className="button button-dark" to="/book-demo">
+            Book a demo <span aria-hidden="true">↗</span>
+          </Link>
+          <Link className="text-link" to="/pages/clients">
+            Explore our work <span aria-hidden="true">↗</span>
+          </Link>
+        </div>
+        <p className="hero-footnote">
+          Strategy-led. Creatively driven. Built around your business.
+        </p>
+      </div>
+      <div
+        className="hero-art"
+        aria-label="Creative content and planning examples"
+      >
+        <div className="art-grid" aria-hidden="true" />
+        <div className="creative-frame">
+          <img
+            src="/images/inopera-creative.webp"
+            alt="Inopera headphones, photographed on a wooden desk"
+            fetchPriority="high"
+            width="700"
+            height="700"
+          />
+          <div className="creative-topline">
+            <span>INOPERA</span>
+            <span>CREATIVE / 01</span>
           </div>
-
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight mb-6 uppercase tracking-tight">
-            We make ads <br /> people don't skip.
-          </h1>
-
-          <p className="text-xl md:text-2xl text-soft-gray font-medium max-w-xl mb-10">
-            Attention <span className="text-white">→</span> Revenue. <br/>
-            The living ad engine for modern brands.
-          </p>
-
-          <button className="bg-electric-green text-black font-bold py-4 px-8 rounded-none uppercase tracking-wider hover:bg-white transition-colors duration-300 transform hover:scale-105">
-            Start the engine
-          </button>
+          <div className="creative-caption">
+            Sound on.
+            <br />
+            World off.<span>Product storytelling / Creative direction</span>
+          </div>
+        </div>
+        <div className="planning-note">
+          <span className="eyebrow">
+            A little strategy. A lot of possibility.
+          </span>
+          <strong>
+            Great content
+            <br />
+            starts with a plan.
+          </strong>
+          <div className="note-progress">
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+          <div className="note-bottom">
+            <span>Research → Create → Refine</span>
+            <span aria-hidden="true">↗</span>
+          </div>
+        </div>
+        <div className="art-stamp" aria-hidden="true">
+          Made to
+          <br />
+          <strong>move you.</strong>
+          <span>✳</span>
         </div>
       </div>
-    </div>
+      <div className="hero-bottom">
+        <span>CREATIVE THINKING. MEASURABLE DIRECTION.</span>
+        <a href="#services">
+          Discover the approach <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+    </section>
   );
 }

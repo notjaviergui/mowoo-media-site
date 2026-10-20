@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 
 dotenv.config();
-console.log("Loaded API key:", process.env.BEEHIIV_API_KEY);
+
 
 const app = express();
 const PORT = 3001;
@@ -13,13 +13,14 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/api/subscribe', async (req, res) => {
+  if (!process.env.BEEHIIV_API_KEY) return res.status(503).json({ error: 'Subscriptions are not configured.' });
   const { email } = req.body;
 
   if (!email) {
     return res.status(400).json({ error: 'Email is required.' });
   }
 
-  console.log('Received email:', email);
+
 
   try {
     const response = await fetch('https://api.beehiiv.com/v1/subscribers', {
@@ -38,7 +39,7 @@ app.post('/api/subscribe', async (req, res) => {
     });
 
     const responseBody = await response.text();
-    console.log('Beehiiv response:', response.status, responseBody);
+
 
     // Try to parse as JSON if possible for better error handling
     let jsonResponse;
@@ -62,6 +63,7 @@ app.post('/api/subscribe', async (req, res) => {
 });
 
 app.post('/chat', async (req, res) => {
+  if (!process.env.OPENAI_API_KEY) return res.status(503).json({ error: 'Chat is not configured.' });
   const { messages } = req.body;
 
   if (!messages || !Array.isArray(messages)) {

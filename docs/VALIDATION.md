@@ -1,0 +1,19 @@
+# Verification
+
+## Passed
+
+- Installed dependencies with `npm ci` using the repository's unchanged npm lockfile. No production dependency additions or upgrades.
+- `npm run build`: production bundle, `dist/404.html`, and `dist/CNAME` generated successfully.
+- `node --test tests/*.test.mjs`: six passing tests for accepted form payloads, HTTP 400/429/500 failures, offline failures, and stalled-request cancellation. Provider responses are simulated; no agency submission was sent.
+- `node --check server/index.js` and `git diff --check` passed.
+- Local Express checks: both `/api/subscribe` and `/chat` return HTTP 503 with a clear configuration error when their provider keys are absent.
+- Browser checks against the production preview: hero and portfolio images load, primary CTA reaches demo requests, mobile menu expands and closes with Escape, required fields block empty submission, portfolio filters return the expected two identity projects and restore all five projects, agent scenario buttons update their labeled example, service and newsletter disclosures expand.
+- Browser route checks: home, services, work, approach, newsletter, careers, client support, legacy paid-media URL, `/WorkUs`, `/contact`, `/about`, and unknown-route fallback render correctly.
+- Desktop and narrow mobile compositions reviewed. Observed CSS viewports approximately 1309px and 354px (desktop app viewport scaling applied); narrow route checks showed no horizontal document overflow.
+- Mobile home, booking, and every route in the smoke test have one main landmark and no horizontal overflow. Form controls have visible associated labels; focus outlines, a skip link, semantic buttons/disclosures, live status copy, and reduced-motion styles are included.
+
+## Limits
+
+This is a local review build, not a production deployment. Formspree ownership/inbox delivery, scheduling availability, real telephone/SMS calls, and external subscription delivery were not tested. No provider credentials, dedicated demo number, or scheduling link were available. The agent walkthrough is a scripted UI example. The existing Express backend needs its own deployment and provider validation. The supplied showreel was retained; a caption/transcript review should be completed if its audio is important to the portfolio presentation.
+
+The locked dependency tree emits an outdated Browserslist-data notice. Build passes; dependency updates were kept outside this redesign's scope.

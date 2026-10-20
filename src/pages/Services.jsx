@@ -1,126 +1,65 @@
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import WebsitesSection from '../components/services/WebsitesSection';
-import PaidMediaSection from '../components/services/PaidMediaSection';
-import RetentionSection from '../components/services/RetentionSection';
-import VideoPackages from '../components/services/videopackages/VideoPackages';
-import CreativeSection from '../components/services/CreativeSection';
-
-export default function Services() {
-  const [activeTag, setActiveTag] = useState(null);
-
-    return (
-      <div className="bg-background text-foreground font-sans min-h-screen">
-        {/* Section: Title + Nav Tags */}
-        <section className="px-6 md:px-16 pt-32 pb-16">
-          <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tight mb-8">
-            The <span className="text-electric-green">Engine</span> <br/> Capabilities
-          </h1>
-          <div className="flex flex-wrap gap-4 mb-8">
-            {["Websites", "Paid Media", "Creative", "Retention"].map((tag) => (
-              <button
-                key={tag}
-                onClick={() => setActiveTag(tag)}
-                className={`border-2 rounded-none px-6 py-2 text-sm font-bold uppercase tracking-widest transition-all duration-300 ${
-                  activeTag === tag
-                    ? 'bg-electric-green text-black border-electric-green'
-                    : 'bg-transparent text-white border-white/20 hover:border-white'
-                }`}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-        </section>
-  
-        {/* Section: Creative Summary */}
-        <div className="bg-background">
-          {activeTag === "Websites" && <WebsitesSection />}
-          {activeTag === "Paid Media" && <PaidMediaSection />}
-          {activeTag === "Creative" && <CreativeSection />}
-          {activeTag === "Retention" && <RetentionSection />}
-        </div>
-  
-        {/* Section: Service Cards */}
-        <section className="grid md:grid-cols-2 gap-8 px-6 md:px-16 py-24 bg-background border-t border-white/10">
-          <div className="border border-white/10 p-10 hover:border-electric-green transition-colors bg-neutral-900 group">
-            <h3 className="text-3xl font-bold uppercase mb-4 group-hover:text-electric-green transition-colors">Ad Production</h3>
-            <p className="text-soft-gray text-lg mb-6">
-              The average person scrolls a quarter-mile on their phone daily.
-              We specialize in thumb-stopping content that communicates value and drives action.
-            </p>
-            <ul className="list-disc list-inside text-white font-medium space-y-2">
-              <li>Strategy</li>
-              <li>Scriptwriting</li>
-              <li>On-set Direction</li>
-              <li>Filming & Editing</li>
-            </ul>
-          </div>
-  
-          <div className="border border-white/10 p-10 hover:border-high-voltage-blue transition-colors bg-neutral-900 group">
-            <h3 className="text-3xl font-bold uppercase mb-4 group-hover:text-high-voltage-blue transition-colors">Copywriting</h3>
-            <p className="text-soft-gray text-lg mb-6">
-              Direct-response copy that hooks attention and demands conversion.
-              No fluff, just persuasive messaging engineered to sell.
-            </p>
-            <ul className="list-disc list-inside text-white font-medium space-y-2">
-              <li>Audience Research</li>
-              <li>Offer Positioning</li>
-              <li>Retention Flows</li>
-              <li>Full Funnel Audit</li>
-            </ul>
-          </div>
-  
-          <div className="border border-white/10 p-10 hover:border-electric-green transition-colors bg-neutral-900 group">
-            <h3 className="text-3xl font-bold uppercase mb-4 group-hover:text-electric-green transition-colors">UGC</h3>
-            <p className="text-soft-gray text-lg mb-6">
-              Branded content that feels native. We manage the entire creator
-              pipeline to produce high-volume, high-converting assets.
-            </p>
-            <ul className="list-disc list-inside text-white font-medium space-y-2">
-              <li>Creator Sourcing</li>
-              <li>Briefing & Scripting</li>
-              <li>Quality Assurance</li>
-              <li>Performance Editing</li>
-            </ul>
-          </div>
-  
-          <div className="border border-white/10 p-10 hover:border-high-voltage-blue transition-colors bg-neutral-900 group">
-            <h3 className="text-3xl font-bold uppercase mb-4 group-hover:text-high-voltage-blue transition-colors">Brand Identity</h3>
-            <p className="text-soft-gray text-lg mb-6">
-              Design systems that sit at the intersection of consumer psychology
-              and premium aesthetics. Built for scale.
-            </p>
-            <ul className="list-disc list-inside text-white font-medium space-y-2">
-              <li>Visual Identity Systems</li>
-              <li>Conversion-Optimized UI</li>
-              <li>Type & Color Theory</li>
-              <li>Brand Guidelines</li>
-            </ul>
-          </div>
-        </section>
-
-        <div className="bg-background py-12">
-          <VideoPackages />
-        </div>
+import React from "react";
+import ServicesOverview from "../components/ServicesOverview";
+import AgentDemo from "../components/AgentDemo";
+import CTA from "../components/CTA";
+export function SupportingServices() {
+  return (
+    <section className="supporting-section section-shell">
+      <div>
+        <p className="eyebrow">The supporting cast</p>
+        <h2>
+          A little more
+          <br />
+          behind your growth.
+        </h2>
+        <p>Bring these into the plan when they serve your goals.</p>
       </div>
-    );
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
+      <div className="supporting-list">
+        {[
+          [
+            "Ad creative & AI-assisted production",
+            "Turn strong content concepts into paid creative. Explore AI-assisted variations alongside filmed content, with human review and testing before scaling.",
+          ],
+          [
+            "Websites & landing pages",
+            "Give visitors a clear destination, with focused messaging, thoughtful design, and a practical path to inquire.",
+          ],
+          [
+            "Retention & brand identity",
+            "Keep your brand recognizable and continue the conversation through useful follow-up and consistent creative.",
+          ],
+        ].map(([title, text]) => (
+          <details key={title}>
+            <summary>
+              {title}
+              <span aria-hidden="true">+</span>
+            </summary>
+            <p>{text}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  );
+}
+export default function Services() {
+  return (
+    <>
+      <section className="page-intro section-shell">
+        <p className="eyebrow">Built around your business</p>
+        <h1>
+          Content is the start.
+          <br />
+          <span>Growth is the direction.</span>
+        </h1>
+        <p>
+          Start with the support you need today. Build a connected approach as
+          your business grows.
+        </p>
+      </section>
+      <ServicesOverview full />
+      <SupportingServices />
+      <AgentDemo />
+      <CTA />
+    </>
+  );
+}

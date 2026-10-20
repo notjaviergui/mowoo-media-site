@@ -1,29 +1,23 @@
 import React from "react";
-import "./ClientsPortal.css";
-
-const ClientsPortal = () => {
+export default function ClientsPortal() {
   return (
-    <div className="clients-portal-container">
-      <video
-        autoPlay
-        muted
-        loop
-        className="background-video"
+    <section className="page-intro section-shell">
+      <p className="eyebrow">For our clients</p>
+      <h1>
+        Your next step,
+        <br />
+        <span>taken care of.</span>
+      </h1>
+      <p>
+        The self-service portal is not available yet. For project updates,
+        content approvals, or access to your files, reach out to the Moowo team.
+      </p>
+      <a
+        className="button button-dark"
+        href="mailto:hello@moowomedia.com?subject=Client%20support"
       >
-        <source src="/Videos/Backgroundvideo.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
-      <div className="login-box">
-        <h2 className="login-title">Hey there,</h2>
-        <form className="login-form">
-          <input type="text" placeholder="Email or Username" className="login-input" />
-          <input type="password" placeholder="Password" className="login-input" />
-          <button type="submit" className="login-button">Sign In</button>
-        </form>
-      </div>
-    </div>
+        Contact your team ↗
+      </a>
+    </section>
   );
-};
-
-export default ClientsPortal;
+}
