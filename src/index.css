@@ -1852,3 +1852,13 @@ textarea {
   margin: 14px 0 !important;
   max-width: 340px !important;
 }
+.agent-web-link {
+  margin-top: 12px;
+  margin-left: 18px;
+}
+@media (max-width: 760px) {
+  .agent-web-link {
+    display: flex;
+    margin-left: 0;
+  }
+}

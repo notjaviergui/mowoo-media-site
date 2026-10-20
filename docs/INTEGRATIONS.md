@@ -4,7 +4,7 @@ The dedicated number **+1 (786) 463-0490** is provisioned in the upgraded Twilio
 
 Twilio's number inventory shows **Voice enabled** and an ElevenLabs US inbound voice webhook. The user explicitly approved the number rental and credential transfer to ElevenLabs. No provider credential was written into chat, source, documentation, screenshots, or the website. The configured secret remains in the provider integration. SMS import was deliberately disabled; A2P messaging registration is not complete.
 
-An external phone call is the remaining end-to-end verification step. Keep the public website voice flag disabled until that call confirms an audible greeting and working two-way conversation. The number can already be called for this controlled test. The number review listed $1.15 immediately and $1.15/month thereafter, with Twilio call usage and ElevenLabs usage additional.
+The caller confirmed that an external phone call reached the agent and that it answered and responded. The website voice button is now enabled; set `VITE_AGENT_VOICE_VERIFIED=false` and rebuild to hide it. After that test, the published voice was changed to Hope (female), with Mia as the conversational persona and a short AI disclosure. The new voice can be reviewed by calling the same number again. The number review listed $1.15 immediately and $1.15/month thereafter, with Twilio call usage and ElevenLabs usage additional.
 
 # Current setup status
 
@@ -16,7 +16,7 @@ A dedicated ElevenLabs agent has now been created and published: **Moowo Media â
 - Account-preview text tests answered a fictional content inquiry and correctly declined unsupported booking, CRM writes, and invented pricing. Replies were subsequently limited to short conversational responses.
 - The public talk-to page loads and presents voice and text modes. Starting a public conversation requires the visitor to accept ElevenLabs' recording/storage terms themselves. No terms were accepted on the account owner's behalf. Public voice/audio and external telephone/SMS have not yet been end-to-end verified.
 - Widget settings are published with black/lime colors, a demo label, and a clear sample-data description. The site uses a hosted link instead of loading a third-party script on every visit.
-- The Twilio number is now provisioned and assigned as documented above. Independent inbound voice verification is pending; SMS remains disabled. Website call/SMS flags remain off until the relevant channel is verified.
+- The Twilio number is now provisioned and assigned as documented above. Inbound voice was confirmed by the caller and its website call button is enabled. SMS remains disabled.
 - The exact system prompt is saved in `server/agents/moowo-demo-prompt.md`. It has no booking, email, CRM-write, or live-transfer tools attached and makes that boundary explicit.
 
 The original setup reference follows; statements about no agent being configured describe the baseline before this setup.

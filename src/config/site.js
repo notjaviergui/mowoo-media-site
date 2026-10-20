@@ -7,7 +7,9 @@ const httpsUrl = (value) => {
     return null;
   }
 };
-const number = (import.meta.env.VITE_AGENT_PHONE_NUMBER || "").trim();
+const number = (
+  import.meta.env.VITE_AGENT_PHONE_NUMBER || "+17864630490"
+).trim();
 export const site = {
   email: "hello@moowomedia.com",
   agentDemoUrl:
@@ -20,7 +22,7 @@ export const site = {
   bookingUrl: httpsUrl(import.meta.env.VITE_BOOKING_URL),
   formEndpoint: "https://formspree.io/f/xnnpllly", // Existing contact infrastructure.
   agentPhone: /^\+[1-9]\d{7,14}$/.test(number) ? number : null,
-  voiceVerified: import.meta.env.VITE_AGENT_VOICE_VERIFIED === "true",
+  voiceVerified: import.meta.env.VITE_AGENT_VOICE_VERIFIED !== "false",
   smsVerified: import.meta.env.VITE_AGENT_SMS_VERIFIED === "true",
   apiBase: (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, ""),
 };

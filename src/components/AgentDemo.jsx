@@ -43,7 +43,11 @@ export default function AgentDemo() {
           could answer inquiries, gather lead details, and hand off to your
           team.
         </p>
-        {site.agentDemoUrl ? (
+        {voiceLive ? (
+          <a href={`tel:${site.agentPhone}`} className="button button-lime">
+            Call Mia, our AI assistant <span aria-hidden="true">↗</span>
+          </a>
+        ) : site.agentDemoUrl ? (
           <a
             href={site.agentDemoUrl}
             className="button button-lime"
@@ -56,6 +60,16 @@ export default function AgentDemo() {
           <Link to="/book-demo" className="button button-lime">
             Explore an agent demo <span aria-hidden="true">↗</span>
           </Link>
+        )}
+        {voiceLive && site.agentDemoUrl && (
+          <a
+            className="text-link agent-web-link"
+            href={site.agentDemoUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Or try the browser demo ↗
+          </a>
         )}
         {site.agentDemoUrl && (
           <p className="agent-demo-note">
