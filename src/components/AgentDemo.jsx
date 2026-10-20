@@ -43,13 +43,30 @@ export default function AgentDemo() {
           could answer inquiries, gather lead details, and hand off to your
           team.
         </p>
-        <Link to="/book-demo" className="button button-lime">
-          Explore an agent demo <span aria-hidden="true">↗</span>
-        </Link>
+        {site.agentDemoUrl ? (
+          <a
+            href={site.agentDemoUrl}
+            className="button button-lime"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Try the live AI demo <span aria-hidden="true">↗</span>
+          </a>
+        ) : (
+          <Link to="/book-demo" className="button button-lime">
+            Explore an agent demo <span aria-hidden="true">↗</span>
+          </Link>
+        )}
+        {site.agentDemoUrl && (
+          <p className="agent-demo-note">
+            Opens ElevenLabs in a new tab. Chat or talk using sample details
+            only. ElevenLabs asks for consent before a conversation starts.
+          </p>
+        )}
         <p className="agent-availability">
           {voiceLive || smsLive
             ? "Try our dedicated AI demonstration line. Please use sample details only."
-            : "Request a guided demo. Public calling and texting are not enabled yet."}
+            : "Phone and SMS demos are not connected yet."}
         </p>
         {(voiceLive || smsLive) && (
           <div className="button-row">

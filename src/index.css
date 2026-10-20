@@ -1594,3 +1594,261 @@ textarea {
 ::selection {
   color: #18200f;
 }
+
+/* A vertical version of the hero's printed planning note. */
+.growth-plan {
+  color: #23261f;
+  background: #fcfcf7;
+  border: 1px solid #e3e4db;
+  border-radius: 9px;
+  padding: 45px 55px 28px;
+  max-width: 880px;
+  margin: auto;
+  box-shadow: 0 24px 90px #0003;
+}
+.plan-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+}
+.plan-header .eyebrow {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+}
+.plan-edition {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: #6a705e;
+}
+.plan-intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 35px 0 20px;
+  gap: 25px;
+}
+.plan-intro h3 {
+  font-size: clamp(32px, 4vw, 51px);
+  letter-spacing: -0.055em;
+  line-height: 1.08;
+}
+.plan-flower {
+  color: #6e8244;
+  font-size: 70px;
+  line-height: 1;
+}
+.plan-instruction {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 10px;
+  line-height: 1.7;
+  color: #656b5b;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #dde1d2;
+}
+.plan-instruction > span {
+  font-size: 9px;
+}
+.plan-steps {
+  position: relative;
+  margin: 35px 0 20px;
+  padding: 0;
+  list-style: none;
+}
+.plan-rail {
+  position: absolute;
+  left: 19px;
+  top: var(--rail-top, 20px);
+  width: 4px;
+  height: var(--rail-height, calc(100% - 80px));
+  background: #e4e8da;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.plan-rail > span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #b3d876;
+  transform: scaleY(var(--plan-progress, 0));
+  transform-origin: top;
+  will-change: transform;
+}
+.plan-step {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 30px;
+  padding: 0 0 65px;
+  position: relative;
+  scroll-margin-top: 120px;
+}
+.plan-step:last-child {
+  padding-bottom: 5px;
+}
+.plan-marker {
+  width: 42px;
+  height: 42px;
+  background: #fcfcf7;
+  border: 1px solid #d6ddc8;
+  color: #737c65;
+  font-size: 11px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  z-index: 1;
+  transition:
+    background 0.25s,
+    border-color 0.25s;
+}
+.plan-step[data-reached="true"] .plan-marker {
+  background: #d7edaa;
+  color: #26351a;
+  border-color: #b3d876;
+}
+.plan-step-copy {
+  padding-top: 5px;
+  opacity: var(--step-opacity, 1);
+  transition: opacity 0.12s linear;
+}
+.plan-step-copy:focus-within {
+  opacity: 1;
+}
+.plan-step-copy > .eyebrow {
+  font-size: 8px;
+  letter-spacing: 0.13em;
+  color: #656f57;
+  margin-bottom: 13px;
+}
+.plan-step-copy h3 {
+  font-size: clamp(26px, 2.6vw, 36px);
+  letter-spacing: -0.045em;
+  max-width: 480px;
+}
+.plan-description {
+  font-size: 13px;
+  line-height: 1.85;
+  color: #5d6553;
+  margin: 18px 0;
+  max-width: 550px;
+}
+.plan-outcome {
+  font-size: 10px;
+  color: #52653b;
+  margin: 18px 0 4px;
+}
+.plan-step .text-link {
+  color: #28371c;
+  font-size: 11px;
+}
+.plan-step .text-link:hover {
+  color: #506e31;
+}
+.plan-deliverables {
+  color: #5d6553;
+  font-size: 12px;
+  line-height: 2;
+  padding-left: 16px;
+}
+.plan-footer {
+  border-top: 1px solid #dde1d2;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: #626a57;
+  font-size: 9px;
+  line-height: 1.7;
+}
+.growth-plan :focus-visible {
+  outline-color: #587632;
+}
+@media (max-width: 760px) {
+  .growth-plan {
+    padding: 25px 20px 20px;
+  }
+  .plan-header {
+    align-items: start;
+  }
+  .plan-header .eyebrow {
+    max-width: 145px;
+    font-size: 7px;
+  }
+  .plan-edition {
+    font-size: 6px;
+    text-align: right;
+    max-width: 85px;
+  }
+  .plan-intro {
+    margin-top: 28px;
+  }
+  .plan-intro h3 {
+    font-size: 31px;
+  }
+  .plan-flower {
+    font-size: 44px;
+  }
+  .plan-instruction {
+    flex-direction: column;
+    gap: 7px;
+    font-size: 9px;
+    padding-bottom: 22px;
+  }
+  .plan-instruction > span {
+    font-size: 8px;
+  }
+  .plan-steps {
+    margin-top: 25px;
+  }
+  .plan-step {
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    padding-bottom: 55px;
+  }
+  .plan-marker {
+    width: 32px;
+    height: 32px;
+    font-size: 9px;
+  }
+  .plan-rail {
+    left: 14px;
+  }
+  .plan-step-copy {
+    padding-top: 0;
+  }
+  .plan-step-copy > .eyebrow {
+    font-size: 7px;
+  }
+  .plan-step-copy h3 {
+    font-size: 25px;
+  }
+  .plan-description {
+    font-size: 12px;
+    margin: 15px 0;
+  }
+  .plan-footer {
+    font-size: 8px;
+    align-items: start;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .plan-outcome {
+    font-size: 9px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .plan-step-copy {
+    opacity: 1 !important;
+  }
+  .plan-rail > span {
+    transform: scaleY(1);
+  }
+}
+.agent-copy .agent-demo-note {
+  font-size: 10px !important;
+  line-height: 1.7 !important;
+  margin: 14px 0 !important;
+  max-width: 340px !important;
+}

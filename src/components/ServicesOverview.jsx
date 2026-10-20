@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useScrollPlan from "./useScrollPlan";
 export const services = [
   {
     id: "content",
@@ -45,6 +46,7 @@ export const services = [
   },
 ];
 export default function ServicesOverview({ full = false }) {
+  const planRef = useScrollPlan();
   return (
     <section className="services-section section-shell" id="services">
       <div className="section-heading">
@@ -61,33 +63,68 @@ export default function ServicesOverview({ full = false }) {
           Automation helps you go further.
         </p>
       </div>
-      <div className="service-list">
-        {services.map((service) => (
-          <article className="service-row" key={service.id} id={service.id}>
-            <span className="service-number">{service.number}</span>
-            <div className="service-title">
-              <p className="eyebrow">{service.label}</p>
-              <h3>{service.title}</h3>
-            </div>
-            <div className="service-body">
-              <p>{service.description}</p>
-              {full && (
-                <ul>
-                  {service.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              )}
-              <Link
-                className="text-link"
-                to={full ? "/book-demo" : `/services#${service.id}`}
-              >
-                {full ? "Let’s talk about it" : "Explore the service"}{" "}
-                <span aria-hidden="true">↗</span>
-              </Link>
-            </div>
-          </article>
-        ))}
+      <div className="growth-plan">
+        <div className="plan-header">
+          <p className="eyebrow">A little strategy. A lot of possibility.</p>
+          <span className="plan-edition">THE GROWTH PLAN / 01—03</span>
+        </div>
+        <div className="plan-intro">
+          <h3>
+            Great growth
+            <br />
+            starts with a plan.
+          </h3>
+          <span className="plan-flower" aria-hidden="true">
+            ✳
+          </span>
+        </div>
+        <p className="plan-instruction">
+          Three connected steps. One clear direction.
+          <span aria-hidden="true">Scroll to follow the plan ↓</span>
+        </p>
+        <ol className="plan-steps" ref={planRef}>
+          <li className="plan-rail" aria-hidden="true">
+            <span />
+          </li>
+          {services.map((service) => (
+            <li
+              className="plan-step"
+              key={service.id}
+              id={service.id}
+              data-plan-step
+            >
+              <span className="plan-marker" aria-hidden="true">
+                {service.number}
+              </span>
+              <div className="plan-step-copy">
+                <p className="eyebrow">{service.label}</p>
+                <h3>{service.title}</h3>
+                <p className="plan-description">{service.description}</p>
+                {full && (
+                  <ul className="plan-deliverables">
+                    {service.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+                <p className="plan-outcome">{service.outcome}</p>
+                <Link
+                  className="text-link"
+                  to={full ? "/book-demo" : `/services#${service.id}`}
+                >
+                  {full ? "Let’s talk about it" : "Explore the service"}
+                  <span aria-hidden="true">↗</span>
+                </Link>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div className="plan-footer">
+          <span>Research → Create → Refine → Grow</span>
+          <span>
+            Built around your business. <span aria-hidden="true">↗</span>
+          </span>
+        </div>
       </div>
     </section>
   );

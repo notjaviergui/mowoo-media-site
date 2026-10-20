@@ -17,3 +17,7 @@
 This is a local review build, not a production deployment. Formspree ownership/inbox delivery, scheduling availability, real telephone/SMS calls, and external subscription delivery were not tested. No provider credentials, dedicated demo number, or scheduling link were available. The agent walkthrough is a scripted UI example. The existing Express backend needs its own deployment and provider validation. The supplied showreel was retained; a caption/transcript review should be completed if its audio is important to the portfolio presentation.
 
 The locked dependency tree emits an outdated Browserslist-data notice. Build passes; dependency updates were kept outside this redesign's scope.
+
+## Scroll-plan and agent follow-up
+
+The services overview now uses a vertical printed-plan layout derived from the hero graphic. A passive scroll listener batches work through requestAnimationFrame, measures three steps, and fills a lime rail as each step brightens. ResizeObserver keeps alignment correct after layout changes. Keyboard focus reveals a step immediately, and reduced-motion preference displays all steps at full opacity. Browser scroll inspection verified changing rail progress and individual opacity values. Agent setup and remaining channel checks are recorded in INTEGRATIONS.md.

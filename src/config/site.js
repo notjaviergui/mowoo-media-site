@@ -10,6 +10,13 @@ const httpsUrl = (value) => {
 const number = (import.meta.env.VITE_AGENT_PHONE_NUMBER || "").trim();
 export const site = {
   email: "hello@moowomedia.com",
+  agentDemoUrl:
+    import.meta.env.VITE_AGENT_DEMO_ENABLED === "false"
+      ? null
+      : httpsUrl(
+          import.meta.env.VITE_AGENT_DEMO_URL ||
+            "https://elevenlabs.io/app/talk-to?agent_id=agent_2101m5dm3egyftgb8h56q4y13wrf",
+        ),
   bookingUrl: httpsUrl(import.meta.env.VITE_BOOKING_URL),
   formEndpoint: "https://formspree.io/f/xnnpllly", // Existing contact infrastructure.
   agentPhone: /^\+[1-9]\d{7,14}$/.test(number) ? number : null,

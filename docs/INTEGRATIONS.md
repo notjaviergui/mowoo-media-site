@@ -1,3 +1,18 @@
+# Current setup status
+
+A dedicated ElevenLabs agent has now been created and published: **Moowo Media — Growth Demo**, ID `agent_2101m5dm3egyftgb8h56q4y13wrf`.
+
+- [Agent console](https://elevenlabs.io/app/agents/agents/agent_2101m5dm3egyftgb8h56q4y13wrf/agent)
+- [Public demo](https://elevenlabs.io/app/talk-to?agent_id=agent_2101m5dm3egyftgb8h56q4y13wrf)
+- The local site now links to that hosted demo (set `VITE_AGENT_DEMO_ENABLED=false` and rebuild to hide it), with clear third-party and sample-data copy. The scripted on-page example stays labeled separately.
+- Account-preview text tests answered a fictional content inquiry and correctly declined unsupported booking, CRM writes, and invented pricing. Replies were subsequently limited to short conversational responses.
+- The public talk-to page loads and presents voice and text modes. Starting a public conversation requires the visitor to accept ElevenLabs' recording/storage terms themselves. No terms were accepted on the account owner's behalf. Public voice/audio and external telephone/SMS have not yet been end-to-end verified.
+- Widget settings are published with black/lime colors, a demo label, and a clear sample-data description. The site uses a hosted link instead of loading a third-party script on every visit.
+- There are no available phone numbers to attach in ElevenLabs. Twilio sign-in, an existing provisioned number or an approved purchase, and independent voice/SMS tests are still needed. Call/SMS website flags remain off.
+- The exact system prompt is saved in `server/agents/moowo-demo-prompt.md`. It has no booking, email, CRM-write, or live-transfer tools attached and makes that boundary explicit.
+
+The original setup reference follows; statements about no agent being configured describe the baseline before this setup.
+
 # Integration setup and honest launch states
 
 The default build does not claim that telephone, SMS, automated trend research, newsletter subscription, or client authentication is live. `.env.example` lists public frontend settings only. `.env` and server credentials are ignored by Git. Vite settings are compiled at build time: changing them requires rebuilding the static site.
