@@ -30,7 +30,7 @@ Reviewed baseline: `127f044` (the repository's default branch when cloned).
 
 ## Design and implementation
 
-Warm ivory, charcoal, and restrained lime form the shared design language. A reusable service overview and project card replace repeated markup. Page-specific layouts alternate editorial rows, portfolio imagery, a process diagram, and a conversation walkthrough. Animations are brief and honor reduced-motion preferences. The hero uses an optimized WebP derived from the supplied Inopera image; the original is retained. The showreel does not preload or autoplay. Only Latin Inter font subsets load. No new application dependencies.
+Black, charcoal, and restrained lime form the shared design language, preserving the requested dark color scheme. Light creative artifacts provide contrast within the dark site. A reusable service overview and project card replace repeated markup. Page-specific layouts alternate editorial rows, portfolio imagery, a process diagram, and a conversation walkthrough. Animations are brief and honor reduced-motion preferences. The hero uses an optimized WebP derived from the supplied Inopera image; the original is retained. The showreel does not preload or autoplay. Only Latin Inter font subsets load. No new application dependencies.
 
 Existing deep service URLs remain valid and route to the consolidated services page. `/WorkUs`, `/contact`, and `/book-demo` use the same request component; `/about` remains a working alias. Unknown routes show a helpful 404 view. GitHub Pages still requires the generated `404.html` for direct navigation.
 

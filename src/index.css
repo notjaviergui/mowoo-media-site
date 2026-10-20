@@ -56,12 +56,12 @@ h6 {
 }
 /* Shared agency design system. Legacy Tailwind tokens remain available. */
 :root {
-  --paper: #f6f5ef;
-  --ink: #23261f;
-  --muted: #66695e;
-  --line: #dcded3;
-  --lime: #d7ed92;
-  --dark: #242920;
+  --paper: #080a08;
+  --ink: #f1f3eb;
+  --muted: #a9b09f;
+  --line: #2d3328;
+  --lime: #c9ed91;
+  --dark: #151b12;
 }
 * {
   box-sizing: border-box;
@@ -134,7 +134,7 @@ button {
     transform 0.2s;
 }
 :focus-visible {
-  outline: 3px solid #647c34;
+  outline: 3px solid #b7df82;
   outline-offset: 5px;
 }
 ::selection {
@@ -174,15 +174,15 @@ button {
   transform: translateY(-2px);
 }
 .button-dark {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--lime);
+  color: #18200f;
 }
 .button-dark:hover {
-  background: #424a39;
+  background: #ddf5b8;
 }
 .button-lime {
   background: var(--lime);
-  color: var(--ink);
+  color: #18200f;
 }
 .button-lime:hover {
   background: #e5f4b7;
@@ -203,7 +203,7 @@ button {
   background: transparent;
 }
 .text-link:hover {
-  color: #5a702d;
+  color: #bbdc92;
 }
 .button-row {
   display: flex;
@@ -221,7 +221,7 @@ button {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(246, 245, 239, 0.97);
+  background: rgba(8, 10, 8, 0.97);
   backdrop-filter: blur(12px);
 }
 .wordmark {
@@ -342,8 +342,8 @@ button {
   position: absolute;
   inset: 20px 0 0 -25px;
   background-image:
-    linear-gradient(#dee1d8 1px, transparent 1px),
-    linear-gradient(90deg, #dee1d8 1px, transparent 1px);
+    linear-gradient(#323a2a 1px, transparent 1px),
+    linear-gradient(90deg, #323a2a 1px, transparent 1px);
   background-size: 34px 34px;
   mask-image: radial-gradient(ellipse, black, transparent 72%);
 }
@@ -504,7 +504,7 @@ button {
   font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.03em;
-  color: #5f6457;
+  color: #a4ad98;
 }
 .brand-strip .serif-brand {
   font-family: Georgia, serif;
@@ -575,7 +575,7 @@ button {
   margin: 15px 0;
 }
 .work-section {
-  background: #eceedf;
+  background: #11160f;
   padding-top: 85px;
   padding-bottom: 85px;
   max-width: none;
@@ -665,12 +665,12 @@ button {
   display: flex;
   justify-content: space-between;
   padding: 16px 0;
-  border-top: 1px solid #bbc2ad;
+  border-top: 1px solid #39432f;
   font-size: 12px;
   margin-bottom: 20px;
 }
 .step-index > span {
-  color: #788368;
+  color: #a9bd94;
 }
 .process-grid h3 {
   font-size: 20px;
@@ -684,7 +684,7 @@ button {
 }
 .agent-section {
   background: var(--dark);
-  color: var(--paper);
+  color: var(--ink);
   max-width: none;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -711,7 +711,7 @@ button {
   color: var(--lime);
 }
 .conversation-panel {
-  background: #f6f5ef;
+  background: #20271c;
   color: var(--ink);
   border-radius: 9px;
   padding: 24px;
@@ -745,7 +745,7 @@ button {
   flex-wrap: wrap;
 }
 .scenario-buttons button {
-  border: 1px solid #d4d7cb;
+  border: 1px solid #46513c;
   border-radius: 30px;
   padding: 7px 9px;
   background: transparent;
@@ -773,11 +773,11 @@ button {
   margin-bottom: 6px;
 }
 .chat-bubble.visitor {
-  background: #e7e8df;
+  background: #30382a;
   margin-left: auto;
 }
 .chat-bubble.agent {
-  background: #e2edcd;
+  background: #35452a;
   margin-top: 14px;
 }
 .conversation-action {
@@ -851,7 +851,7 @@ button {
   font-size: 11px;
 }
 .footer-top a:hover {
-  color: #5a702d;
+  color: #bbdc92;
 }
 .footer-bottom {
   display: flex;
@@ -870,7 +870,7 @@ button {
 }
 .page-intro h1 span,
 .booking-copy h1 span {
-  color: #707b60;
+  color: #a6ba91;
 }
 .page-intro > p:not(.eyebrow) {
   margin-top: 25px;
@@ -891,7 +891,7 @@ button {
   gap: 8vw;
   padding-top: 70px;
   padding-bottom: 95px;
-  background: #eceedf;
+  background: #11160f;
   max-width: none;
 }
 .supporting-section .eyebrow {
@@ -904,11 +904,11 @@ button {
   color: var(--muted);
 }
 .supporting-list details {
-  border-top: 1px solid #cbd0bf;
+  border-top: 1px solid #38432f;
   padding: 23px 0;
 }
 .supporting-list details:last-child {
-  border-bottom: 1px solid #cbd0bf;
+  border-bottom: 1px solid #38432f;
 }
 .supporting-list summary {
   display: flex;
@@ -941,7 +941,7 @@ button {
 }
 .filter-row button {
   padding: 10px 16px;
-  border: 1px solid #cbd0bf;
+  border: 1px solid #38432f;
   border-radius: 30px;
   background: transparent;
   font-size: 11px;
@@ -979,13 +979,13 @@ button {
   gap: 8vw;
   padding-top: 50px;
   padding-bottom: 80px;
-  background: #eceedf;
+  background: #11160f;
   max-width: none;
 }
 .large-asterisk {
   font-size: 200px;
   line-height: 1;
-  color: #6a7b4c;
+  color: #b7d493;
   align-self: center;
   text-align: center;
 }
@@ -1038,7 +1038,7 @@ button {
   padding: 35px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fffef9;
+  background: #131810;
 }
 .booking-panel h2 {
   font-size: 33px;
@@ -1070,7 +1070,7 @@ textarea {
   width: 100%;
   min-width: 0;
   background: transparent;
-  border: 1px solid #d1d5c6;
+  border: 1px solid #46513b;
   border-radius: 4px;
   padding: 11px 12px;
   color: var(--ink);
@@ -1091,7 +1091,7 @@ textarea {
 }
 .form-error {
   font-size: 12px;
-  color: #a23b29;
+  color: #f2a893;
   line-height: 1.6;
   margin-bottom: 20px;
 }
@@ -1147,7 +1147,7 @@ textarea {
 .careers-section {
   padding-top: 65px;
   padding-bottom: 80px;
-  background: #eceedf;
+  background: #11160f;
   max-width: none;
 }
 .memo-subscribe > p,
@@ -1563,4 +1563,34 @@ textarea {
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* Light creative artifacts retain their own contrast within the black site. */
+.planning-note {
+  color: #23261f;
+}
+.art-stamp {
+  color: #18200f;
+}
+.cta-section {
+  color: #18200f;
+}
+.cta-section .button-dark {
+  background: #18200f;
+  color: #f1f3eb;
+}
+.cta-section .button-dark:hover {
+  background: #35452a;
+}
+.conversation-panel {
+  border: 1px solid var(--line);
+}
+.hero-art .art-grid {
+  opacity: 0.7;
+}
+.scenario-buttons button {
+  min-height: 36px;
+}
+::selection {
+  color: #18200f;
 }
