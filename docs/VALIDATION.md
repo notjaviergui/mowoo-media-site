@@ -21,3 +21,7 @@ The locked dependency tree emits an outdated Browserslist-data notice. Build pas
 ## Scroll-plan and agent follow-up
 
 The services overview now uses a vertical printed-plan layout derived from the hero graphic. A passive scroll listener batches work through requestAnimationFrame, measures three steps, and fills a lime rail as each step brightens. ResizeObserver keeps alignment correct after layout changes. Keyboard focus reveals a step immediately, and reduced-motion preference displays all steps at full opacity. Browser scroll inspection verified changing rail progress and individual opacity values. Agent setup and remaining channel checks are recorded in INTEGRATIONS.md.
+
+## Fullscreen reel and motion refinement
+
+Restored the original fullscreen reel with a transparent header that darkens on scroll. Verified muted playback, matching viewport height, working pause/play controls, offscreen pausing, and no horizontal overflow in the preview. The plan now uses time-based easing in a finite animation-frame loop, with geometry measured only after scroll/resize changes. Shared hover transitions and restrained hero entrances use consistent easing; reduced-motion preferences disable entrances and autoplay. Browser inspection confirmed that rail progress and step opacity change with scrolling. Production build, six existing form tests, and diff whitespace checks pass.

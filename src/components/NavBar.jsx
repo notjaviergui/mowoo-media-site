@@ -3,6 +3,13 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(() => window.scrollY > 40);
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+    return () => window.removeEventListener("scroll", update);
+  }, []);
   const location = useLocation();
   const menuButton = useRef(null);
   useEffect(() => {
@@ -25,7 +32,9 @@ export default function NavBar() {
     ["Our approach", "/pages/us"],
   ];
   return (
-    <header className="site-header">
+    <header
+      className={`site-header ${location.pathname === "/" ? "over-video" : ""} ${scrolled || open ? "is-scrolled" : ""}`}
+    >
       <Link to="/" className="wordmark" aria-label="Moowo Media home">
         moowo<span className="brand-dot">®</span>
         <small>MEDIA</small>

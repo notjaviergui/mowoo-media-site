@@ -1,23 +1,81 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+
 export default function VideoHero() {
+  const videoRef = useRef(null);
+  const heroRef = useRef(null);
+  const userPaused = useRef(false);
+  const inView = useRef(true);
+  const [paused, setPaused] = useState(true);
+  const [failed, setFailed] = useState(false);
+  useEffect(() => {
+    const video = videoRef.current;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => {
+      if (
+        reducedMotion.matches ||
+        document.hidden ||
+        userPaused.current ||
+        !inView.current
+      )
+        video.pause();
+      else video.play().catch(() => setPaused(true));
+    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inView.current = entry.isIntersecting;
+        sync();
+      },
+      { threshold: 0.05 },
+    );
+    observer.observe(heroRef.current);
+    document.addEventListener("visibilitychange", sync);
+    reducedMotion.addEventListener("change", sync);
+    sync();
+    return () => {
+      observer.disconnect();
+      video.pause();
+      document.removeEventListener("visibilitychange", sync);
+      reducedMotion.removeEventListener("change", sync);
+    };
+  }, []);
+  function toggleVideo() {
+    const video = videoRef.current;
+    userPaused.current = !video.paused;
+    if (video.paused) video.play().catch(() => setPaused(true));
+    else video.pause();
+  }
   return (
-    <section className="hero section-shell">
+    <section className="hero hero-video section-shell" ref={heroRef}>
+      <div className="hero-video-backdrop" aria-hidden="true">
+        <video
+          ref={videoRef}
+          src="/reel-video.mp4"
+          muted
+          playsInline
+          loop
+          preload="metadata"
+          onPlay={() => setPaused(false)}
+          onPause={() => setPaused(true)}
+          onError={() => setFailed(true)}
+        />
+        {failed && <img src="/images/inopera-creative.webp" alt="" />}
+      </div>
+      <div className="hero-video-shade" aria-hidden="true" />
       <div className="hero-copy">
         <p className="eyebrow">
-          <span className="status-dot" /> Your next chapter starts here
+          <span className="status-dot" /> Content first. Performance always.
         </p>
         <h1>
           Make content.
           <br />
           Build momentum.
           <br />
-          <span className="accent-underline">Grow with purpose.</span>
+          <span>Grow with purpose.</span>
         </h1>
         <p className="hero-description">
-          A performance agency for brands ready to move forward. We create the
-          content, manage the presence, and build the automations that support
-          your growth.
+          A performance agency for brands ready to move forward. Content
+          creation and management, supported by automation that helps you scale.
         </p>
         <div className="button-row">
           <Link className="button button-dark" to="/book-demo">
@@ -27,65 +85,23 @@ export default function VideoHero() {
             Explore our work <span aria-hidden="true">↗</span>
           </Link>
         </div>
-        <p className="hero-footnote">
-          Strategy-led. Creatively driven. Built around your business.
-        </p>
-      </div>
-      <div
-        className="hero-art"
-        aria-label="Creative content and planning examples"
-      >
-        <div className="art-grid" aria-hidden="true" />
-        <div className="creative-frame">
-          <img
-            src="/images/inopera-creative.webp"
-            alt="Inopera headphones, photographed on a wooden desk"
-            fetchPriority="high"
-            width="700"
-            height="700"
-          />
-          <div className="creative-topline">
-            <span>INOPERA</span>
-            <span>CREATIVE / 01</span>
-          </div>
-          <div className="creative-caption">
-            Sound on.
-            <br />
-            World off.<span>Product storytelling / Creative direction</span>
-          </div>
-        </div>
-        <div className="planning-note">
-          <span className="eyebrow">
-            A little strategy. A lot of possibility.
-          </span>
-          <strong>
-            Great content
-            <br />
-            starts with a plan.
-          </strong>
-          <div className="note-progress">
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
-          <div className="note-bottom">
-            <span>Research → Create → Refine</span>
-            <span aria-hidden="true">↗</span>
-          </div>
-        </div>
-        <div className="art-stamp" aria-hidden="true">
-          Made to
-          <br />
-          <strong>move you.</strong>
-          <span>✳</span>
-        </div>
       </div>
       <div className="hero-bottom">
-        <span>CREATIVE THINKING. MEASURABLE DIRECTION.</span>
         <a href="#services">
           Discover the approach <span aria-hidden="true">↓</span>
         </a>
+        {!failed && (
+          <button
+            className="video-toggle"
+            onClick={toggleVideo}
+            aria-label={
+              paused ? "Play background video" : "Pause background video"
+            }
+          >
+            <span aria-hidden="true">{paused ? "▶" : "Ⅱ"}</span>
+            {paused ? "Play reel" : "Pause reel"}
+          </button>
+        )}
       </div>
     </section>
   );
