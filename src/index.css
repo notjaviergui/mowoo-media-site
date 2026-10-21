@@ -2075,7 +2075,9 @@ button {
 
 /* A quiet, product-focused stage for the growth story. */
 .cake-plan {
-  background: #0c0f0b;
+  max-width: 1140px;
+  background:
+    radial-gradient(ellipse at 25% 24%, #1a20131f, transparent 55%), #0c0f0b;
   color: #f0f2e9;
   border: 1px solid #272d22;
   border-radius: 24px;
@@ -2098,7 +2100,7 @@ button {
 }
 .cake-journey {
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
+  grid-template-columns: 1.35fr 1fr;
   gap: 64px;
   align-items: start;
 }
@@ -2116,8 +2118,8 @@ button {
   overflow: visible;
 }
 .sculpture-layer {
-  opacity: var(--layer-build, 0);
-  transform: translateY(calc(-85px * (1 - var(--layer-build, 0))));
+  opacity: clamp(0, calc(var(--layer-build, 0) * 2), 1);
+  transform: translateY(calc(-60px * (1 - var(--layer-build, 0))));
 }
 .cake-stage-caption {
   display: flex;
@@ -2140,8 +2142,8 @@ button {
 }
 .cake-plan .plan-step {
   display: block;
-  min-height: 66vh;
-  padding: 85px 0 110px;
+  min-height: 58vh;
+  padding: 75px 0 90px;
 }
 .cake-plan .plan-marker {
   width: auto;
@@ -2242,6 +2244,43 @@ button {
 
 .cake-plan .plan-bullets li {
   opacity: calc(0.4 + 0.6 * var(--bullet-reveal, 1));
+}
+@media (prefers-reduced-motion: reduce) {
+  .cake-plan .plan-bullets li {
+    opacity: 1;
+  }
+}
+
+.cake-step-label {
+  margin-left: 16px;
+  color: #aebba0;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.cake-plan .plan-step-copy {
+  opacity: 1;
+}
+.cake-plan .plan-bullets {
+  color: #c5cdbd;
+}
+.cake-plan .plan-bullets li {
+  opacity: calc(0.72 + 0.28 * var(--bullet-reveal, 1));
+}
+.cake-plan .plan-step-copy h3 {
+  max-width: 390px;
+}
+@media (max-width: 900px) {
+  .cake-plan .plan-step {
+    min-height: 45vh;
+    padding: 36px 0 65px;
+  }
+  .cake-stage {
+    padding-bottom: 18px;
+  }
+  .cake-stage-caption {
+    color: #b6bfac;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .cake-plan .plan-bullets li {

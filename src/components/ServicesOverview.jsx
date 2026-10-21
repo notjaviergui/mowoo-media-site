@@ -141,6 +141,15 @@ export default function ServicesOverview({ full = false }) {
               >
                 <span className="plan-marker" aria-hidden="true">
                   {String(index + 1).padStart(2, "0")}
+                  {!full && (
+                    <span className="cake-step-label">
+                      {
+                        ["Research", "Create", "Refine", "Automate", "Grow"][
+                          index
+                        ]
+                      }
+                    </span>
+                  )}
                 </span>
                 <div className="plan-step-copy">
                   {full && <p className="eyebrow">{service.label}</p>}
