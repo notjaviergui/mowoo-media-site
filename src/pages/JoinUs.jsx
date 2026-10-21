@@ -17,9 +17,8 @@ export default function JoinUs() {
       <section className="careers-section section-shell">
         <h2>Introduce yourself.</h2>
         <p>
-          Share your portfolio, the work you enjoy, and how you’d like to
-          collaborate. We’ll be in touch if there’s a fit. This is an expression
-          of interest, not a listing of current vacancies.
+          Share your portfolio and the work you enjoy. We’ll reach out when a
+          future collaboration looks like a good fit.
         </p>
         <a
           className="button button-dark"

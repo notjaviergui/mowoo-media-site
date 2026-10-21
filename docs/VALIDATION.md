@@ -14,7 +14,7 @@
 
 ## Limits
 
-This is a local review build, not a production deployment. Formspree ownership/inbox delivery, scheduling availability, real telephone/SMS calls, and external subscription delivery were not tested. No provider credentials, dedicated demo number, or scheduling link were available. The agent walkthrough is a scripted UI example. The existing Express backend needs its own deployment and provider validation. The supplied showreel was retained; a caption/transcript review should be completed if its audio is important to the portfolio presentation.
+This is a local review build, not a production deployment. Formspree ownership/inbox delivery, scheduling availability, SMS, public browser microphone conversations, and newsletter delivery remain unverified. Inbound telephone voice was confirmed by the user; the hosted ElevenLabs link and dedicated number are configured. The on-page conversation walkthrough remains a labeled scripted example. The existing Express backend needs its own deployment and provider validation. The supplied showreel was retained; a caption/transcript review should be completed if its audio is important to the portfolio presentation.
 
 The locked dependency tree emits an outdated Browserslist-data notice. Build passes; dependency updates were kept outside this redesign's scope.
 
@@ -28,4 +28,10 @@ Restored the original fullscreen reel with a transparent header that darkens on 
 
 ## Refined cake presentation
 
-The landing growth plan uses a scalable SVG illustration with five independent layers, shared lighting, surface texture, cream seams, and a dark plinth. Existing eased scroll progress drives each layer; no animation dependency or raster payload was added. The dark presentation uses large type and a sticky graphic beside the sequence on desktop, then a compact sticky stage above the copy on mobile. Verified changing layer values, desktop and narrow viewport layouts without horizontal overflow, and successful production build. Reduced-motion preferences show the complete illustration and all bullets.
+The landing growth plan uses a generated photographic sponge-and-buttercream cutout reused across five layers. Scroll thresholds trigger a finite gravity, collision, bounce, and settling simulation. No animation dependency was added. The single PNG is approximately 2.1 MB; the generation prompt is in CAKE-ARTWORK.md. The dark presentation uses large type and a sticky graphic beside the sequence on desktop, then a compact sticky stage above the copy on mobile. Verified changing layer values, desktop and narrow viewport layouts without horizontal overflow, and successful production build. Reduced-motion preferences show the complete illustration and all bullets.
+
+## Final interface review
+
+Reviewed the landing page, services, portfolio, approach, demo request, newsletter, careers, and client support routes. Final refinements include eased mobile menu opening/closing, Escape focus return, outside-tap dismissal, closure on desktop resize, active navigation styling, instant route scroll reset, main-content focus after navigation, and clearer demo copy. The cake stage scales down on short screens.
+
+Validation: production build; six form transport tests; whitespace checks; browser checks for mobile menu navigation and Escape, closed-menu visibility, route scroll reset, service disclosures, scenario selection, required form validation, portfolio filtering, and narrow-screen horizontal overflow. Real calls were previously confirmed by the user. Formspree inbox delivery, public browser microphone flow, SMS, newsletter delivery, and backend provider credentials are not newly verified by this review.

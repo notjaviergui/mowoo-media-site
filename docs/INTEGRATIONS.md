@@ -14,16 +14,16 @@ A dedicated ElevenLabs agent has now been created and published: **Moowo Media â
 - [Public demo](https://elevenlabs.io/app/talk-to?agent_id=agent_2101m5dm3egyftgb8h56q4y13wrf)
 - The local site now links to that hosted demo (set `VITE_AGENT_DEMO_ENABLED=false` and rebuild to hide it), with clear third-party and sample-data copy. The scripted on-page example stays labeled separately.
 - Account-preview text tests answered a fictional content inquiry and correctly declined unsupported booking, CRM writes, and invented pricing. Replies were subsequently limited to short conversational responses.
-- The public talk-to page loads and presents voice and text modes. Starting a public conversation requires the visitor to accept ElevenLabs' recording/storage terms themselves. No terms were accepted on the account owner's behalf. Public voice/audio and external telephone/SMS have not yet been end-to-end verified.
+- The public talk-to page loads and presents voice and text modes. Starting a public conversation requires the visitor to accept ElevenLabs' recording/storage terms themselves. No terms were accepted on the account owner's behalf. The public browser audio flow has not been end-to-end tested here. Inbound telephone voice was separately verified by the caller; SMS remains disabled.
 - Widget settings are published with black/lime colors, a demo label, and a clear sample-data description. The site uses a hosted link instead of loading a third-party script on every visit.
 - The Twilio number is now provisioned and assigned as documented above. Inbound voice was confirmed by the caller and its website call button is enabled. SMS remains disabled.
 - The exact system prompt is saved in `server/agents/moowo-demo-prompt.md`. It has no booking, email, CRM-write, or live-transfer tools attached and makes that boundary explicit.
 
-The original setup reference follows; statements about no agent being configured describe the baseline before this setup.
+The configuration and remaining launch checks follow.
 
 # Integration setup and honest launch states
 
-The default build does not claim that telephone, SMS, automated trend research, newsletter subscription, or client authentication is live. `.env.example` lists public frontend settings only. `.env` and server credentials are ignored by Git. Vite settings are compiled at build time: changing them requires rebuilding the static site.
+The default build exposes the caller-verified telephone number and hosted browser demo. SMS, automated trend research, newsletter subscription, and client authentication are not presented as live integrations. `.env.example` lists public frontend settings only. `.env` and server credentials are ignored by Git. Vite settings are compiled at build time: changing them requires rebuilding the static site.
 
 ## Demo requests and scheduling
 
@@ -35,11 +35,11 @@ For direct scheduling, set `VITE_BOOKING_URL` to your HTTPS booking page and reb
 
 Use ElevenLabs' native Twilio integration; a custom voice-streaming backend is unnecessary for this demo.
 
-Needed configuration (not available or verified in this checkout):
+Provider configuration checklist (voice has been configured as recorded above; SMS and downstream handoffs remain incomplete):
 
 - A dedicated purchased Twilio number provisioned for inbound voice and SMS. The old contact phone in the chatbot is not treated as an agent line.
 - Twilio Account SID and Auth Token, or supported restricted API-key SID/secret, entered in the provider console only.
-- An ElevenLabs account, configured agent, approved knowledge base, and agent assignment for the number. Record the agent ID in your private deployment inventory; this website does not need it.
+- An ElevenLabs account, configured agent, approved knowledge base, and agent assignment for the number. The public agent ID is used in the hosted demo URL; credentials belong only in the provider console.
 - Channel activation and messaging registration requirements applicable to your number/account; confirm these with Twilio before public testing.
 - A tested handoff destination and clear agent boundaries. Avoid collecting sensitive details in a public demo.
 
@@ -55,6 +55,7 @@ Steps:
 The flags record operator verification; they are not a provider health check. No API keys are shipped in the browser. The website itself does not make calls, send messages, capture lead data from calls, or create provider resources. Those behaviors live in the configured agent and its tools.
 
 Official guides checked for this implementation:
+
 - [Twilio native integration](https://elevenlabs.io/docs/eleven-agents/phone-numbers/twilio-integration/native-integration/)
 - [SMS conversations](https://elevenlabs.io/docs/eleven-agents/phone-numbers/twilio-integration/sms-conversations)
 - [Twilio webhook security](https://www.twilio.com/docs/usage/webhooks/webhooks-security) â€” use the official SDK signature validator if you later add custom inbound endpoints. Do not add an unvalidated public webhook to the existing server.

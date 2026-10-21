@@ -47,10 +47,7 @@ export default function Clients() {
             aria-label="Moowo Media creative showreel"
             src="/reel-video.mp4"
           />
-          <p className="muted">
-            Creative showreel. Visual portfolio only; no performance results
-            implied.
-          </p>
+          <p className="muted">A selection of our creative work in motion.</p>
         </div>
       </section>
       <CTA />

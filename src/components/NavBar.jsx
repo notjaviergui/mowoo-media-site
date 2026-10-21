@@ -12,6 +12,7 @@ export default function NavBar() {
   }, []);
   const location = useLocation();
   const menuButton = useRef(null);
+  const header = useRef(null);
   useEffect(() => {
     setOpen(false);
   }, [location]);
@@ -23,8 +24,21 @@ export default function NavBar() {
         menuButton.current?.focus();
       }
     };
+    const outside = (event) => {
+      if (!header.current?.contains(event.target)) setOpen(false);
+    };
+    const desktop = window.matchMedia("(min-width: 761px)");
+    const resized = () => {
+      if (desktop.matches) setOpen(false);
+    };
     document.addEventListener("keydown", close);
-    return () => document.removeEventListener("keydown", close);
+    document.addEventListener("pointerdown", outside);
+    desktop.addEventListener("change", resized);
+    return () => {
+      document.removeEventListener("keydown", close);
+      document.removeEventListener("pointerdown", outside);
+      desktop.removeEventListener("change", resized);
+    };
   }, [open]);
   const items = [
     ["Services", "/services"],
@@ -33,6 +47,7 @@ export default function NavBar() {
   ];
   return (
     <header
+      ref={header}
       className={`site-header ${location.pathname === "/" ? "over-video" : ""} ${scrolled || open ? "is-scrolled" : ""}`}
     >
       <Link to="/" className="wordmark" aria-label="Moowo Media home">

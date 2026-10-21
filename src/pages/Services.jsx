@@ -6,12 +6,8 @@ export function SupportingServices() {
   return (
     <section className="supporting-section section-shell">
       <div>
-        <p className="eyebrow">The supporting cast</p>
-        <h2>
-          A little more
-          <br />
-          behind your growth.
-        </h2>
+        <p className="eyebrow">More ways we can help</p>
+        <h2>Support for your next step.</h2>
         <p>Bring these into the plan when they serve your goals.</p>
       </div>
       <div className="supporting-list">

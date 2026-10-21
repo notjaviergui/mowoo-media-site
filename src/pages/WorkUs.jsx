@@ -47,7 +47,7 @@ export default function WorkUs() {
             <span>02</span> Explore the services and relevant demos.
           </li>
           <li>
-            <span>03</span> Leave with a clear potential next step.
+            <span>03</span> Discuss the next step for your business.
           </li>
         </ol>
         <a className="text-link" href={`mailto:${site.email}`}>

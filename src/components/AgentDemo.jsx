@@ -65,14 +65,12 @@ export default function AgentDemo() {
           </a>
         )}
         {site.agentDemoUrl && (
-          <p className="agent-demo-note">
-            Browser demo opens in ElevenLabs. Use sample details only.
-          </p>
+          <p className="agent-demo-note">Browser demo opens in ElevenLabs.</p>
         )}
         <p className="agent-availability">
-          {voiceLive || smsLive
-            ? "Use sample details when calling."
-            : "Phone and SMS demos are not connected yet."}
+          {voiceLive || smsLive || site.agentDemoUrl
+            ? "Please use sample details in the demo."
+            : "Request a demo to explore an agent for your business."}
         </p>
         {(voiceLive || smsLive) && (
           <div className="button-row">
@@ -81,7 +79,11 @@ export default function AgentDemo() {
                 Text the AI demo ↗
               </a>
             )}
-            <span>{site.agentPhone}</span>
+            <span>
+              {site.agentPhone === "+17864630490"
+                ? "(786) 463-0490"
+                : site.agentPhone}
+            </span>
           </div>
         )}
       </div>

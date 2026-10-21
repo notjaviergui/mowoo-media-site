@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Optional settings are documented in `.env.example`. Defaults provide a complete static site with demo requests through the existing Formspree endpoint, a scripted agent preview, and no claimed live telephone integration.
+Optional settings are documented in `.env.example`. Defaults provide a complete static site with demo requests through the existing Formspree endpoint, a labeled scripted preview, a hosted ElevenLabs demo, and the caller-verified inbound demo number. SMS is disabled.
 
 ```sh
 npm run build
