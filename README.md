@@ -19,7 +19,15 @@ npm run preview
 node --test tests/*.test.mjs
 ```
 
-`npm run build` retains the existing GitHub Pages SPA fallback and custom domain. Do not run the old `npm run deploy` script casually: it commits and pushes before publishing. Review and deploy through your normal release process.
+## Publishing
+
+GitHub Actions builds and deploys the site from `main` using [the Pages workflow](.github/workflows/pages.yml). Pull requests run tests and a production build without deploying. Merging into `main` publishes the resulting `dist/` artifact automatically; local builds and `npm run deploy` are no longer needed.
+
+In **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source. Keep the custom domain `www.moowomedia.com` and HTTPS enabled. The build preserves `CNAME` and the `404.html` SPA fallback, and Vite's `/` base matches the custom domain.
+
+To redeploy the current `main` manually, open **Actions → Build and deploy site → Run workflow** and select `main`. Deployment uses GitHub's built-in token and needs no personal token or provider API credentials. Provider keys must never be added to frontend build variables.
+
+The legacy `npm run deploy` script still commits local changes and publishes to `gh-pages`; do not use it with this Actions deployment. The Express backend remains a separate service and is not deployed by GitHub Pages.
 
 - [Architecture review and section decisions](docs/ARCHITECTURE-REVIEW.md)
 - [Provider setup and configuration](docs/INTEGRATIONS.md)
