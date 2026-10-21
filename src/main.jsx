@@ -1,71 +1,144 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { ParallaxProvider } from 'react-scroll-parallax';
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
-import '@fontsource/inter/700.css';
-import '@fontsource/syne/700.css';
-import '@fontsource/syne/800.css';
-import './index.css'
-import VideoHero from './components/VideoHero';
-import AdFeed from './components/AdFeed';
-import MetricsProof from './components/MetricsProof';
-import BeforeAfter from './components/BeforeAfter';
-import CampaignTimeline from './components/CampaignTimeline';
-import ProcessSteps from './components/ProcessSteps';
-import CTA from './components/CTA';
-import Services from './pages/Services';
-import JoinUs from './pages/JoinUs';
-import Newsletter from './pages/Newsletter';
-import Clients from './pages/Clients';
-import Layout from './components/Layout';
-import Us from './pages/Us';
-import WorkUs from './pages/WorkUs';
-import WebsitesSection from './components/services/WebsitesSection';
-import PaidMediaSection from './components/services/PaidMediaSection';
-import RetentionSection from './components/services/RetentionSection';
-import Footer from './components/Footer';
-import ClientsPortal from './pages/ClientsPortal';
-import AIChatBox from './components/AIChatBox';
-import './components/AIChatBox.css';
-
-const LandingPage = () => (
-  <div className="page-load">
-    <div className="font-sans text-foreground bg-background page-load">
-      <div className="animate-fade-slide">
-        <VideoHero />
-        <AdFeed />
-        <MetricsProof />
-        <BeforeAfter />
-        <CampaignTimeline />
-        <ProcessSteps />
-        <CTA />
-        <Footer />
-      </div> {/* Close animate-fade-slide wrapper */}
-    </div>
-  </div>
-);
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import "@fontsource/inter/latin-400.css";
+import "@fontsource/inter/latin-500.css";
+import "@fontsource/inter/latin-700.css";
+import "./index.css";
+import Layout from "./components/Layout";
+import VideoHero from "./components/VideoHero";
+import ServicesOverview from "./components/ServicesOverview";
+import AdFeed from "./components/AdFeed";
+import AgentDemo from "./components/AgentDemo";
+import CTA from "./components/CTA";
+import Services from "./pages/Services";
+import Clients from "./pages/Clients";
+import Us from "./pages/Us";
+import WorkUs from "./pages/WorkUs";
+import Newsletter from "./pages/Newsletter";
+import JoinUs from "./pages/JoinUs";
+import ClientsPortal from "./pages/ClientsPortal";
+function LandingPage() {
+  return (
+    <>
+      <VideoHero />
+      <div className="brand-strip section-shell">
+        <p>Brands we’ve worked with</p>
+        <span>INOPERA</span>
+        <span className="serif-brand">MAYU</span>
+        <span>Miami Mojito Co.</span>
+        <span>SUCHES CABINS</span>
+      </div>
+      <ServicesOverview />
+      <AdFeed />
+      <AgentDemo />
+      <CTA />
+    </>
+  );
+}
+const servicePaths = [
+  "/services",
+  "/components/services/creativesection",
+  "/components/services/websitessection",
+  "/components/services/paidmediasection",
+  "/components/services/retentionsection",
+];
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ParallaxProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Layout><LandingPage /></Layout>} />
-          <Route path="/components/services/websitessection" element={<Layout><WebsitesSection /></Layout>} />
-          <Route path="/components/services/paidmediasection" element={<Layout><PaidMediaSection /></Layout>} />
-          <Route path="/components/services/creativesection" element={<Layout><Services /></Layout>} />
-          <Route path="/components/services/retentionsection" element={<Layout><RetentionSection /></Layout>} />
-          <Route path="/pages/join-us" element={<Layout><JoinUs /></Layout>} />
-          <Route path="/pages/newsletter" element={<Layout><Newsletter /></Layout>} />
-          <Route path="/pages/clients" element={<Layout><Clients /></Layout>} />
-          <Route path="/pages/clients-portal" element={<Layout><ClientsPortal /></Layout>} />
-          <Route path="/pages/us" element={<Layout><Us /></Layout>} />
-          <Route path="/WorkUs" element={<Layout><WorkUs /></Layout>} />
-        </Routes>
-      </Router>
-      <AIChatBox /> {/* <-- globally included */}
-    </ParallaxProvider>
-  </React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <LandingPage />
+            </Layout>
+          }
+        />
+        {servicePaths.map((path) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <Layout>
+                <Services />
+              </Layout>
+            }
+          />
+        ))}
+        {["/book-demo", "/WorkUs", "/contact"].map((path) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <Layout>
+                <WorkUs />
+              </Layout>
+            }
+          />
+        ))}
+        <Route
+          path="/pages/clients"
+          element={
+            <Layout>
+              <Clients />
+            </Layout>
+          }
+        />
+        {["/pages/us", "/about"].map((path) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <Layout>
+                <Us />
+              </Layout>
+            }
+          />
+        ))}
+        <Route
+          path="/pages/newsletter"
+          element={
+            <Layout>
+              <Newsletter />
+            </Layout>
+          }
+        />
+        <Route
+          path="/pages/join-us"
+          element={
+            <Layout>
+              <JoinUs />
+            </Layout>
+          }
+        />
+        <Route
+          path="/pages/clients-portal"
+          element={
+            <Layout>
+              <ClientsPortal />
+            </Layout>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Layout>
+              <section className="page-intro section-shell">
+                <p className="eyebrow">404</p>
+                <h1>
+                  Let’s get you
+                  <br />
+                  back on track.
+                </h1>
+                <Link className="button button-dark" to="/">
+                  Back to home ↗
+                </Link>
+              </section>
+            </Layout>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>,
 );

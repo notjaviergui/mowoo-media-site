@@ -1,36 +1,49 @@
-import React, { useEffect, useState } from 'react';
-
+import React from "react";
+import { Link } from "react-router-dom";
 export default function Footer() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const bottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight;
-      setIsVisible(bottom);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
-    <footer className={`w-full py-12 px-6 border-t border-white/10 bg-background text-soft-gray text-sm text-center transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-      <div className="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto space-y-6 md:space-y-0">
-        <div className="flex space-x-6 font-bold uppercase tracking-widest text-xs">
-          <a href="/about" className="hover:text-electric-green transition-colors">About</a>
-          <a href="/services" className="hover:text-electric-green transition-colors">Services</a>
-          <a href="/contact" className="hover:text-electric-green transition-colors">Contact</a>
-        </div>
+    <footer className="site-footer">
+      <div className="footer-top">
         <div>
-          <a href="https://instagram.com/moowomedia" target="_blank" rel="noopener noreferrer" className="hover:text-electric-green transition-colors inline-flex items-center gap-2 font-bold uppercase tracking-widest text-xs">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-4 h-4">
-              <path d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zm0 1.5h8.5A4.25 4.25 0 0120.5 7.75v8.5a4.25 4.25 0 01-4.25 4.25h-8.5A4.25 4.25 0 013.5 16.25v-8.5A4.25 4.25 0 017.75 3.5zm8.75 2.25a.75.75 0 100 1.5.75.75 0 000-1.5zM12 7a5 5 0 100 10 5 5 0 000-10zm0 1.5a3.5 3.5 0 110 7 3.5 3.5 0 010-7z" />
-            </svg>
-            @moowomedia
+          <Link to="/" className="wordmark">
+            moowo<small>MEDIA</small>
+          </Link>
+          <p>
+            Good content. Clear direction.
+            <br />
+            Room to grow.
+          </p>
+        </div>
+        <nav aria-label="Explore">
+          <span className="eyebrow">Explore</span>
+          <Link to="/services">Services</Link>
+          <Link to="/pages/clients">Our work</Link>
+          <Link to="/pages/us">Our approach</Link>
+          <Link to="/book-demo">Book a demo</Link>
+        </nav>
+        <nav aria-label="More from Moowo">
+          <span className="eyebrow">Stay connected</span>
+          <Link to="/pages/newsletter">The Moowo Memo</Link>
+          <Link to="/pages/join-us">Join us</Link>
+          <Link to="/pages/clients-portal">Client support</Link>
+          <a
+            href="https://instagram.com/moowomedia"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Instagram ↗
+          </a>
+        </nav>
+        <div>
+          <span className="eyebrow">Start a conversation</span>
+          <a className="footer-email" href="mailto:hello@moowomedia.com">
+            hello@moowomedia.com ↗
           </a>
         </div>
-        <div className="font-medium">
-          © {new Date().getFullYear()} Mowoo Media. All rights reserved.
-        </div>
+      </div>
+      <div className="footer-bottom">
+        <span>© {new Date().getFullYear()} Moowo Media</span>
+        <span>Content first. Performance always.</span>
       </div>
     </footer>
   );

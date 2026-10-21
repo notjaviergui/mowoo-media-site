@@ -1,180 +1,174 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import './WorkUs.css';
-
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { site } from "../config/site";
+import { submitDemo } from "../lib/submitDemo.mjs";
 export default function WorkUs() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
   const location = useLocation();
-  const [project, setProject] = useState(location.state?.project || '');
-  const [budget, setBudget] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-  const [formStep, setFormStep] = useState(1);
-  const [showSecondInput, setShowSecondInput] = useState(false);
-  const [showThirdInput, setShowThirdInput] = useState(false);
-  const [showTextarea, setShowTextarea] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const [status, setStatus] = useState("idle");
+  const [error, setError] = useState("");
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (status === "sending") return;
+    const form = event.currentTarget;
+    if (!form.reportValidity()) return;
+    setStatus("sending");
+    setError("");
     try {
-      await fetch("https://formspree.io/f/xnnpllly", {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, phone, project, budget }),
-      });
-      setSubmitted(true);
-    } catch (err) {
-      console.error("Form error:", err);
+      await submitDemo(
+        site.formEndpoint,
+        Object.fromEntries(new FormData(form)),
+      );
+      setStatus("success");
+    } catch {
+      setStatus("error");
+      setError(
+        "We couldn’t send your request. Please try again or email hello@moowomedia.com.",
+      );
     }
-  };
-
-  const nextStep = () => setFormStep((prev) => Math.min(prev + 1, 5));
-  const prevStep = () => setFormStep((prev) => Math.max(prev - 1, 1));
-
+  }
   return (
-    <section className="relative bg-background text-foreground font-sans pt-32 pb-16 px-6 md:px-16 min-h-screen border-t border-white/10">
-      <h2 className="text-white text-4xl md:text-6xl font-black text-center mb-4 uppercase tracking-tight">
-        Let’s start your project
-      </h2>
-      <p className="text-soft-gray text-center text-lg md:text-xl mb-16 max-w-2xl mx-auto font-medium">
-        Just a few questions to understand your goals better. We'll follow up with data-driven strategy.
-      </p>
-      {submitted ? (
-        <>
-          <div className="text-center text-2xl font-semibold relative z-10">
-            Thank you for your submission!
+    <section className="booking-page section-shell">
+      <div className="booking-copy">
+        <p className="eyebrow">Let’s find your next move</p>
+        <h1>
+          Less guessing.
+          <br />
+          <span>More direction.</span>
+        </h1>
+        <p>
+          Book a demo to explore a content plan, ongoing management, or an
+          automation built around your business.
+        </p>
+        <ol className="booking-expectations">
+          <li>
+            <span>01</span> Tell us what you’re working toward.
+          </li>
+          <li>
+            <span>02</span> Explore the services and relevant demos.
+          </li>
+          <li>
+            <span>03</span> Discuss the next step for your business.
+          </li>
+        </ol>
+        <a className="text-link" href={`mailto:${site.email}`}>
+          Prefer email? {site.email} ↗
+        </a>
+      </div>
+      <div className="booking-panel">
+        {status === "success" ? (
+          <div className="booking-success" role="status">
+            <span aria-hidden="true">↗</span>
+            <h2>Your request is on its way.</h2>
+            <p>
+              Thanks for sharing your goals. The team will follow up to arrange
+              a time. Your demo is not booked until confirmed.
+            </p>
+            <button className="text-link" onClick={() => setStatus("idle")}>
+              Send another request ↗
+            </button>
           </div>
-          <div className="confetti absolute inset-0 pointer-events-none z-0">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <span key={i} />
-            ))}
-          </div>
-        </>
-      ) : (
-        <form onSubmit={handleSubmit} className="max-w-3xl mx-auto space-y-6">
-          {formStep === 1 && (
-            <>
-              <h2 className="text-white text-xl md:text-2xl font-semibold">
-                1 → What’s your name? <span className="text-red-500">*</span>
-              </h2>
-              <p className="text-white/50 text-sm mb-6">(please answer clearly)</p>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                placeholder="Type your answer here..."
-                className="w-full bg-transparent border-b border-white/50 placeholder-white/70 text-white text-[1.4rem] pb-3 mb-2 placeholder:text-[1.2rem] focus:outline-none focus:border-white focus:ring-0 transition-all duration-300"
-                required
-              />
-            </>
-          )}
-
-          {formStep === 2 && (
-            <>
-              <h2 className="text-white text-xl md:text-2xl font-semibold">
-                2 → What’s your best email? <span className="text-red-500">*</span>
-              </h2>
-              <p className="text-white/50 text-sm mb-6">(we’ll use this to get in touch)</p>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                placeholder="Type your answer here..."
-                className="w-full bg-transparent border-b border-white/50 placeholder-white/70 text-white text-[1.4rem] pb-3 mb-2 placeholder:text-[1.2rem] focus:outline-none focus:border-white focus:ring-0 transition-all duration-300"
-                required
-              />
-            </>
-          )}
-
-          {formStep === 3 && (
-            <>
-              <h2 className="text-white text-xl md:text-2xl font-semibold">
-                3 → Company or Brand name? <span className="text-red-500">*</span>
-              </h2>
-              <p className="text-white/50 text-sm mb-6">(can be personal or business)</p>
-              <input
-                type="text"
-                value={phone}
-                onChange={(e) => {
-                  setPhone(e.target.value);
-                }}
-                placeholder="Type your answer here..."
-                className="w-full bg-transparent border-b border-white/50 placeholder-white/70 text-white text-[1.4rem] pb-3 mb-2 placeholder:text-[1.2rem] focus:outline-none focus:border-white focus:ring-0 transition-all duration-300"
-                required
-              />
-            </>
-          )}
-
-          {formStep === 4 && (
-            <>
-              <h2 className="text-white text-xl md:text-2xl font-semibold">
-                4 → Explain your vision <span className="text-red-500">*</span>
-              </h2>
-              <p className="text-white/50 text-sm mb-6">(project details, dreams, or goals)</p>
-              <textarea
-                value={project}
-                onChange={(e) => setProject(e.target.value)}
-                placeholder="Type your answer here..."
-                rows="6"
-                className="w-full bg-transparent border-b border-white/50 placeholder-white/70 text-white text-[1.4rem] pb-3 mb-2 placeholder:text-[1.2rem] focus:outline-none focus:border-white focus:ring-0 transition-all duration-300"
-                required
-              />
-            </>
-          )}
-
-          {formStep === 5 && (
-            <>
-              <h2 className="text-white text-xl md:text-2xl font-semibold">
-                5 → Estimate your monthly budget <span className="text-red-500">*</span>
-              </h2>
-              <p className="text-white/50 text-sm mb-6">(helps us tailor solutions to your needs)</p>
-              <input
-                type="text"
-                value={budget}
-                onChange={(e) => setBudget(e.target.value)}
-                placeholder="e.g. $1,000 – $3,000"
-                className="w-full bg-transparent border-b border-white/50 placeholder-white/70 text-white text-[1.4rem] pb-3 mb-2 placeholder:text-[1.2rem] focus:outline-none focus:border-white focus:ring-0 transition-all duration-300"
-                required
-              />
-            </>
-          )}
-
-          <div className="flex justify-between items-center pt-8">
-            {formStep > 1 && (
-              <button
-                type="button"
-                onClick={prevStep}
-                className="bg-transparent border border-white/50 text-white font-bold uppercase tracking-wider px-8 py-3 rounded-none hover:bg-white/10 transition-colors duration-300"
+        ) : (
+          <>
+            <p className="eyebrow">Book a demo</p>
+            <h2>
+              A conversation
+              <br />
+              about your growth.
+            </h2>
+            {site.bookingUrl && (
+              <a
+                href={site.bookingUrl}
+                className="button button-dark"
+                target="_blank"
+                rel="noreferrer"
               >
-                Back
-              </button>
+                Choose a time ↗
+              </a>
             )}
-            {formStep < 5 ? (
+            <p className="form-intro">
+              {site.bookingUrl
+                ? "Or request a time below."
+                : "Share a few details. We’ll follow up to confirm a time."}
+            </p>
+            <form onSubmit={handleSubmit}>
+              <div className="form-grid">
+                <label>
+                  Your name
+                  <input
+                    name="name"
+                    autoComplete="name"
+                    required
+                    maxLength="100"
+                  />
+                </label>
+                <label>
+                  Work email
+                  <input
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    maxLength="254"
+                  />
+                </label>
+              </div>
+              <label>
+                Business or brand
+                <input
+                  name="company"
+                  autoComplete="organization"
+                  required
+                  maxLength="150"
+                />
+              </label>
+              <label>
+                I’m interested in
+                <select name="service" required defaultValue="">
+                  <option value="" disabled>
+                    Select a service
+                  </option>
+                  <option>Content creation</option>
+                  <option>Account & content management</option>
+                  <option>AI agents & automation</option>
+                  <option>A connected plan / Not sure yet</option>
+                </select>
+              </label>
+              <label>
+                What would you like to achieve?
+                <textarea
+                  name="project"
+                  rows="3"
+                  maxLength="3000"
+                  required
+                  defaultValue={location.state?.project || ""}
+                  placeholder="Tell us about your goals and preferred demo times (with time zone)."
+                />
+              </label>
+              <label className="honeypot" aria-hidden="true">
+                Leave this blank
+                <input name="_gotcha" tabIndex={-1} autoComplete="off" />
+              </label>
+              <p className="form-note">
+                We’ll use these details to respond to your request. Please don’t
+                include sensitive customer information.
+              </p>
+              {error && (
+                <p role="alert" className="form-error">
+                  {error}
+                </p>
+              )}
               <button
-                type="button"
-                onClick={nextStep}
-                className="bg-electric-green text-black font-bold uppercase tracking-wider px-8 py-3 rounded-none hover:bg-white transition-colors duration-300 transform hover:scale-105"
-              >
-                Next
-              </button>
-            ) : (
-              <button
+                className="button button-dark"
                 type="submit"
-                className="bg-high-voltage-blue text-white font-bold uppercase tracking-wider px-8 py-3 rounded-none hover:bg-white hover:text-black transition-colors duration-300 transform hover:scale-105"
+                disabled={status === "sending"}
               >
-                Submit
+                {status === "sending" ? "Sending…" : "Request my demo"}{" "}
+                <span aria-hidden="true">↗</span>
               </button>
-            )}
-          </div>
-        </form>
-      )}
-      <div className="text-center text-xl font-bold mt-24 text-soft-gray uppercase tracking-widest">hello@moowomedia.com</div>
-      
+            </form>
+          </>
+        )}
+      </div>
     </section>
   );
 }

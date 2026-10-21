@@ -1,45 +1,108 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function VideoHero() {
+  const videoRef = useRef(null);
+  const heroRef = useRef(null);
+  const userPaused = useRef(false);
+  const inView = useRef(true);
+  const [paused, setPaused] = useState(true);
+  const [failed, setFailed] = useState(false);
+  useEffect(() => {
+    const video = videoRef.current;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => {
+      if (
+        reducedMotion.matches ||
+        document.hidden ||
+        userPaused.current ||
+        !inView.current
+      )
+        video.pause();
+      else video.play().catch(() => setPaused(true));
+    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inView.current = entry.isIntersecting;
+        sync();
+      },
+      { threshold: 0.05 },
+    );
+    observer.observe(heroRef.current);
+    document.addEventListener("visibilitychange", sync);
+    reducedMotion.addEventListener("change", sync);
+    sync();
+    return () => {
+      observer.disconnect();
+      video.pause();
+      document.removeEventListener("visibilitychange", sync);
+      reducedMotion.removeEventListener("change", sync);
+    };
+  }, []);
+  function toggleVideo() {
+    const video = videoRef.current;
+    userPaused.current = !video.paused;
+    if (video.paused) video.play().catch(() => setPaused(true));
+    else video.pause();
+  }
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-background">
-      {/* Background Video */}
-      <video
-        className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-60"
-        src="/reel-video.mp4"
-        autoPlay
-        muted
-        defaultMuted
-        loop
-        playsInline
-        preload="auto"
-      />
-
-      {/* Overlay gradient for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black z-10" />
-
-      {/* Content */}
-      <div className="absolute inset-0 z-20 flex flex-col justify-center px-6 md:px-16 mt-16">
-        <div className="max-w-4xl">
-          <div className="flex items-center space-x-2 mb-6">
-            <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-            <span className="text-red-500 text-xs font-bold tracking-widest uppercase">REC</span>
-          </div>
-
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight mb-6 uppercase tracking-tight">
-            We make ads <br /> people don't skip.
-          </h1>
-
-          <p className="text-xl md:text-2xl text-soft-gray font-medium max-w-xl mb-10">
-            Attention <span className="text-white">→</span> Revenue. <br/>
-            The living ad engine for modern brands.
-          </p>
-
-          <button className="bg-electric-green text-black font-bold py-4 px-8 rounded-none uppercase tracking-wider hover:bg-white transition-colors duration-300 transform hover:scale-105">
-            Start the engine
-          </button>
+    <section className="hero hero-video section-shell" ref={heroRef}>
+      <div className="hero-video-backdrop" aria-hidden="true">
+        <video
+          ref={videoRef}
+          src="/reel-video.mp4"
+          muted
+          playsInline
+          loop
+          preload="metadata"
+          onPlay={() => setPaused(false)}
+          onPause={() => setPaused(true)}
+          onError={() => setFailed(true)}
+        />
+        {failed && <img src="/images/inopera-creative.webp" alt="" />}
+      </div>
+      <div className="hero-video-shade" aria-hidden="true" />
+      <div className="hero-copy">
+        <p className="eyebrow">
+          <span className="status-dot" /> Content first. Performance always.
+        </p>
+        <h1>
+          Make content.
+          <br />
+          Build momentum.
+          <br />
+          <span>Grow with purpose.</span>
+        </h1>
+        <p className="hero-description">
+          Content that gets seen. Management that keeps you consistent.
+          Automation that saves time.
+        </p>
+        <div className="button-row">
+          <Link className="button button-dark" to="/book-demo">
+            Book a demo <span aria-hidden="true">↗</span>
+          </Link>
+          <Link className="text-link" to="/pages/clients">
+            Explore our work <span aria-hidden="true">↗</span>
+          </Link>
         </div>
       </div>
-    </div>
+      <div className="hero-bottom">
+        <a href="#services">
+          What we do <span aria-hidden="true">↓</span>
+        </a>
+        {!failed && (
+          <button
+            className="video-toggle"
+            onClick={toggleVideo}
+            aria-label={
+              paused ? "Play background video" : "Pause background video"
+            }
+          >
+            <span aria-hidden="true">{paused ? "▶" : "Ⅱ"}</span>
+            {paused ? "Play reel" : "Pause reel"}
+          </button>
+        )}
+      </div>
+    </section>
   );
 }
