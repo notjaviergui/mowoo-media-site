@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import useScrollPlan from "./useScrollPlan";
+import GrowthCake from "./GrowthCake";
 export const services = [
   {
     id: "content",
@@ -111,30 +112,20 @@ export default function ServicesOverview({ full = false }) {
             <br />
             layer by layer.
           </h3>
-          <span className="plan-flower" aria-hidden="true">
-            ✳
-          </span>
+          {full && (
+            <span className="plan-flower" aria-hidden="true">
+              ✳
+            </span>
+          )}
         </div>
         <div className={full ? undefined : "cake-journey"}>
           {!full && (
             <div className="cake-stage" aria-hidden="true">
-              <div className="cake-illustration">
-                <div className="cake-plate" />
-                {["Research", "Create", "Refine", "Automate", "Grow"].map(
-                  (label, index) => (
-                    <div
-                      className={`cake-layer cake-layer-${index}`}
-                      data-cake-layer
-                      key={label}
-                      style={{ "--layer-index": index }}
-                    >
-                      <span>{label}</span>
-                    </div>
-                  ),
-                )}
-                <span className="cake-spark">✳</span>
+              <GrowthCake />
+              <div className="cake-stage-caption">
+                <span>THE MOOWO METHOD</span>
+                <span>Built to grow.</span>
               </div>
-              <p>Every layer makes the next one stronger.</p>
             </div>
           )}
           <ol className="plan-steps" ref={planRef}>

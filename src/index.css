@@ -2073,168 +2073,178 @@ button {
   }
 }
 
-/* An editorial cake diagram: each service is a foundation for the next. */
+/* A quiet, product-focused stage for the growth story. */
+.cake-plan {
+  background: #0c0f0b;
+  color: #f0f2e9;
+  border: 1px solid #272d22;
+  border-radius: 24px;
+  padding: 64px;
+}
+.cake-plan .plan-header {
+  color: #9ca593;
+}
+.cake-plan .plan-header .eyebrow {
+  color: #bdce9f;
+}
+.cake-plan .plan-intro {
+  margin: 50px 0 40px;
+}
+.cake-plan .plan-intro h3 {
+  color: #f0f2e9;
+  font-size: clamp(44px, 5.6vw, 76px);
+  line-height: 1.04;
+  letter-spacing: -0.065em;
+}
 .cake-journey {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 55px;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 64px;
   align-items: start;
 }
 .cake-stage {
   position: sticky;
-  top: 150px;
-  padding: 25px 0 35px;
-  text-align: center;
+  top: 110px;
+  padding: 15px 0 30px;
+  min-width: 0;
 }
-.cake-illustration {
-  position: relative;
-  height: 375px;
-  width: 100%;
-  max-width: 350px;
-  margin: 0 auto;
-}
-.cake-plate {
-  position: absolute;
-  bottom: 8px;
-  left: 0;
-  width: 100%;
-  height: 66px;
-  border-radius: 50%;
-  background: #e2e6d6;
-  border: 1px solid #cad1bc;
-  box-shadow: 0 8px 0 #d0d7c3;
-}
-.cake-layer {
-  position: absolute;
-  left: calc(6% + var(--layer-index) * 2%);
-  width: calc(88% - var(--layer-index) * 4%);
-  height: 77px;
-  bottom: calc(35px + var(--layer-index) * 49px);
-  border-radius: 0 0 50% 50% / 0 0 28px 28px;
-  background: var(--cake-side);
-  box-shadow:
-    inset -18px 0 25px #0000000d,
-    0 4px 0 #fcfcf755;
-  opacity: var(--layer-build, 0);
-  transform: translateY(calc(-40px * (1 - var(--layer-build, 0))));
-  z-index: calc(2 + var(--layer-index));
-}
-.cake-layer::before {
-  content: "";
-  position: absolute;
-  top: -23px;
-  left: 0;
-  width: 100%;
-  height: 48px;
-  border-radius: 50%;
-  background: var(--cake-top);
-  border: 1px solid #ffffff55;
-}
-.cake-layer span {
-  position: relative;
+.growth-cake {
   display: block;
-  padding-top: 32px;
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #26331e;
+  width: 125%;
+  max-width: none;
+  margin-left: -12.5%;
+  overflow: visible;
 }
-.cake-layer-0 {
-  --cake-side: #9cab7e;
-  --cake-top: #becd9f;
+.sculpture-layer {
+  opacity: var(--layer-build, 0);
+  transform: translateY(calc(-85px * (1 - var(--layer-build, 0))));
 }
-.cake-layer-1 {
-  --cake-side: #c1cf9d;
-  --cake-top: #d8e3bd;
+.cake-stage-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #2b3225;
+  padding-top: 22px;
+  color: #a8b19e;
+  font-size: 10px;
 }
-.cake-layer-2 {
-  --cake-side: #e2c59b;
-  --cake-top: #f1dec1;
+.cake-stage-caption > span:first-child {
+  font-size: 8px;
+  letter-spacing: 0.16em;
 }
-.cake-layer-3 {
-  --cake-side: #b9cba8;
-  --cake-top: #d6e3cb;
+.cake-plan .plan-steps {
+  margin-top: 0;
 }
-.cake-layer-4 {
-  --cake-side: #c5df88;
-  --cake-top: #e0efb9;
-}
-.cake-spark {
-  position: absolute;
-  top: 12px;
-  left: 46%;
-  color: #6c843d;
-  font-size: 42px;
-  opacity: var(--plan-progress, 0);
-}
-.cake-stage > p {
-  color: #657052;
-  font-size: 11px;
-  margin: 20px auto 0;
-  max-width: 220px;
+.cake-plan .plan-rail {
+  display: none;
 }
 .cake-plan .plan-step {
-  gap: 20px;
-  min-height: 275px;
-  padding-bottom: 70px;
+  display: block;
+  min-height: 66vh;
+  padding: 85px 0 110px;
+}
+.cake-plan .plan-marker {
+  width: auto;
+  height: auto;
+  display: block;
+  border: 0;
+  border-radius: 0;
+  color: #b5cc8c;
+  background: none;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  margin-bottom: 24px;
+}
+.cake-plan .plan-step[data-reached="true"] .plan-marker {
+  background: none;
+  color: #c9ed91;
 }
 .cake-plan .plan-step-copy h3 {
-  font-size: clamp(25px, 2.3vw, 32px);
+  color: #f1f3eb;
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
 }
 .cake-plan .plan-bullets {
-  font-size: 13px;
+  color: #b2baaa;
+  font-size: 14px;
+  line-height: 1.8;
+  margin-top: 24px;
+  padding-left: 16px;
+}
+.cake-plan .plan-bullets li {
+  margin: 12px 0;
+}
+.cake-plan .plan-bullets li::marker {
+  color: #a3b47c;
+  font-size: 9px;
+}
+.cake-plan .plan-footer {
+  color: #8d9882;
+  border-color: #293123;
 }
 @media (max-width: 900px) {
+  .cake-plan {
+    padding: 35px 25px;
+    border-radius: 18px;
+  }
+  .cake-plan .plan-intro {
+    margin: 35px 0;
+  }
+  .cake-plan .plan-intro h3 {
+    font-size: clamp(40px, 7vw, 60px);
+  }
   .cake-journey {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 0;
   }
   .cake-stage {
     top: 72px;
     z-index: 5;
-    background: #fcfcf7;
-    padding: 5px 0 14px;
-    border-bottom: 1px solid #dde1d2;
+    background: linear-gradient(#0c0f0b 92%, #0c0f0b00);
+    padding: 0 0 24px;
   }
-  .cake-illustration {
-    height: 220px;
-    max-width: 230px;
+  .growth-cake {
+    height: 290px;
+    width: 100%;
+    margin: 0;
   }
-  .cake-layer {
-    height: 48px;
-    bottom: calc(25px + var(--layer-index) * 30px);
-  }
-  .cake-layer::before {
-    height: 30px;
-    top: -15px;
-  }
-  .cake-layer span {
-    padding-top: 19px;
-    font-size: 8px;
-  }
-  .cake-plate {
-    height: 42px;
-    bottom: 5px;
-  }
-  .cake-stage > p {
-    margin-top: 0;
-    font-size: 10px;
-    max-width: none;
-  }
-  .cake-spark {
-    top: 0;
-    font-size: 28px;
+  .cake-stage-caption {
+    max-width: 420px;
+    margin: -5px auto 0;
+    padding-top: 12px;
   }
   .cake-plan .plan-step {
-    min-height: 250px;
+    min-height: 58vh;
+    padding: 45px 0 80px;
+  }
+  .cake-plan .plan-step-copy h3 {
+    font-size: 32px;
+  }
+}
+@media (max-width: 480px) {
+  .growth-cake {
+    height: 235px;
+  }
+  .cake-plan .plan-bullets {
+    font-size: 13px;
+  }
+  .cake-plan .plan-step-copy h3 {
+    font-size: 29px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cake-layer {
+  .sculpture-layer {
     opacity: 1;
     transform: none;
   }
-  .cake-spark {
+}
+
+.cake-plan .plan-bullets li {
+  opacity: calc(0.4 + 0.6 * var(--bullet-reveal, 1));
+}
+@media (prefers-reduced-motion: reduce) {
+  .cake-plan .plan-bullets li {
     opacity: 1;
   }
 }

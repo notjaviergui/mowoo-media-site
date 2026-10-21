@@ -25,3 +25,7 @@ The services overview now uses a vertical printed-plan layout derived from the h
 ## Fullscreen reel and motion refinement
 
 Restored the original fullscreen reel with a transparent header that darkens on scroll. Verified muted playback, matching viewport height, working pause/play controls, offscreen pausing, and no horizontal overflow in the preview. The plan now uses time-based easing in a finite animation-frame loop, with geometry measured only after scroll/resize changes. Shared hover transitions and restrained hero entrances use consistent easing; reduced-motion preferences disable entrances and autoplay. Browser inspection confirmed that rail progress and step opacity change with scrolling. Production build, six existing form tests, and diff whitespace checks pass.
+
+## Refined cake presentation
+
+The landing growth plan uses a scalable SVG illustration with five independent layers, shared lighting, surface texture, cream seams, and a dark plinth. Existing eased scroll progress drives each layer; no animation dependency or raster payload was added. The dark presentation uses large type and a sticky graphic beside the sequence on desktop, then a compact sticky stage above the copy on mobile. Verified changing layer values, desktop and narrow viewport layouts without horizontal overflow, and successful production build. Reduced-motion preferences show the complete illustration and all bullets.
