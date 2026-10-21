@@ -1,38 +1,21 @@
 import React from "react";
 const steps = [
-  [
-    "Listen & research",
-    "We get to know your business, audience, and goals, then look for relevant content opportunities.",
-  ],
+  ["Listen & research", "We learn your goals and find content opportunities."],
   [
     "Create & publish",
-    "We turn the strategy into scripts and creative, with your approval before content goes live.",
+    "We create the content. You approve it before publishing.",
   ],
-  [
-    "Learn & refine",
-    "We review reach, engagement, and inquiries to improve the next round of content.",
-  ],
-  [
-    "Connect & scale",
-    "When the foundation is ready, we connect workflows that help your team manage demand.",
-  ],
+  ["Learn & refine", "We review results and improve the next round."],
+  ["Connect & scale", "We add automation where it saves your team time."],
 ];
 export default function ProcessSteps() {
   return (
     <section className="process-section section-shell" id="process">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">The way forward</p>
-          <h2>
-            Clear direction.
-            <br />
-            At every step.
-          </h2>
+          <p className="eyebrow">How it works</p>
+          <h2>A clear next step.</h2>
         </div>
-        <p>
-          You bring the expertise. We bring the strategy, creative, and systems
-          to help more people discover it.
-        </p>
       </div>
       <ol className="process-grid">
         {steps.map(([title, text], index) => (

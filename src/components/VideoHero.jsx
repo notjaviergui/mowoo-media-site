@@ -74,8 +74,8 @@ export default function VideoHero() {
           <span>Grow with purpose.</span>
         </h1>
         <p className="hero-description">
-          A performance agency for brands ready to move forward. Content
-          creation and management, supported by automation that helps you scale.
+          Content that gets seen. Management that keeps you consistent.
+          Automation that saves time.
         </p>
         <div className="button-row">
           <Link className="button button-dark" to="/book-demo">
@@ -88,7 +88,7 @@ export default function VideoHero() {
       </div>
       <div className="hero-bottom">
         <a href="#services">
-          Discover the approach <span aria-hidden="true">↓</span>
+          What we do <span aria-hidden="true">↓</span>
         </a>
         {!failed && (
           <button

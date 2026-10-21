@@ -61,12 +61,8 @@ export default function AdFeed() {
     <section className="work-section section-shell" id="work">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">A glimpse of the creative</p>
-          <h2>
-            Different brands.
-            <br />
-            The same attention to detail.
-          </h2>
+          <p className="eyebrow">Selected work</p>
+          <h2>A few recent projects.</h2>
         </div>
         <Link to="/pages/clients" className="text-link">
           View our work <span aria-hidden="true">↗</span>

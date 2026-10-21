@@ -24,11 +24,7 @@ function LandingPage() {
     <>
       <VideoHero />
       <div className="brand-strip section-shell">
-        <p>
-          Creative connections.
-          <br />
-          <strong>Across different worlds.</strong>
-        </p>
+        <p>Brands we’ve worked with</p>
         <span>INOPERA</span>
         <span className="serif-brand">MAYU</span>
         <span>Miami Mojito Co.</span>

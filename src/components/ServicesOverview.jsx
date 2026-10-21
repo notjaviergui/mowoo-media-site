@@ -8,7 +8,7 @@ export const services = [
     title: "Content that earns attention.",
     label: "Performance content creation",
     description:
-      "Turn audience insights and relevant trends into content with a clear purpose. From the first hook to the final edit, we help you show up with something worth watching.",
+      "We find relevant trends, write scripts, and create content for your audience.",
     items: [
       "Trend & audience research",
       "Tailored scripts & creative strategy",
@@ -19,10 +19,10 @@ export const services = [
   {
     id: "management",
     number: "02",
-    title: "A presence that keeps growing.",
+    title: "Show up consistently.",
     label: "Account & content management",
     description:
-      "Keep your content moving with a clear calendar, thoughtful publishing, and ongoing review. We make consistency easier and use what we learn to shape what comes next.",
+      "We plan, publish, and improve your content so you can stay consistent.",
     items: [
       "Content calendars & publishing",
       "Account coordination",
@@ -33,10 +33,10 @@ export const services = [
   {
     id: "automation",
     number: "03",
-    title: "More time for what matters.",
+    title: "Save time with automation.",
     label: "AI agents & automation",
     description:
-      "Support the attention your content creates. We design agents and workflows around your customer inquiries, lead handoffs, and everyday operations.",
+      "AI agents answer questions, qualify leads, and handle routine tasks.",
     items: [
       "Voice & messaging agent design",
       "Lead qualification & routing",
@@ -52,20 +52,12 @@ export default function ServicesOverview({ full = false }) {
       <div className="section-heading">
         <div>
           <p className="eyebrow">What we do</p>
-          <h2>
-            One partner.
-            <br />
-            Your next stage of growth.
-          </h2>
+          <h2>Create. Manage. Grow.</h2>
         </div>
-        <p>
-          Content leads the way. Consistent management keeps it moving.
-          Automation helps you go further.
-        </p>
       </div>
       <div className="growth-plan">
         <div className="plan-header">
-          <p className="eyebrow">A little strategy. A lot of possibility.</p>
+          <p className="eyebrow">Your growth plan</p>
           <span className="plan-edition">THE GROWTH PLAN / 01—03</span>
         </div>
         <div className="plan-intro">
@@ -78,10 +70,6 @@ export default function ServicesOverview({ full = false }) {
             ✳
           </span>
         </div>
-        <p className="plan-instruction">
-          Three connected steps. One clear direction.
-          <span aria-hidden="true">Scroll to follow the plan ↓</span>
-        </p>
         <ol className="plan-steps" ref={planRef}>
           <li className="plan-rail" aria-hidden="true">
             <span />
@@ -107,12 +95,12 @@ export default function ServicesOverview({ full = false }) {
                     ))}
                   </ul>
                 )}
-                <p className="plan-outcome">{service.outcome}</p>
+                {full && <p className="plan-outcome">{service.outcome}</p>}
                 <Link
                   className="text-link"
                   to={full ? "/book-demo" : `/services#${service.id}`}
                 >
-                  {full ? "Let’s talk about it" : "Explore the service"}
+                  {full ? "Let’s talk about it" : "Learn more"}
                   <span aria-hidden="true">↗</span>
                 </Link>
               </div>
@@ -120,9 +108,9 @@ export default function ServicesOverview({ full = false }) {
           ))}
         </ol>
         <div className="plan-footer">
-          <span>Research → Create → Refine → Grow</span>
+          <span>Built around your business.</span>
           <span>
-            Built around your business. <span aria-hidden="true">↗</span>
+            <span aria-hidden="true">↗</span>
           </span>
         </div>
       </div>

@@ -13,14 +13,13 @@ const scenarios = [
     label: "Qualify a lead",
     question: "I need help staying consistent on social.",
     answer:
-      "We can explore a content plan and ongoing management. Which channels are you using, and what does a successful month look like for you?",
+      "We can help plan and manage your content. Which channels do you use?",
     action: "Gather context → Prepare a useful handoff",
   },
   {
     label: "Arrange a handoff",
     question: "Can I speak with someone about a project?",
-    answer:
-      "Of course. Use the demo request form to share your goals and preferred time. The Moowo team will follow up to confirm a conversation.",
+    answer: "Share your goals in the demo form. Our team will follow up.",
     action: "Capture the request → Connect with the team",
   },
 ];
@@ -32,16 +31,10 @@ export default function AgentDemo() {
   return (
     <section className="agent-section section-shell" id="agent-demo">
       <div className="agent-copy">
-        <p className="eyebrow">Support the growth you create</p>
-        <h2>
-          Good conversations.
-          <br />
-          Fewer loose ends.
-        </h2>
+        <p className="eyebrow">Try it yourself</p>
+        <h2>Meet Mia, your AI sales assistant.</h2>
         <p>
-          Give customer questions a clear next step. Explore how an AI agent
-          could answer inquiries, gather lead details, and hand off to your
-          team.
+          Call Mia to see how an agent answers questions and qualifies leads.
         </p>
         {voiceLive ? (
           <a href={`tel:${site.agentPhone}`} className="button button-lime">
@@ -73,22 +66,16 @@ export default function AgentDemo() {
         )}
         {site.agentDemoUrl && (
           <p className="agent-demo-note">
-            Opens ElevenLabs in a new tab. Chat or talk using sample details
-            only. ElevenLabs asks for consent before a conversation starts.
+            Browser demo opens in ElevenLabs. Use sample details only.
           </p>
         )}
         <p className="agent-availability">
           {voiceLive || smsLive
-            ? "Try our dedicated AI demonstration line. Please use sample details only."
+            ? "Use sample details when calling."
             : "Phone and SMS demos are not connected yet."}
         </p>
         {(voiceLive || smsLive) && (
           <div className="button-row">
-            {voiceLive && (
-              <a className="text-link" href={`tel:${site.agentPhone}`}>
-                Call the AI demo ↗
-              </a>
-            )}
             {smsLive && (
               <a className="text-link" href={`sms:${site.agentPhone}`}>
                 Text the AI demo ↗
@@ -101,7 +88,7 @@ export default function AgentDemo() {
       <div className="conversation-panel">
         <div className="conversation-heading">
           <span className="status-dot" />
-          <strong>A conversation with possibility</strong>
+          <strong>See an example</strong>
           <span className="sample-badge">Scripted preview</span>
         </div>
         <div
@@ -132,7 +119,7 @@ export default function AgentDemo() {
           <p className="conversation-action">{scenario.action}</p>
         </div>
         <p className="preview-caption">
-          Illustrative interaction, not a live AI conversation.
+          Scripted example — use the call button to talk to Mia.
         </p>
       </div>
     </section>
