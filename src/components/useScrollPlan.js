@@ -23,6 +23,14 @@ export default function useScrollPlan() {
     let bulletOpacity = bullets.map(() => 0);
     let bulletTargets = [...bulletOpacity];
     let disposed = false;
+    const bodies = layers.map(() => ({
+      y: -130,
+      velocity: 0,
+      active: false,
+      landed: false,
+      wanted: false,
+      squash: 0,
+    }));
     function measure() {
       const listRect = list.getBoundingClientRect();
       const rowRects = rows.map((row) => row.getBoundingClientRect());
@@ -55,6 +63,9 @@ export default function useScrollPlan() {
       );
       list.style.setProperty("--rail-top", `${first - listRect.top}px`);
       list.style.setProperty("--rail-height", `${last - first}px`);
+      bodies.forEach((body, index) => {
+        body.wanted = motion.matches || readingLine >= markers[index].top + 35;
+      });
       rows.forEach((row, index) => {
         row.dataset.reached = String(
           readingLine >= markers[index].top || motion.matches,
@@ -78,7 +89,49 @@ export default function useScrollPlan() {
       bulletOpacity = bulletOpacity.map(
         (value, index) => value + (bulletTargets[index] - value) * blend,
       );
+      let physicsMoving = false;
+      const dt = Math.min(elapsed / 1000, 0.032);
+      bodies.forEach((body, index) => {
+        if (!body.wanted) {
+          Object.assign(body, {
+            y: -130,
+            velocity: 0,
+            active: false,
+            landed: false,
+            squash: 0,
+          });
+        } else if (motion.matches) {
+          Object.assign(body, {
+            y: 0,
+            velocity: 0,
+            active: true,
+            landed: true,
+            squash: 0,
+          });
+        } else {
+          if (!body.active && (index === 0 || bodies[index - 1].landed))
+            body.active = true;
+          if (body.active && !body.landed) {
+            body.velocity += 1900 * dt;
+            body.y += body.velocity * dt;
+            if (body.y >= 0) {
+              body.y = 0;
+              body.squash = Math.min(body.velocity / 7500, 0.065);
+              if (body.velocity < 70) {
+                body.velocity = 0;
+                body.landed = true;
+              } else body.velocity *= -0.22;
+            }
+          }
+          body.squash *= Math.exp(-dt * 18);
+          if (!body.landed || body.squash > 0.0005) physicsMoving = true;
+        }
+        layers[index].style.setProperty("--drop-y", `${body.y}px`);
+        layers[index].style.setProperty("--drop-visible", body.active ? 1 : 0);
+        layers[index].style.setProperty("--drop-squash", 1 - body.squash);
+      });
       const unsettled =
+        physicsMoving ||
         bulletOpacity.some(
           (value, index) => Math.abs(value - bulletTargets[index]) > 0.0005,
         ) ||
@@ -95,12 +148,6 @@ export default function useScrollPlan() {
       plan.style.setProperty("--plan-progress", progress);
       rows.forEach((row, index) =>
         row.style.setProperty("--step-opacity", opacity[index]),
-      );
-      layers.forEach((layer, index) =>
-        layer.style.setProperty(
-          "--layer-build",
-          clamp((opacity[index] - 0.46) / 0.54),
-        ),
       );
       bullets.forEach((bullet, index) =>
         bullet.style.setProperty("--bullet-reveal", bulletOpacity[index]),
