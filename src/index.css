@@ -2047,3 +2047,28 @@ button {
   position: absolute;
   inset: 0;
 }
+
+.plan-bullets {
+  padding-left: 18px;
+  margin: 20px 0 0;
+  color: #424c38;
+  font-size: 14px;
+  line-height: 1.7;
+  list-style: disc;
+}
+.plan-bullets li {
+  padding-left: 4px;
+  margin: 9px 0;
+  opacity: calc(0.15 + 0.85 * var(--bullet-reveal, 1));
+  transform: translateY(calc(8px * (1 - var(--bullet-reveal, 1))));
+}
+.plan-step:focus-within .plan-bullets li {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .plan-bullets li {
+    opacity: 1;
+    transform: none;
+  }
+}

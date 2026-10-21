@@ -9,7 +9,6 @@ import Layout from "./components/Layout";
 import VideoHero from "./components/VideoHero";
 import ServicesOverview from "./components/ServicesOverview";
 import AdFeed from "./components/AdFeed";
-import ProcessSteps from "./components/ProcessSteps";
 import AgentDemo from "./components/AgentDemo";
 import CTA from "./components/CTA";
 import Services from "./pages/Services";
@@ -32,7 +31,6 @@ function LandingPage() {
       </div>
       <ServicesOverview />
       <AdFeed />
-      <ProcessSteps />
       <AgentDemo />
       <CTA />
     </>

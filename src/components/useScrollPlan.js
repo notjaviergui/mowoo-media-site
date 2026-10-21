@@ -9,6 +9,7 @@ export default function useScrollPlan() {
     const list = ref.current;
     if (!list) return;
     const rows = [...list.querySelectorAll("[data-plan-step]")];
+    const bullets = [...list.querySelectorAll("[data-plan-reveal]")];
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
     let dirty = true;
@@ -17,6 +18,8 @@ export default function useScrollPlan() {
     let targetProgress = 0;
     let opacity = rows.map(() => 1);
     let targets = [...opacity];
+    let bulletOpacity = bullets.map(() => 0);
+    let bulletTargets = [...bulletOpacity];
     let disposed = false;
     function measure() {
       const listRect = list.getBoundingClientRect();
@@ -27,6 +30,13 @@ export default function useScrollPlan() {
       const first = markers[0].top + markers[0].height / 2;
       const last = markers.at(-1).top + markers.at(-1).height / 2;
       const readingLine = window.innerHeight * 0.7;
+      bulletTargets = bullets.map((bullet) =>
+        motion.matches
+          ? 1
+          : smoothstep(
+              clamp((readingLine - bullet.getBoundingClientRect().top) / 100),
+            ),
+      );
       targetProgress = motion.matches
         ? 1
         : clamp((readingLine - first) / Math.max(last - first, 1));
@@ -63,7 +73,13 @@ export default function useScrollPlan() {
       opacity = opacity.map(
         (value, index) => value + (targets[index] - value) * blend,
       );
+      bulletOpacity = bulletOpacity.map(
+        (value, index) => value + (bulletTargets[index] - value) * blend,
+      );
       const unsettled =
+        bulletOpacity.some(
+          (value, index) => Math.abs(value - bulletTargets[index]) > 0.0005,
+        ) ||
         Math.abs(progress - targetProgress) > 0.0005 ||
         opacity.some(
           (value, index) => Math.abs(value - targets[index]) > 0.0005,
@@ -71,10 +87,14 @@ export default function useScrollPlan() {
       if (!unsettled) {
         progress = targetProgress;
         opacity = [...targets];
+        bulletOpacity = [...bulletTargets];
       }
       list.style.setProperty("--plan-progress", progress);
       rows.forEach((row, index) =>
         row.style.setProperty("--step-opacity", opacity[index]),
+      );
+      bullets.forEach((bullet, index) =>
+        bullet.style.setProperty("--bullet-reveal", bulletOpacity[index]),
       );
       if (unsettled) frame = requestAnimationFrame(tick);
       else previousTime = 0;
