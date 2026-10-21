@@ -2072,3 +2072,169 @@ button {
     transform: none;
   }
 }
+
+/* An editorial cake diagram: each service is a foundation for the next. */
+.cake-journey {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 55px;
+  align-items: start;
+}
+.cake-stage {
+  position: sticky;
+  top: 150px;
+  padding: 25px 0 35px;
+  text-align: center;
+}
+.cake-illustration {
+  position: relative;
+  height: 375px;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+}
+.cake-plate {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  width: 100%;
+  height: 66px;
+  border-radius: 50%;
+  background: #e2e6d6;
+  border: 1px solid #cad1bc;
+  box-shadow: 0 8px 0 #d0d7c3;
+}
+.cake-layer {
+  position: absolute;
+  left: calc(6% + var(--layer-index) * 2%);
+  width: calc(88% - var(--layer-index) * 4%);
+  height: 77px;
+  bottom: calc(35px + var(--layer-index) * 49px);
+  border-radius: 0 0 50% 50% / 0 0 28px 28px;
+  background: var(--cake-side);
+  box-shadow:
+    inset -18px 0 25px #0000000d,
+    0 4px 0 #fcfcf755;
+  opacity: var(--layer-build, 0);
+  transform: translateY(calc(-40px * (1 - var(--layer-build, 0))));
+  z-index: calc(2 + var(--layer-index));
+}
+.cake-layer::before {
+  content: "";
+  position: absolute;
+  top: -23px;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--cake-top);
+  border: 1px solid #ffffff55;
+}
+.cake-layer span {
+  position: relative;
+  display: block;
+  padding-top: 32px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #26331e;
+}
+.cake-layer-0 {
+  --cake-side: #9cab7e;
+  --cake-top: #becd9f;
+}
+.cake-layer-1 {
+  --cake-side: #c1cf9d;
+  --cake-top: #d8e3bd;
+}
+.cake-layer-2 {
+  --cake-side: #e2c59b;
+  --cake-top: #f1dec1;
+}
+.cake-layer-3 {
+  --cake-side: #b9cba8;
+  --cake-top: #d6e3cb;
+}
+.cake-layer-4 {
+  --cake-side: #c5df88;
+  --cake-top: #e0efb9;
+}
+.cake-spark {
+  position: absolute;
+  top: 12px;
+  left: 46%;
+  color: #6c843d;
+  font-size: 42px;
+  opacity: var(--plan-progress, 0);
+}
+.cake-stage > p {
+  color: #657052;
+  font-size: 11px;
+  margin: 20px auto 0;
+  max-width: 220px;
+}
+.cake-plan .plan-step {
+  gap: 20px;
+  min-height: 275px;
+  padding-bottom: 70px;
+}
+.cake-plan .plan-step-copy h3 {
+  font-size: clamp(25px, 2.3vw, 32px);
+}
+.cake-plan .plan-bullets {
+  font-size: 13px;
+}
+@media (max-width: 900px) {
+  .cake-journey {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .cake-stage {
+    top: 72px;
+    z-index: 5;
+    background: #fcfcf7;
+    padding: 5px 0 14px;
+    border-bottom: 1px solid #dde1d2;
+  }
+  .cake-illustration {
+    height: 220px;
+    max-width: 230px;
+  }
+  .cake-layer {
+    height: 48px;
+    bottom: calc(25px + var(--layer-index) * 30px);
+  }
+  .cake-layer::before {
+    height: 30px;
+    top: -15px;
+  }
+  .cake-layer span {
+    padding-top: 19px;
+    font-size: 8px;
+  }
+  .cake-plate {
+    height: 42px;
+    bottom: 5px;
+  }
+  .cake-stage > p {
+    margin-top: 0;
+    font-size: 10px;
+    max-width: none;
+  }
+  .cake-spark {
+    top: 0;
+    font-size: 28px;
+  }
+  .cake-plan .plan-step {
+    min-height: 250px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cake-layer {
+    opacity: 1;
+    transform: none;
+  }
+  .cake-spark {
+    opacity: 1;
+  }
+}

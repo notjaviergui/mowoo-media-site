@@ -98,7 +98,7 @@ export default function ServicesOverview({ full = false }) {
           <h2>Create. Manage. Grow.</h2>
         </div>
       </div>
-      <div className="growth-plan">
+      <div className={`growth-plan ${!full ? "cake-plan" : ""}`}>
         <div className="plan-header">
           <p className="eyebrow">Your growth plan</p>
           <span className="plan-edition">
@@ -107,55 +107,78 @@ export default function ServicesOverview({ full = false }) {
         </div>
         <div className="plan-intro">
           <h3>
-            Great growth
+            Growth, built
             <br />
-            starts with a plan.
+            layer by layer.
           </h3>
           <span className="plan-flower" aria-hidden="true">
             ✳
           </span>
         </div>
-        <ol className="plan-steps" ref={planRef}>
-          <li className="plan-rail" aria-hidden="true">
-            <span />
-          </li>
-          {steps.map((service, index) => (
-            <li
-              className="plan-step"
-              key={service.id}
-              id={service.id}
-              data-plan-step
-            >
-              <span className="plan-marker" aria-hidden="true">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <div className="plan-step-copy">
-                {full && <p className="eyebrow">{service.label}</p>}
-                <h3>{service.title}</h3>
-                {full && (
-                  <p className="plan-description">{service.description}</p>
+        <div className={full ? undefined : "cake-journey"}>
+          {!full && (
+            <div className="cake-stage" aria-hidden="true">
+              <div className="cake-illustration">
+                <div className="cake-plate" />
+                {["Research", "Create", "Refine", "Automate", "Grow"].map(
+                  (label, index) => (
+                    <div
+                      className={`cake-layer cake-layer-${index}`}
+                      data-cake-layer
+                      key={label}
+                      style={{ "--layer-index": index }}
+                    >
+                      <span>{label}</span>
+                    </div>
+                  ),
                 )}
-                <ul className={full ? "plan-deliverables" : "plan-bullets"}>
-                  {service.items.map((item) => (
-                    <li key={item} data-plan-reveal={!full || undefined}>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                {full && <p className="plan-outcome">{service.outcome}</p>}
-                {full && (
-                  <Link
-                    className="text-link"
-                    to={full ? "/book-demo" : `/services#${service.id}`}
-                  >
-                    {full ? "Let’s talk about it" : "Learn more"}
-                    <span aria-hidden="true">↗</span>
-                  </Link>
-                )}
+                <span className="cake-spark">✳</span>
               </div>
+              <p>Every layer makes the next one stronger.</p>
+            </div>
+          )}
+          <ol className="plan-steps" ref={planRef}>
+            <li className="plan-rail" aria-hidden="true">
+              <span />
             </li>
-          ))}
-        </ol>
+            {steps.map((service, index) => (
+              <li
+                className="plan-step"
+                key={service.id}
+                id={service.id}
+                data-plan-step
+              >
+                <span className="plan-marker" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div className="plan-step-copy">
+                  {full && <p className="eyebrow">{service.label}</p>}
+                  <h3>{service.title}</h3>
+                  {full && (
+                    <p className="plan-description">{service.description}</p>
+                  )}
+                  <ul className={full ? "plan-deliverables" : "plan-bullets"}>
+                    {service.items.map((item) => (
+                      <li key={item} data-plan-reveal={!full || undefined}>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  {full && <p className="plan-outcome">{service.outcome}</p>}
+                  {full && (
+                    <Link
+                      className="text-link"
+                      to={full ? "/book-demo" : `/services#${service.id}`}
+                    >
+                      {full ? "Let’s talk about it" : "Learn more"}
+                      <span aria-hidden="true">↗</span>
+                    </Link>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
         <div className="plan-footer">
           <span>Built around your business.</span>
           <span>

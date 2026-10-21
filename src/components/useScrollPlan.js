@@ -9,6 +9,9 @@ export default function useScrollPlan() {
     const list = ref.current;
     if (!list) return;
     const rows = [...list.querySelectorAll("[data-plan-step]")];
+    const layers = [
+      ...list.closest(".growth-plan").querySelectorAll("[data-cake-layer]"),
+    ];
     const bullets = [...list.querySelectorAll("[data-plan-reveal]")];
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
@@ -16,7 +19,7 @@ export default function useScrollPlan() {
     let previousTime = 0;
     let progress = 0;
     let targetProgress = 0;
-    let opacity = rows.map(() => 1);
+    let opacity = rows.map(() => 0.46);
     let targets = [...opacity];
     let bulletOpacity = bullets.map(() => 0);
     let bulletTargets = [...bulletOpacity];
@@ -90,8 +93,15 @@ export default function useScrollPlan() {
         bulletOpacity = [...bulletTargets];
       }
       list.style.setProperty("--plan-progress", progress);
+      list.closest(".growth-plan").style.setProperty("--plan-progress", progress);
       rows.forEach((row, index) =>
         row.style.setProperty("--step-opacity", opacity[index]),
+      );
+      layers.forEach((layer, index) =>
+        layer.style.setProperty(
+          "--layer-build",
+          clamp((opacity[index] - 0.46) / 0.54),
+        ),
       );
       bullets.forEach((bullet, index) =>
         bullet.style.setProperty("--bullet-reveal", bulletOpacity[index]),
