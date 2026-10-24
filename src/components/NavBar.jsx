@@ -48,11 +48,11 @@ export default function NavBar() {
   return (
     <header
       ref={header}
-      className={`site-header ${location.pathname === "/" ? "over-video" : ""} ${scrolled || open ? "is-scrolled" : ""}`}
+      className={`site-header ${scrolled || open ? "is-scrolled" : ""}`}
     >
       <Link to="/" className="wordmark" aria-label="Moowo Media home">
-        moowo<span className="brand-dot">®</span>
-        <small>MEDIA</small>
+        MOOWO<span className="brand-dot">®</span>
+        <small>Media</small>
       </Link>
       <button
         ref={menuButton}
@@ -78,7 +78,7 @@ export default function NavBar() {
           </Link>
         ))}
         <Link to="/book-demo" className="button button-dark nav-cta">
-          Book a demo <span aria-hidden="true">↗</span>
+          Let’s talk <span aria-hidden="true">↗</span>
         </Link>
       </nav>
     </header>

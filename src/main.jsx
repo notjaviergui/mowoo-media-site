@@ -4,13 +4,12 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import "@fontsource/inter/latin-400.css";
 import "@fontsource/inter/latin-500.css";
 import "@fontsource/inter/latin-700.css";
+import "@fontsource/syne/latin-700.css";
+import "@fontsource/syne/latin-800.css";
 import "./index.css";
+import "./editorial.css";
 import Layout from "./components/Layout";
-import VideoHero from "./components/VideoHero";
-import ServicesOverview from "./components/ServicesOverview";
-import AdFeed from "./components/AdFeed";
-import AgentDemo from "./components/AgentDemo";
-import CTA from "./components/CTA";
+import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Clients from "./pages/Clients";
 import Us from "./pages/Us";
@@ -18,24 +17,6 @@ import WorkUs from "./pages/WorkUs";
 import Newsletter from "./pages/Newsletter";
 import JoinUs from "./pages/JoinUs";
 import ClientsPortal from "./pages/ClientsPortal";
-function LandingPage() {
-  return (
-    <>
-      <VideoHero />
-      <div className="brand-strip section-shell">
-        <p>Brands we’ve worked with</p>
-        <span>INOPERA</span>
-        <span className="serif-brand">MAYU</span>
-        <span>Miami Mojito Co.</span>
-        <span>SUCHES CABINS</span>
-      </div>
-      <ServicesOverview />
-      <AdFeed />
-      <AgentDemo />
-      <CTA />
-    </>
-  );
-}
 const servicePaths = [
   "/services",
   "/components/services/creativesection",
@@ -51,7 +32,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           path="/"
           element={
             <Layout>
-              <LandingPage />
+              <Home />
             </Layout>
           }
         />
