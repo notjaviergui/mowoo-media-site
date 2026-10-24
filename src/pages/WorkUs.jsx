@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { motion, useReducedMotion } from "framer-motion";
 import { site } from "../config/site";
 import { submitDemo } from "../lib/submitDemo.mjs";
 export default function WorkUs() {
   const location = useLocation();
+  const reduced = useReducedMotion();
+  const ease = [0.22, 1, 0.36, 1];
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
   async function handleSubmit(event) {
@@ -27,14 +30,43 @@ export default function WorkUs() {
     }
   }
   return (
-    <section className="booking-page section-shell">
+    <motion.div className="contact-experience"
+      initial={reduced ? false : { clipPath: "ellipse(0% 0% at 100% 100%)" }}
+      animate={{ clipPath: "ellipse(160% 160% at 100% 100%)" }}
+      transition={{ duration: reduced ? 0 : 0.85, ease }}>
+      <section className="contact-stage" aria-labelledby="contact-title">
+        <header className="contact-topbar">
+          <Link className="contact-wordmark" to="/" aria-label="Moowo Media home">MOOWO<small>Media</small></Link>
+          <Link className="contact-close" to="/" aria-label="Close contact page and return home">Close <span aria-hidden="true">×</span></Link>
+        </header>
+        <div className="contact-scene">
+          <div className="contact-headline">
+            <h1 id="contact-title" aria-label="Got a good feeling? Let’s make it move.">
+              {["GOT A", "GOOD", "FEELING?"].map((line, index) => <span className="contact-line" key={line} aria-hidden="true"><motion.span
+                initial={reduced ? false : { y: "115%", rotate: 5 }} animate={{ y: 0, rotate: 0 }}
+                transition={{ duration: 0.85, delay: 0.35 + index * 0.12, ease }}>{line}</motion.span></span>)}
+            </h1>
+            <motion.p initial={reduced ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.85, duration: 0.5 }}>Let’s make it move.</motion.p>
+          </div>
+          <motion.div className="contact-details" initial={reduced ? false : { opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.7, ease }}>
+            <div className="contact-email"><p>New projects. Big ideas. Just hello.</p><a href={`mailto:${site.email}`}>{site.email} <span aria-hidden="true">↗</span></a></div>
+            <a className="contact-ticket" href="#start-project">
+              <span className="ticket-top">A good conversation starts here <span aria-hidden="true">↗</span></span>
+              <strong>LET’S<br />TALK<span className="ticket-spark" aria-hidden="true">✳</span></strong>
+              <span className="ticket-bottom">Tell us your idea <span aria-hidden="true">↓</span></span>
+            </a>
+          </motion.div>
+        </div>
+        <div className="contact-bottom"><a href="https://instagram.com/moowomedia" target="_blank" rel="noreferrer">Instagram ↗</a><span>Good content. Clear direction.</span><a href="#start-project">Start something ↓</a></div>
+      </section>
+      <section className="booking-page section-shell contact-form-section" id="start-project" aria-labelledby="request-heading">
       <div className="booking-copy">
         <p className="eyebrow">Let’s find your next move</p>
-        <h1>
+        <h2 id="request-heading">
           Less guessing.
           <br />
           <span>More direction.</span>
-        </h1>
+        </h2>
         <p>
           Book a demo to explore a content plan, ongoing management, or an
           automation built around your business.
@@ -169,6 +201,8 @@ export default function WorkUs() {
           </>
         )}
       </div>
-    </section>
+      </section>
+      <div className="contact-signoff"><Link to="/">← Back to Moowo</Link><span>Let’s make something good.</span></div>
+    </motion.div>
   );
 }
