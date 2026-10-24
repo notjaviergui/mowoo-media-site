@@ -2,6 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 export const projects = [
   {
+    title: "Blue North Medical",
+    category: "Digital presence",
+    className: "project-bluenorth",
+    website: "https://bluenorthmedical.com",
+  },
+  {
     title: "Inopera",
     category: "Product creative",
     image: "/images/inopera-creative.webp",
@@ -41,13 +47,13 @@ export function ProjectCard({ project }) {
   return (
     <article className="project-card">
       <div className={`project-image ${project.className}`}>
-        <img
+        {project.image ? <img
           src={project.image}
           alt={project.alt}
           loading="lazy"
           width="700"
           height="700"
-        />
+        /> : <div className="bluenorth-preview"><span>Concept preview</span><strong>Blue North<br />Medical<span aria-hidden="true">↗</span></strong><p>A clearer digital direction.</p></div>}
       </div>
       <div className="project-caption">
         <h3>{project.title}</h3>
