@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
+import PageTransition from "./PageTransition";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import MomentumScroll from "./MomentumScroll";
@@ -37,6 +38,7 @@ export default function Layout({ children }) {
   return (
     <>
       <MomentumScroll />
+      <PageTransition key={pathname} pathname={pathname} skip={introBlocking} />
       <AnimatePresence onExitComplete={() => { setIntroBlocking(false); document.getElementById("main-content")?.focus({ preventScroll: true }); }}>
         {intro && <BrandIntro key="brand-intro" onComplete={completeIntro} />}
       </AnimatePresence>

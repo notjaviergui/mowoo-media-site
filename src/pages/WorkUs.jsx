@@ -30,10 +30,7 @@ export default function WorkUs() {
     }
   }
   return (
-    <motion.div className="contact-experience"
-      initial={reduced ? false : { clipPath: "ellipse(0% 0% at 100% 100%)" }}
-      animate={{ clipPath: "ellipse(160% 160% at 100% 100%)" }}
-      transition={{ duration: reduced ? 0 : 0.85, ease }}>
+    <div className="contact-experience">
       <section className="contact-stage" aria-labelledby="contact-title">
         <header className="contact-topbar">
           <Link className="contact-wordmark" to="/" aria-label="Moowo Media home">MOOWO<small>Media</small></Link>
@@ -203,6 +200,6 @@ export default function WorkUs() {
       </div>
       </section>
       <div className="contact-signoff"><Link to="/">← Back to Moowo</Link><span>Let’s make something good.</span></div>
-    </motion.div>
+    </div>
   );
 }
