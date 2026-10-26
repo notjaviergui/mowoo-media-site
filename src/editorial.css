@@ -575,14 +575,13 @@ button, a { touch-action: manipulation; }
     .ticket-bottom,
     .contact-bottom > *
   ),
-  .contact-form-section :is(
+  .contact-form-section .booking-copy :is(
     .eyebrow,
     h2,
     p,
     .booking-expectations li,
     .booking-expectations li span,
-    .text-link,
-    .booking-panel label
+    .text-link
   ),
   .contact-signoff > * {
     transition:
@@ -623,7 +622,7 @@ button, a { touch-action: manipulation; }
     top: -1px;
   }
 
-  .contact-form-section .booking-panel label:is(:hover, :focus-within) {
+  .contact-form-section .booking-panel :is(.eyebrow, h2, p, label, button):is(:hover, :focus-visible, :focus-within) {
     color: #405c2a;
     text-shadow: 0 2px 12px #243b1722;
   }
@@ -649,14 +648,13 @@ button, a { touch-action: manipulation; }
     .ticket-bottom,
     .contact-bottom > *
   ),
-  .contact-form-section :is(
+  .contact-form-section .booking-copy :is(
     .eyebrow,
     h2,
     p,
     .booking-expectations li,
     .booking-expectations li span,
-    .text-link,
-    .booking-panel label
+    .text-link
   ),
   .contact-signoff > * {
     transition: none;
