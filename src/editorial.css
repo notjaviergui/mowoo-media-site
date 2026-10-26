@@ -583,6 +583,10 @@ button, a { touch-action: manipulation; }
     .booking-expectations li span,
     .text-link
   ),
+  .contact-form-section .booking-panel :is(.eyebrow, h2, p, label, button) {
+    transition: color 220ms ease, text-shadow 220ms ease;
+  }
+
   .contact-signoff > * {
     transition:
       color 220ms ease,
@@ -608,7 +612,7 @@ button, a { touch-action: manipulation; }
     top: -1px;
   }
 
-  .contact-form-section :is(
+  .contact-form-section .booking-copy :is(
     .eyebrow,
     h2,
     p,
@@ -656,6 +660,10 @@ button, a { touch-action: manipulation; }
     .booking-expectations li span,
     .text-link
   ),
+  .contact-form-section .booking-panel :is(.eyebrow, h2, p, label, button) {
+    transition: none;
+  }
+
   .contact-signoff > * {
     transition: none;
   }
