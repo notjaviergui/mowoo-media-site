@@ -559,3 +559,106 @@ button, a { touch-action: manipulation; }
   .contact-bottom { gap: 12px; }
 }
 @media (max-width: 380px) { .page-intro:not(.editorial-page-heading) h1 { font-size: 40px; } }
+
+
+/* Let’s Talk copy responds to the cursor with a small lift and a warm ink shift. */
+@media (hover: hover) and (pointer: fine) {
+  .contact-stage :is(
+    .contact-wordmark,
+    .contact-close,
+    .contact-line > span,
+    .contact-headline > p,
+    .contact-email p,
+    .contact-email a,
+    .ticket-top,
+    .contact-ticket strong,
+    .ticket-bottom,
+    .contact-bottom > *
+  ),
+  .contact-form-section :is(
+    .eyebrow,
+    h2,
+    p,
+    .booking-expectations li,
+    .booking-expectations li span,
+    .text-link,
+    .booking-panel label
+  ),
+  .contact-signoff > * {
+    transition:
+      color 220ms ease,
+      text-shadow 220ms ease,
+      top 220ms cubic-bezier(.22,1,.36,1);
+  }
+
+  .contact-stage :is(
+    .contact-wordmark,
+    .contact-close,
+    .contact-line > span,
+    .contact-headline > p,
+    .contact-email p,
+    .contact-email a,
+    .ticket-top,
+    .contact-ticket strong,
+    .ticket-bottom,
+    .contact-bottom > *
+  ):is(:hover, :focus-visible) {
+    color: #405c2a;
+    text-shadow: 0 2px 12px #243b1722;
+    position: relative;
+    top: -1px;
+  }
+
+  .contact-form-section :is(
+    .eyebrow,
+    h2,
+    p,
+    .booking-expectations li,
+    .booking-expectations li span,
+    .text-link
+  ):is(:hover, :focus-visible) {
+    color: var(--lime);
+    text-shadow: 0 2px 14px #c2f33525;
+    position: relative;
+    top: -1px;
+  }
+
+  .contact-form-section .booking-panel label:is(:hover, :focus-within) {
+    color: #405c2a;
+    text-shadow: 0 2px 12px #243b1722;
+  }
+
+  .contact-signoff > *:is(:hover, :focus-visible) {
+    color: #405c2a;
+    text-shadow: 0 2px 12px #243b1722;
+    position: relative;
+    top: -1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-stage :is(
+    .contact-wordmark,
+    .contact-close,
+    .contact-line > span,
+    .contact-headline > p,
+    .contact-email p,
+    .contact-email a,
+    .ticket-top,
+    .contact-ticket strong,
+    .ticket-bottom,
+    .contact-bottom > *
+  ),
+  .contact-form-section :is(
+    .eyebrow,
+    h2,
+    p,
+    .booking-expectations li,
+    .booking-expectations li span,
+    .text-link,
+    .booking-panel label
+  ),
+  .contact-signoff > * {
+    transition: none;
+  }
+}
