@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useMotionValue, useReducedMotion } from "framer-motion";
 import { projects, ProjectCard } from "./AdFeed";
+import { RevealHeading, RevealText } from "./Reveal";
 
 export default function WorkCarousel() {
   const rail = useRef(null);
@@ -101,9 +102,9 @@ export default function WorkCarousel() {
 
   return (
     <section className="home-work" id="work" aria-labelledby="work-heading">
-      <div className="work-heading section-shell"><h2 id="work-heading">Made to <span>move.</span></h2><Link className="round-link" to="/pages/clients"><span>Our work</span><span aria-hidden="true">↗</span></Link></div>
+      <div className="work-heading section-shell"><RevealHeading id="work-heading" lines={["Made to *move.*"]} stagger={.1} /><Link className="round-link" to="/pages/clients"><span>Our work</span><span aria-hidden="true">↗</span></Link></div>
       <div className="carousel-toolbar section-shell">
-        <p>Good work doesn’t sit still.</p>
+        <RevealText delay={.15}>Brands we’ve shaped. Stories we keep telling.</RevealText>
         <div className="carousel-controls">
           {!reduced && <button className="carousel-play" onClick={() => setPlaying(value => !value)} aria-pressed={playing}>{playing ? "Ⅱ Pause" : "▶ Play"}</button>}
           <span className="carousel-count" aria-hidden="true">{String(position.index + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
@@ -124,8 +125,7 @@ export default function WorkCarousel() {
         }}>
         {projects.map(project => <Link key={project.title} className="work-slide" to="/pages/clients" aria-label={`Explore our work for ${project.title}`}><ProjectCard project={project} /><span className="project-arrow" aria-hidden="true">↗</span></Link>)}
       </div>
-      <div className="carousel-bottom section-shell"><span>Drag, swipe, or follow the arrows.</span><div className="carousel-progress" aria-hidden="true"><motion.div style={{ scaleX: progress }} /></div></div>
-      <div className="home-reel section-shell"><div className="reel-heading"><h3>And in motion.</h3><span>Press play. Get a feel for us. ↘</span></div><video controls playsInline preload="none" poster="/images/inopera-creative.webp" aria-label="Moowo Media creative reel"><source src="/reel-video.mp4" type="video/mp4" />Your browser does not support video playback.</video></div>
+      <div className="carousel-bottom section-shell"><RevealText as="span">Drag, swipe, or follow the arrows.</RevealText><div className="carousel-progress" aria-hidden="true"><motion.div style={{ scaleX: progress }} /></div></div>
     </section>
   );
 }

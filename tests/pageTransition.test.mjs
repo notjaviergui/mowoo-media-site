@@ -11,3 +11,18 @@ test("route aliases retain their page transition and unknown routes remain suppo
   assert.equal(pageTransition("/components/services/websitessection"), pageTransition("/services"));
   assert.equal(pageTransition("/missing"), "fade");
 });
+import { transitionFrames, transitionShapes } from "../src/lib/pageTransition.mjs";
+test("every transition shape morphs between paths with identical structure", () => {
+  const shape = path => path.replace(/-?\d+(\.\d+)?/g, "#");
+  for (const name of Object.keys(transitionShapes)) {
+    for (const lag of [0, .22]) {
+      const frames = transitionFrames(name, lag);
+      assert.ok(frames.length > 4, name);
+      assert.ok(frames.every(frame => shape(frame) === shape(frames[0])), `${name} frames share commands`);
+      assert.ok(!frames.join(" ").includes("NaN"), `${name} has finite numbers`);
+    }
+  }
+});
+test("routes use the organic shapes and unknown routes fall back", () => {
+  for (const route of ["/", "/services", "/pages/clients", "/missing"]) assert.ok(transitionShapes[pageTransition(route)]);
+});

@@ -2,10 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 export const projects = [
   {
-    title: "Blue North Medical",
-    category: "Digital presence",
-    className: "project-bluenorth",
+    title: "Blue North Medical Group",
+    category: "Short-form content",
+    image: "/work/shorts/bluenorth-01.jpg",
+    alt: "Still from a Blue North Medical Group short-form video",
+    className: "project-bluenorth project-vertical",
     website: "https://bluenorthmedical.com",
+    ongoing: true,
+  },
+  {
+    title: "Cherylxxw",
+    category: "Short-form content",
+    image: "/work/shorts/cheryl-reel-02.jpg",
+    alt: "Still from a Cherylxxw stream clip",
+    className: "project-cheryl project-vertical",
+    ongoing: true,
   },
   {
     title: "Inopera",
