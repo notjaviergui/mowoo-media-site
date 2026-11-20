@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import WorkCarousel from "../components/WorkCarousel";
+import ContentSea from "../components/ContentSea";
+import ReelFullBleed from "../components/ReelFullBleed";
 import ServiceJourney from "../components/ServiceJourney";
 import AgentDemo from "../components/AgentDemo";
 
@@ -80,5 +82,5 @@ function FAQ() {
 }
 
 export default function Home() {
-  return <div className="editorial-home"><Hero /><Introduction /><WorkCarousel /><ServiceJourney /><div className="home-agent"><AgentDemo /></div><FAQ /></div>;
+  return <div className="editorial-home"><Hero /><Introduction /><WorkCarousel /><ContentSea /><ReelFullBleed /><ServiceJourney /><div className="home-agent"><AgentDemo /></div><FAQ /></div>;
 }

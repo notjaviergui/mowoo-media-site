@@ -1,6 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { AnimatePresence, motion, useInView, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { site } from "../config/site";
+import { RevealHeading, RevealText } from "./Reveal";
+
+const ease = [.22, 1, .36, 1];
+const cycle = 6500;
+
+// Live-looking voice line: bars breathe at staggered speeds while Mia "talks".
+function VoiceLine({ active }) {
+  return (
+    <div className={`mia-voice ${active ? "is-talking" : ""}`} aria-hidden="true">
+      <span className="mia-voice-orb"><span>✳</span></span>
+      <span className="mia-voice-bars">{Array.from({ length: 28 }, (_, index) => <span key={index} style={{ "--bar": index }} />)}</span>
+      <span className="mia-voice-label">{active ? "Mia is talking" : "Mia is listening"}</span>
+    </div>
+  );
+}
 const scenarios = [
   {
     label: "Answer an inquiry",
@@ -25,17 +41,47 @@ const scenarios = [
 ];
 export default function AgentDemo() {
   const [active, setActive] = useState(0);
+  const [typing, setTyping] = useState(false);
+  const [userPicked, setUserPicked] = useState(false);
+  const section = useRef(null);
+  const panel = useRef(null);
+  const reduced = useReducedMotion();
+  const inView = useInView(panel, { amount: .5 });
   const scenario = scenarios[active];
+
+  const { scrollYProgress } = useScroll({ target: section, offset: ["start end", "end start"] });
+  const drift = useSpring(scrollYProgress, { stiffness: 80, damping: 24, mass: .4 });
+  const panelY = useTransform(drift, [0, 1], [90, -70]);
+  const panelRotate = useTransform(drift, [0, .5, 1], [4, 0, -2]);
+  const orbY = useTransform(drift, [0, 1], [140, -140]);
+  const orbScale = useTransform(drift, [0, .5, 1], [.7, 1.1, .85]);
+
+  // Each example "types" for a beat before Mia answers.
+  useEffect(() => {
+    if (reduced) return undefined;
+    setTyping(true);
+    const timer = setTimeout(() => setTyping(false), 1100);
+    return () => clearTimeout(timer);
+  }, [active, reduced]);
+
+  // Examples play on their own while visible, until someone picks one.
+  useEffect(() => {
+    if (reduced || userPicked || !inView) return undefined;
+    const timer = setTimeout(() => setActive(index => (index + 1) % scenarios.length), cycle);
+    return () => clearTimeout(timer);
+  }, [active, inView, reduced, userPicked]);
   const voiceLive = site.agentPhone && site.voiceVerified;
   const smsLive = site.agentPhone && site.smsVerified;
   return (
-    <section className="agent-section section-shell" id="agent-demo">
+    <section ref={section} className="agent-section section-shell" id="agent-demo">
+      <motion.div className="mia-orb" aria-hidden="true" style={reduced ? undefined : { y: orbY, scale: orbScale }} />
       <div className="agent-copy">
-        <p className="eyebrow">Try it yourself</p>
-        <h2>Meet Mia, your AI sales assistant.</h2>
-        <p>
+        <RevealText className="eyebrow">Try it yourself</RevealText>
+        <RevealHeading lines={["Meet *Mia,*", "your AI sales", "assistant."]} />
+        <RevealText delay={.2}>
           Call Mia to see how an agent answers questions and qualifies leads.
-        </p>
+        </RevealText>
+        <VoiceLine active={!typing && inView && !reduced} />
         {voiceLive ? (
           <a href={`tel:${site.agentPhone}`} className="button button-lime">
             Call Mia, our AI assistant <span aria-hidden="true">↗</span>
@@ -87,7 +133,7 @@ export default function AgentDemo() {
           </div>
         )}
       </div>
-      <div className="conversation-panel">
+      <motion.div ref={panel} className="conversation-panel" style={reduced ? undefined : { y: panelY, rotate: panelRotate }}>
         <div className="conversation-heading">
           <span className="status-dot" />
           <strong>See an example</strong>
@@ -101,29 +147,42 @@ export default function AgentDemo() {
             <button
               key={item.label}
               aria-pressed={active === index}
-              onClick={() => setActive(index)}
+              onClick={() => { setUserPicked(true); setActive(index); }}
             >
               {item.label}
+              {active === index && !userPicked && !reduced && inView && <motion.span key={active} className="scenario-timer" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: cycle / 1000, ease: "linear" }} />}
             </button>
           ))}
         </div>
         <div className="conversation" aria-live="polite">
-          <div className="chat-bubble visitor">
-            <span>Visitor</span>
-            <p>{scenario.question}</p>
-          </div>
-          <div className="chat-bubble agent">
-            <span>
-              <span aria-hidden="true">✳ </span>Moowo agent · example
-            </span>
-            <p>{scenario.answer}</p>
-          </div>
-          <p className="conversation-action">{scenario.action}</p>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div key={active} className="conversation-thread" exit={reduced ? undefined : { opacity: 0, y: -14, transition: { duration: .25 } }}>
+              <motion.div className="chat-bubble visitor" initial={reduced ? false : { opacity: 0, x: 40, scale: .92 }} animate={{ opacity: 1, x: 0, scale: 1 }} transition={{ duration: .55, ease }}>
+                <span>Visitor</span>
+                <p>{scenario.question}</p>
+              </motion.div>
+              <AnimatePresence mode="wait" initial={false}>
+                {typing ? (
+                  <motion.div key="typing" className="chat-bubble agent chat-typing" initial={{ opacity: 0, y: 12, scale: .9 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, scale: .9, transition: { duration: .15 } }} transition={{ duration: .35, ease }} aria-label="Mia is typing">
+                    <span aria-hidden="true" /><span aria-hidden="true" /><span aria-hidden="true" />
+                  </motion.div>
+                ) : (
+                  <motion.div key="answer" className="chat-bubble agent" initial={reduced ? false : { opacity: 0, y: 18, scale: .94, rotate: -1.5 }} animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }} transition={{ duration: .6, ease }}>
+                    <span>
+                      <span aria-hidden="true" className="agent-spark">✳ </span>Moowo agent · example
+                    </span>
+                    <p>{scenario.answer}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <motion.p className="conversation-action" initial={reduced ? false : { opacity: 0 }} animate={{ opacity: typing ? .35 : 1 }} transition={{ duration: .4, delay: typing ? 0 : .25 }}>{scenario.action}</motion.p>
+            </motion.div>
+          </AnimatePresence>
         </div>
         <p className="preview-caption">
           Scripted example — use the call button to talk to Mia.
         </p>
-      </div>
+      </motion.div>
     </section>
   );
 }
