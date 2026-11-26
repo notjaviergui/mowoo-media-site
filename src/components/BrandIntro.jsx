@@ -40,7 +40,7 @@ export default function BrandIntro({ onComplete }) {
           initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1, duration: 0.6 }}>Media</motion.text>
       </svg>
       <button ref={skip} className="intro-skip" onClick={onComplete}
-        onKeyDown={(event) => { if (event.key === "Tab") { event.preventDefault(); skip.current.focus(); } if (event.key === "Escape") onComplete(); }}>Skip intro ↗</button>
+        onKeyDown={(event) => { if (event.key === "Tab") { event.preventDefault(); skip.current.focus(); } if (event.key === "Escape") onComplete(); }}>Skip intro ↗︎</button>
     </motion.div>
   );
 }

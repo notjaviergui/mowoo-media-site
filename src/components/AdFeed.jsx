@@ -64,7 +64,7 @@ export function ProjectCard({ project }) {
           loading="lazy"
           width="700"
           height="700"
-        /> : <div className="bluenorth-preview"><span>Concept preview</span><strong>Blue North<br />Medical<span aria-hidden="true">↗</span></strong><p>A clearer digital direction.</p></div>}
+        /> : <div className="bluenorth-preview"><span>Concept preview</span><strong>Blue North<br />Medical<span aria-hidden="true">↗︎</span></strong><p>A clearer digital direction.</p></div>}
       </div>
       <div className="project-caption">
         <h3>{project.title}</h3>
@@ -82,7 +82,7 @@ export default function AdFeed() {
           <h2>A few recent projects.</h2>
         </div>
         <Link to="/pages/clients" className="text-link">
-          View our work <span aria-hidden="true">↗</span>
+          View our work <span aria-hidden="true">↗︎</span>
         </Link>
       </div>
       <div className="project-grid">

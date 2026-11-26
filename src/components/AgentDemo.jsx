@@ -11,7 +11,7 @@ const cycle = 6500;
 function VoiceLine({ active }) {
   return (
     <div className={`mia-voice ${active ? "is-talking" : ""}`} aria-hidden="true">
-      <span className="mia-voice-orb"><span>✳</span></span>
+      <span className="mia-voice-orb"><span>✳︎</span></span>
       <span className="mia-voice-bars">{Array.from({ length: 28 }, (_, index) => <span key={index} style={{ "--bar": index }} />)}</span>
       <span className="mia-voice-label">{active ? "Mia is talking" : "Mia is listening"}</span>
     </div>
@@ -84,7 +84,7 @@ export default function AgentDemo() {
         <VoiceLine active={!typing && inView && !reduced} />
         {voiceLive ? (
           <a href={`tel:${site.agentPhone}`} className="button button-lime">
-            Call Mia, our AI assistant <span aria-hidden="true">↗</span>
+            Call Mia, our AI assistant <span aria-hidden="true">↗︎</span>
           </a>
         ) : site.agentDemoUrl ? (
           <a
@@ -93,11 +93,11 @@ export default function AgentDemo() {
             target="_blank"
             rel="noreferrer"
           >
-            Try the live AI demo <span aria-hidden="true">↗</span>
+            Try the live AI demo <span aria-hidden="true">↗︎</span>
           </a>
         ) : (
           <Link to="/book-demo" className="button button-lime">
-            Explore an agent demo <span aria-hidden="true">↗</span>
+            Explore an agent demo <span aria-hidden="true">↗︎</span>
           </Link>
         )}
         {voiceLive && site.agentDemoUrl && (
@@ -107,7 +107,7 @@ export default function AgentDemo() {
             target="_blank"
             rel="noreferrer"
           >
-            Or try the browser demo ↗
+            Or try the browser demo ↗︎
           </a>
         )}
         {site.agentDemoUrl && (
@@ -122,7 +122,7 @@ export default function AgentDemo() {
           <div className="button-row">
             {smsLive && (
               <a className="text-link" href={`sms:${site.agentPhone}`}>
-                Text the AI demo ↗
+                Text the AI demo ↗︎
               </a>
             )}
             <span>
@@ -169,7 +169,7 @@ export default function AgentDemo() {
                 ) : (
                   <motion.div key="answer" className="chat-bubble agent" initial={reduced ? false : { opacity: 0, y: 18, scale: .94, rotate: -1.5 }} animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }} transition={{ duration: .6, ease }}>
                     <span>
-                      <span aria-hidden="true" className="agent-spark">✳ </span>Moowo agent · example
+                      <span aria-hidden="true" className="agent-spark">✳︎ </span>Moowo agent · example
                     </span>
                     <p>{scenario.answer}</p>
                   </motion.div>

@@ -22,7 +22,7 @@ export default function ProcessSteps() {
           <li key={title}>
             <span className="step-index">
               0{index + 1}
-              <span aria-hidden="true">↗</span>
+              <span aria-hidden="true">↗︎</span>
             </span>
             <h3>{title}</h3>
             <p>{text}</p>

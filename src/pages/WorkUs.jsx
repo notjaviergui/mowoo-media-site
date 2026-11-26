@@ -46,15 +46,15 @@ export default function WorkUs() {
             <motion.p initial={reduced ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.85, duration: 0.5 }}>Let’s make it move.</motion.p>
           </div>
           <motion.div className="contact-details" initial={reduced ? false : { opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6, duration: 0.7, ease }}>
-            <div className="contact-email"><p>New projects. Big ideas. Just hello.</p><a href={`mailto:${site.email}`}>{site.email} <span aria-hidden="true">↗</span></a></div>
+            <div className="contact-email"><p>New projects. Big ideas. Just hello.</p><a href={`mailto:${site.email}`}>{site.email} <span aria-hidden="true">↗︎</span></a></div>
             <a className="contact-ticket" href="#start-project">
-              <span className="ticket-top">A good conversation starts here <span aria-hidden="true">↗</span></span>
-              <strong>LET’S<br />TALK<span className="ticket-spark" aria-hidden="true">✳</span></strong>
+              <span className="ticket-top">A good conversation starts here <span aria-hidden="true">↗︎</span></span>
+              <strong>LET’S<br />TALK<span className="ticket-spark" aria-hidden="true">✳︎</span></strong>
               <span className="ticket-bottom">Tell us your idea <span aria-hidden="true">↓</span></span>
             </a>
           </motion.div>
         </div>
-        <div className="contact-bottom"><a href="https://instagram.com/moowomedia" target="_blank" rel="noreferrer">Instagram ↗</a><span>Good content. Clear direction.</span><a href="#start-project">Start something ↓</a></div>
+        <div className="contact-bottom"><a href="https://instagram.com/moowomedia" target="_blank" rel="noreferrer">Instagram ↗︎</a><span>Good content. Clear direction.</span><a href="#start-project">Start something ↓</a></div>
       </section>
       <section className="booking-page section-shell contact-form-section" id="start-project" aria-labelledby="request-heading">
       <div className="booking-copy">
@@ -80,20 +80,20 @@ export default function WorkUs() {
           </li>
         </ol>
         <a className="text-link" href={`mailto:${site.email}`}>
-          Prefer email? {site.email} ↗
+          Prefer email? {site.email} ↗︎
         </a>
       </div>
       <div className="booking-panel">
         {status === "success" ? (
           <div className="booking-success" role="status">
-            <span aria-hidden="true">↗</span>
+            <span aria-hidden="true">↗︎</span>
             <h2>Your request is on its way.</h2>
             <p>
               Thanks for sharing your goals. The team will follow up to arrange
               a time. Your demo is not booked until confirmed.
             </p>
             <button className="text-link" onClick={() => setStatus("idle")}>
-              Send another request ↗
+              Send another request ↗︎
             </button>
           </div>
         ) : (
@@ -111,7 +111,7 @@ export default function WorkUs() {
                 target="_blank"
                 rel="noreferrer"
               >
-                Choose a time ↗
+                Choose a time ↗︎
               </a>
             )}
             <p className="form-intro">
@@ -192,7 +192,7 @@ export default function WorkUs() {
                 disabled={status === "sending"}
               >
                 {status === "sending" ? "Sending…" : "Request my demo"}{" "}
-                <span aria-hidden="true">↗</span>
+                <span aria-hidden="true">↗︎</span>
               </button>
             </form>
           </>

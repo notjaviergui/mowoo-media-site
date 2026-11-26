@@ -114,7 +114,7 @@ export default function ServicesOverview({ full = false }) {
           </h3>
           {full && (
             <span className="plan-flower" aria-hidden="true">
-              ✳
+              ✳︎
             </span>
           )}
         </div>
@@ -171,7 +171,7 @@ export default function ServicesOverview({ full = false }) {
                       to={full ? "/book-demo" : `/services#${service.id}`}
                     >
                       {full ? "Let’s talk about it" : "Learn more"}
-                      <span aria-hidden="true">↗</span>
+                      <span aria-hidden="true">↗︎</span>
                     </Link>
                   )}
                 </div>
@@ -182,7 +182,7 @@ export default function ServicesOverview({ full = false }) {
         <div className="plan-footer">
           <span>Built around your business.</span>
           <span>
-            <span aria-hidden="true">↗</span>
+            <span aria-hidden="true">↗︎</span>
           </span>
         </div>
       </div>

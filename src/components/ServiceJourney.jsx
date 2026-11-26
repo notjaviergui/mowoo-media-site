@@ -50,13 +50,13 @@ export default function ServiceJourney() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 75%", "end 80%"] });
   return (
     <section className="home-services section-shell" id="services" aria-labelledby="services-heading">
-      <div className="ideas-heading"><h2 id="services-heading">Good ideas.<br /><span>Wildly connected.</span></h2><p>Four ways we<br />make things move. <span aria-hidden="true">↙</span></p></div>
+      <div className="ideas-heading"><h2 id="services-heading">Good ideas.<br /><span>Wildly connected.</span></h2><p>Four ways we<br />make things move. <span aria-hidden="true">↙︎</span></p></div>
       <div className="ideas-canvas" ref={ref}>
         <svg className="ideas-line ideas-line-desktop" viewBox="0 0 1200 1450" preserveAspectRatio="none" aria-hidden="true"><path className="ideas-track" d={desktopPath} /><motion.path d={desktopPath} style={{ pathLength: reduced ? 1 : scrollYProgress }} /></svg>
         <svg className="ideas-line ideas-line-mobile" viewBox="0 0 400 1500" preserveAspectRatio="none" aria-hidden="true"><path className="ideas-track" d={mobilePath} /><motion.path d={mobilePath} style={{ pathLength: reduced ? 1 : scrollYProgress }} /></svg>
         <ol className="idea-nodes">{ideas.map((idea, index) => <JourneyNode key={idea.id} idea={idea} index={index} progress={scrollYProgress} reduced={reduced} />)}</ol>
       </div>
-      <div className="ideas-ending"><p>Better together.<br />Built around your business.</p><Link className="button button-dark" to="/services">Find your next step <span aria-hidden="true">↗</span></Link></div>
+      <div className="ideas-ending"><p>Better together.<br />Built around your business.</p><Link className="button button-dark" to="/services">Find your next step <span aria-hidden="true">↗︎</span></Link></div>
     </section>
   );
 }

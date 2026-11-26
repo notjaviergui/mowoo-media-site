@@ -34,7 +34,7 @@ export default function WorkHero() {
           <span className="work-hero-small work-hero-pop" style={{ "--i": 6 }}>is in the</span>
           <motion.span className="work-hero-feed" style={{ rotate: reduced ? -2 : feedRotate }}>
             <span className="work-hero-feed-word">Feed.</span>
-            <motion.span className="work-hero-spark" style={{ rotate: reduced ? 12 : sparkRotate }}>✳</motion.span>
+            <motion.span className="work-hero-spark" style={{ rotate: reduced ? 12 : sparkRotate }}>✳︎</motion.span>
           </motion.span>
         </motion.span>
       </motion.h1>

@@ -102,11 +102,11 @@ export default function WorkCarousel() {
 
   return (
     <section className="home-work" id="work" aria-labelledby="work-heading">
-      <div className="work-heading section-shell"><RevealHeading id="work-heading" lines={["Made to *move.*"]} stagger={.1} /><Link className="round-link" to="/pages/clients"><span>Our work</span><span aria-hidden="true">↗</span></Link></div>
+      <div className="work-heading section-shell"><RevealHeading id="work-heading" lines={["Made to *move.*"]} stagger={.1} /><Link className="round-link" to="/pages/clients"><span>Our work</span><span aria-hidden="true">↗︎</span></Link></div>
       <div className="carousel-toolbar section-shell">
         <RevealText delay={.15}>Brands we’ve shaped. Stories we keep telling.</RevealText>
         <div className="carousel-controls">
-          {!reduced && <button className="carousel-play" onClick={() => setPlaying(value => !value)} aria-pressed={playing}>{playing ? "Ⅱ Pause" : "▶ Play"}</button>}
+          {!reduced && <button className="carousel-play" onClick={() => setPlaying(value => !value)} aria-pressed={playing}>{playing ? "Ⅱ Pause" : "▶︎ Play"}</button>}
           <span className="carousel-count" aria-hidden="true">{String(position.index + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}</span>
           <button className="carousel-button" aria-label="Previous project" aria-controls="project-carousel" disabled={position.start} onClick={() => move(-1)}>←</button>
           <button className="carousel-button" aria-label="Next project" aria-controls="project-carousel" disabled={position.end} onClick={() => move(1)}>→</button>
@@ -123,7 +123,7 @@ export default function WorkCarousel() {
           if (event.key === "ArrowLeft" || event.key === "ArrowRight") { event.preventDefault(); move(event.key === "ArrowRight" ? 1 : -1); }
           else if (event.key === "Home" || event.key === "End") { event.preventDefault(); setPlaying(false); rail.current.scrollTo({ left: event.key === "Home" ? 0 : rail.current.scrollWidth, behavior: reduced ? "instant" : "smooth" }); }
         }}>
-        {projects.map(project => <Link key={project.title} className="work-slide" to="/pages/clients" aria-label={`Explore our work for ${project.title}`}><ProjectCard project={project} /><span className="project-arrow" aria-hidden="true">↗</span></Link>)}
+        {projects.map(project => <Link key={project.title} className="work-slide" to="/pages/clients" aria-label={`Explore our work for ${project.title}`}><ProjectCard project={project} /><span className="project-arrow" aria-hidden="true">↗︎</span></Link>)}
       </div>
       <div className="carousel-bottom section-shell"><RevealText as="span">Drag, swipe, or follow the arrows.</RevealText><div className="carousel-progress" aria-hidden="true"><motion.div style={{ scaleX: progress }} /></div></div>
     </section>
