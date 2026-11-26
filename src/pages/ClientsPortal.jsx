@@ -16,7 +16,7 @@ export default function ClientsPortal() {
         className="button button-dark"
         href="mailto:hello@moowomedia.com?subject=Client%20support"
       >
-        Contact your team ↗
+        Contact your team ↗︎
       </a>
     </section>
   );

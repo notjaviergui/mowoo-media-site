@@ -78,7 +78,7 @@ export default function NavBar() {
           </Link>
         ))}
         <Link to="/book-demo" className="button button-dark nav-cta">
-          Let’s talk <span aria-hidden="true">↗</span>
+          Let’s talk <span aria-hidden="true">↗︎</span>
         </Link>
       </nav>
     </header>

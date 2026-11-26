@@ -76,7 +76,7 @@ export default function Newsletter() {
               className="button button-dark"
               disabled={status === "sending" || status === "success"}
             >
-              {status === "sending" ? "Subscribing…" : "Subscribe ↗"}
+              {status === "sending" ? "Subscribing…" : "Subscribe ↗︎"}
             </button>
             <p role="status">
               {status === "success"
@@ -93,7 +93,7 @@ export default function Newsletter() {
               above, or get in touch.
             </p>
             <a className="text-link" href="mailto:hello@moowomedia.com">
-              Talk to the team ↗
+              Talk to the team ↗︎
             </a>
           </>
         )}

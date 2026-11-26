@@ -35,7 +35,7 @@ export default function PageTransition({ pathname, skip }) {
         initial={{ rotate: -40, scale: .6, opacity: 0 }}
         animate={{ rotate: [-40, 20, 160], scale: [.6, 1, .2], opacity: [0, 1, 0] }}
         transition={{ duration: duration * .62, times: [0, .35, 1], ease: [.22, 1, .36, 1] }}
-      >✳</motion.span>
+      >✳︎</motion.span>
     </div>
   );
 }

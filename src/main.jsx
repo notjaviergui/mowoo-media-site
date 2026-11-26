@@ -113,7 +113,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
                   back on track.
                 </h1>
                 <Link className="button button-dark" to="/">
-                  Back to home ↗
+                  Back to home ↗︎
                 </Link>
               </section>
             </Layout>

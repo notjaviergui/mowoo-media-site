@@ -47,7 +47,7 @@ export default function ReelFullBleed() {
           <RevealHeading id="reel-heading" lines={["Thirty-six seconds.", "*Every* kind of work."]} delay={.15} />
         </motion.div>
         <div className="reel-bleed-controls">
-          <button type="button" onClick={() => setPlaying(value => !value)} aria-pressed={playing}>{playing ? "Ⅱ Pause" : "▶ Play"}</button>
+          <button type="button" onClick={() => setPlaying(value => !value)} aria-pressed={playing}>{playing ? "Ⅱ Pause" : "▶︎ Play"}</button>
           <button type="button" onClick={toggleSound} aria-pressed={!muted}>{muted ? "Sound on" : "Sound off"}</button>
         </div>
       </motion.div>

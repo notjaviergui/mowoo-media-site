@@ -101,7 +101,7 @@ function SeaVideo({ tile, progress, small, onOpen }) {
       <span className="sea-front-card">
         <video ref={video} muted loop playsInline preload="none" poster={item.poster} src={playable ? item.loop : undefined} aria-hidden="true" tabIndex={-1} />
         {tile.near && <span className="sea-tile-label">{client.short}</span>}
-        {tile.near && <span className="sea-tile-play" aria-hidden="true">▶</span>}
+        {tile.near && <span className="sea-tile-play" aria-hidden="true">▶︎</span>}
       </span>
     </motion.button>
   );
@@ -114,7 +114,7 @@ function StaticTile({ item, onOpen }) {
       <span className="sea-front-card">
         <img src={item.poster} alt="" loading="lazy" />
         <span className="sea-tile-label">{client.short}</span>
-        <span className="sea-tile-play" aria-hidden="true">▶</span>
+        <span className="sea-tile-play" aria-hidden="true">▶︎</span>
       </span>
     </button>
   );

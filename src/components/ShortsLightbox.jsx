@@ -104,7 +104,7 @@ export default function ShortsLightbox({ items, index, onIndex, onClose }) {
               onTimeUpdate={event => setProgress(event.currentTarget.duration ? event.currentTarget.currentTime / event.currentTarget.duration : 0)}
               onEnded={() => go(1)}
             />
-            <button type="button" className="lightbox-toggle" onClick={togglePlay} aria-label={paused ? "Play video" : "Pause video"}>{paused ? "▶" : "Ⅱ"}</button>
+            <button type="button" className="lightbox-toggle" onClick={togglePlay} aria-label={paused ? "Play video" : "Pause video"}>{paused ? "▶︎" : "Ⅱ"}</button>
             <span className="lightbox-progress" aria-hidden="true"><span style={{ transform: `scaleX(${progress})` }} /></span>
           </motion.div>
         </AnimatePresence>
@@ -112,7 +112,7 @@ export default function ShortsLightbox({ items, index, onIndex, onClose }) {
       </div>
       <div className="lightbox-bottom">
         <p>{item.title}</p>
-        {instagram && <a href={instagram} target="_blank" rel="noreferrer">View on Instagram <span aria-hidden="true">↗</span></a>}
+        {instagram && <a href={instagram} target="_blank" rel="noreferrer">View on Instagram <span aria-hidden="true">↗︎</span></a>}
       </div>
     </motion.div>,
     document.body,

@@ -10,7 +10,7 @@ export default function CTA() {
       <div className="cta-bottom">
         <p>Tell us what you need. We’ll help you find the next step.</p>
         <Link to="/book-demo" className="button button-dark">
-          Book a demo <span aria-hidden="true">↗</span>
+          Book a demo <span aria-hidden="true">↗︎</span>
         </Link>
       </div>
     </section>

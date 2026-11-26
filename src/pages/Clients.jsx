@@ -24,7 +24,7 @@ function CaseStudy({ project, open, onToggle, index }) {
   return <motion.div className={`case-study ${open ? "is-open" : ""}`} initial={reduced ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .1 }} transition={{ duration: .55 }}>
     <button className="case-trigger" aria-label={`${open ? "Close" : "Explore"} ${project.title} case study`} aria-expanded={open} aria-controls={id} onClick={onToggle}>
       <ProjectCard project={project} />
-      <span className="case-trigger-bottom"><span>0{index + 1} / {open ? "Close case study" : "Explore case study"}</span><span aria-hidden="true">{open ? "−" : "↗"}</span></span>
+      <span className="case-trigger-bottom"><span>0{index + 1} / {open ? "Close case study" : "Explore case study"}</span><span aria-hidden="true">{open ? "−" : "↗︎"}</span></span>
     </button>
     <div id={id}>
       <AnimatePresence initial={false}>{open && <motion.section className="case-reveal" aria-label={`${project.title} sample case study`} initial={{ height: reduced ? "auto" : 0, opacity: reduced ? 1 : 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: reduced ? "auto" : 0, opacity: 0 }} transition={{ duration: reduced ? 0 : .45, ease: [.22, 1, .36, 1] }}>
@@ -36,7 +36,7 @@ function CaseStudy({ project, open, onToggle, index }) {
           <h4>The brief</h4><p>{brief}</p>
           <h4>{project.ongoing ? "How we do it" : "The direction"}</h4><p>{direction}</p>
           <h4>{project.ongoing ? "What we deliver" : "What it could include"}</h4><ul>{deliverables.map(item => <li key={item}>{item}</li>)}</ul>
-          <div className="case-links">{project.ongoing && <a href="#content-sea">Watch the work ↑</a>}{project.website && <a href={project.website} target="_blank" rel="noreferrer">Visit client website ↗</a>}<Link to="/book-demo" state={{ project: `I’d like to discuss a project inspired by the ${project.title} case study.` }}>Build something like this ↗</Link></div>
+          <div className="case-links">{project.ongoing && <a href="#content-sea">Watch the work ↑</a>}{project.website && <a href={project.website} target="_blank" rel="noreferrer">Visit client website ↗︎</a>}<Link to="/book-demo" state={{ project: `I’d like to discuss a project inspired by the ${project.title} case study.` }}>Build something like this ↗︎</Link></div>
         </div>
       </motion.section>}</AnimatePresence>
     </div>

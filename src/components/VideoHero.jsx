@@ -79,10 +79,10 @@ export default function VideoHero() {
         </p>
         <div className="button-row">
           <Link className="button button-dark" to="/book-demo">
-            Book a demo <span aria-hidden="true">↗</span>
+            Book a demo <span aria-hidden="true">↗︎</span>
           </Link>
           <Link className="text-link" to="/pages/clients">
-            Explore our work <span aria-hidden="true">↗</span>
+            Explore our work <span aria-hidden="true">↗︎</span>
           </Link>
         </div>
       </div>
@@ -98,7 +98,7 @@ export default function VideoHero() {
               paused ? "Play background video" : "Pause background video"
             }
           >
-            <span aria-hidden="true">{paused ? "▶" : "Ⅱ"}</span>
+            <span aria-hidden="true">{paused ? "▶︎" : "Ⅱ"}</span>
             {paused ? "Play reel" : "Pause reel"}
           </button>
         )}

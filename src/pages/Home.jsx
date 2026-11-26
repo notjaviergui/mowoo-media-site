@@ -24,7 +24,7 @@ function Introduction() {
   return (
     <section className="home-introduction" id="about" ref={ref} aria-labelledby="intro-heading">
       <div className="intro-pin section-shell">
-      <h2 className="section-kicker" id="intro-heading">Four things. One direction. <span aria-hidden="true">↙</span></h2>
+      <h2 className="section-kicker" id="intro-heading">Four things. One direction. <span aria-hidden="true">↙︎</span></h2>
       <p className="fill-paragraph">
         <span className="sr-only">{introduction}</span>
         <span aria-hidden="true">{words.map((word, index) => <FillWord key={index} word={word} index={index} progress={fillProgress} reduced={reduced} />)}</span>
@@ -52,12 +52,12 @@ function Hero() {
           {Array.from("MOOWO").map((letter, index) => <span className="hero-letter" style={{ "--letter-index": index }} key={index}>{letter}</span>)}<span className="hero-registration">®</span>
         </motion.span>
         <motion.span className="hero-media" aria-hidden="true" style={{ x: reduced ? 0 : mediaX, rotate: reduced ? 0 : mediaRotate }}>
-          <span className="hero-media-word">Media</span><motion.span className="brand-spark" style={{ rotate: reduced ? 12 : sparkRotate }}>✳</motion.span>
+          <span className="hero-media-word">Media</span><motion.span className="brand-spark" style={{ rotate: reduced ? 12 : sparkRotate }}>✳︎</motion.span>
         </motion.span>
       </motion.div>
       <div className="brand-hero-bottom">
         <h1 id="home-title">Content that moves<br />your business forward.</h1>
-        <Link className="round-link" to="/book-demo"><span>Let’s talk</span><span aria-hidden="true">↗</span></Link>
+        <Link className="round-link" to="/book-demo"><span>Let’s talk</span><span aria-hidden="true">↗︎</span></Link>
         <a className="scroll-cue" href="#about">A little further <span aria-hidden="true">↓</span></a>
       </div>
       <div className="hero-rule" aria-hidden="true" />
@@ -75,7 +75,7 @@ const faqs = [
 function FAQ() {
   return (
     <section className="home-faq section-shell" aria-labelledby="faq-heading">
-      <div><span className="faq-spark" aria-hidden="true">✳</span><h2 id="faq-heading">A few good<br /><span>questions.</span></h2></div>
+      <div><span className="faq-spark" aria-hidden="true">✳︎</span><h2 id="faq-heading">A few good<br /><span>questions.</span></h2></div>
       <div className="home-faq-list">{faqs.map(([question, answer]) => <details key={question}><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}</div>
     </section>
   );

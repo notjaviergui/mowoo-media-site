@@ -14,11 +14,11 @@ export default function Footer() {
   const { pathname } = useLocation();
   return (
     <footer className="site-footer editorial-footer">
-      <div className="footer-invitation"><h2>Have a good feeling?<br /><span>Let’s make something.</span></h2><Link to="/book-demo" className="round-link"><span>Let’s talk</span><span aria-hidden="true">↗</span></Link></div>
+      <div className="footer-invitation"><h2>Have a good feeling?<br /><span>Let’s make something.</span></h2><Link to="/book-demo" className="round-link"><span>Let’s talk</span><span aria-hidden="true">↗︎</span></Link></div>
       <div className="footer-links">
-        <a href="mailto:hello@moowomedia.com">hello@moowomedia.com ↗</a>
+        <a href="mailto:hello@moowomedia.com">hello@moowomedia.com ↗︎</a>
         <nav aria-label="Explore"><Link to="/services">Services</Link><Link to="/pages/clients">Our work</Link><Link to="/pages/us">Our approach</Link></nav>
-        <nav aria-label="Stay connected"><a href="https://instagram.com/moowomedia" target="_blank" rel="noreferrer">Instagram ↗</a><Link to="/pages/newsletter">The Moowo Memo</Link><Link to="/pages/join-us">Join us</Link><Link to="/pages/clients-portal">Client support</Link></nav>
+        <nav aria-label="Stay connected"><a href="https://instagram.com/moowomedia" target="_blank" rel="noreferrer">Instagram ↗︎</a><Link to="/pages/newsletter">The Moowo Memo</Link><Link to="/pages/join-us">Join us</Link><Link to="/pages/clients-portal">Client support</Link></nav>
       </div>
       <motion.div key={pathname} className="footer-brand" initial={reduced ? "visible" : "hidden"} whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
         <Link to="/" aria-label="Moowo Media home"><BounceWord word="MOOWO" reduced={reduced} row={0} /><BounceWord word="MEDIA" reduced={reduced} row={1} /></Link>

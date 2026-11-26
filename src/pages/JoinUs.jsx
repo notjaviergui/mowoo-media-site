@@ -24,7 +24,7 @@ export default function JoinUs() {
           className="button button-dark"
           href="mailto:hello@moowomedia.com?subject=Creative%20collaboration"
         >
-          Share your work ↗
+          Share your work ↗︎
         </a>
       </section>
     </>
